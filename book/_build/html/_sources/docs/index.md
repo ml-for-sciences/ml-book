@@ -10,4 +10,6 @@ These lectures were built using the new Sphinx-based [Jupyter Book
 [ExecutableBookProject](https://ebp.jupyterbook.org/en/latest/).
 Instructions for how to build them from source can be found in the Jupyter
 Book documentation.
+
+Built based [executable book example](https://github.com/executablebooks/quantecon-mini-example)
 ```
