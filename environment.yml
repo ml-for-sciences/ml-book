@@ -1,0 +1,11 @@
+name: ml-book
+channels:
+  - default
+dependencies:
+  - python=3.8
+  - sphinx
+  - pip
+  - pandas
+  - matplotlib
+  - pip:
+    - jupyter-book
