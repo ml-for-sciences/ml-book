@@ -11,5 +11,6 @@
 - part: Exercises
   chapters:
   - file: docs/pca
+  - file: docs/Linear-regression
 
     
