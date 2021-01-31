@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unsupervised Learning &#8212; Machine Learning for Sciences</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Structuring Data without Neural Networks {#sec:structuring_data}" href="ml_without_neural_network-1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Sciences</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_without_neural_network-1.html">
+   Structuring Data without Neural Networks {#sec:structuring_data}
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Unsupervised Learning
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/ml_unsupervised.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restricted-boltzmann-machine">
+   Restricted Boltzmann machine
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-an-rbm">
+     Training an RBM
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-signal-or-image-reconstruction-denoising">
+     Example: signal or image reconstruction/denoising
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-an-rnn-without-supervision">
+   Training an RNN without supervision
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-generating-molecules-with-an-rnn">
+     Example: generating molecules with an RNN
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#autoencoders">
+   Autoencoders
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variational-autoencoders">
+     Variational autoencoders
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-adversarial-networks">
+   Generative adversarial networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-generative-models">
+     Types of generative models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-working-principle-of-gans">
+     The working principle of GANs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-cost-functions">
+     The cost functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#remarks">
+     Remarks
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mode-collapse">
+       Mode collapse
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#arithmetics-with-gans">
+       Arithmetics with GANs
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#using-gans-with-labelled-data">
+       Using GANs with labelled data
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-sided-label-smoothing">
+       One-sided label smoothing
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="unsupervised-learning">
+<span id="sec-unsupervised"></span><h1>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h1>
+<p>In Sec. <span class="xref myst"></span>, we discussed supervised learning tasks, for which datasets consist of input-output pairs, or data-label pairs. More often than not, however, we have data without labels and would like to extract information from such a dataset. Clustering problems fall in this category, for instance: We suspect that the data can be divided into different types, but we do not know which features distinguish these types.</p>
+<p>Mathematically, we can think of the data <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as samples that were drawn from a probability distribution <span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span>. The unsupervised learning task is to implicitly represent this distribution with a model, for example represented by a neural network. The model can then be used to study properties of the distribution or to generate new ‘artificial’ data. The models we encounter in this chapter are thus also referred to as <em>generative models</em>. In general, unsupervised learning is conceptually more challenging than supervised learning. At the same time, unsupervised algorithms are highly desirable, since unlabelled data is much more abundant than labelled data. Moreover, we can in principle use a generative model for a classification task by learning the joint probability distribution of the data-label pair.</p>
+<p>In this chapter, we will introduce three types of neural networks that are specific to unsupervised learning tasks: <em>Restricted Boltzmann machines</em>, <em>autoencoders</em>, and <em>generative adversarial networks</em>. Furthermore, we will discuss how the RNN introduced in the previous chapter can also be used for an unsupervised task.</p>
+<div class="section" id="restricted-boltzmann-machine">
+<h2>Restricted Boltzmann machine<a class="headerlink" href="#restricted-boltzmann-machine" title="Permalink to this headline">¶</a></h2>
+<p><em>Restricted Boltzmann Machines</em> (RBM) are a class of generative stochastic neural networks. More specifically, given some (binary) input data <span class="math notranslate nohighlight">\(\mathbf{x}\in\{0,1\}^{n_v}\)</span>, an RBM can be trained to approximate the probability distribution of this input. Moreover, once the neural network is trained to approximate the distribution of the input, we can sample from the network, in other words we generate new instances from the learned probability distribution.</p>
+<p>The RBM consists of two layers (see <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 3</span></a>) of <em>binary units</em>. Each binary unit is a variable which can take the values <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. We call the first (input) layer visible and the second layer hidden. The visible layer with input variables <span class="math notranslate nohighlight">\(\lbrace v_{1}, v_{2}, \dots v_{n_{\mathrm{v}}}\rbrace\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>, is connected to the hidden layer with variables <span class="math notranslate nohighlight">\(\{ h_{1}, h_{2}, \dots h_{n_{\mathrm{h}}}\}\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. The role of the hidden layer is to mediate correlations between the units of the visible layer. In contrast to the neural networks we have seen in the previous chapter, the hidden layer is not followed by an output layer. Instead, the RBM represents a probability distribution <span class="math notranslate nohighlight">\(P_{\text{rbm}}(\mathbf{v})\)</span>, which depends on variational parameters represented by the weights and biases of a neural network. The RBM, as illustrated by the graph in <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 3</span></a>, is a special case of a network structure known as a Boltzmann machine with the restriction that a unit in the visible layer is only connected to hidden units and vice versa, hence the name <em>restricted</em> Boltzmann machine.</p>
+<div class="figure align-default" id="fig-rbm">
+<img alt="../_images/rbm.png" src="../_images/rbm.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Restricted Boltzmann machine.</strong> Each of the three visible units and
+five hidden units represents a variable that can take the values <span class="math notranslate nohighlight">\(\pm1\)</span>
+and the connections between them represent the entries <span class="math notranslate nohighlight">\(W_{ij}\)</span> of the
+weight matrix that enters the energy function <a class="reference internal" href="#equation-eqn-rbm-energy">(1)</a>.</span><a class="headerlink" href="#fig-rbm" title="Permalink to this image">¶</a></p>
+</div>
+<p>The structure of the RBM is motivated from statistical physics: To each choice of the binary vectors <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>, we assign a value we call the energy</p>
+<div class="math notranslate nohighlight" id="equation-eqn-rbm-energy">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eqn-rbm-energy" title="Permalink to this equation">¶</a></span>\[E(\mathbf{v},\mathbf{h}) = -\sum_{i}a_{i}v_{i} - \sum_{j}b_{j}h_{j} - \sum_{ij} v_{i}W_{ij}h_{j},\]</div>
+<p>where the vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, and the matrix <span class="math notranslate nohighlight">\(W\)</span> are the variational parameters of the model. Given the energy, the probability distribution over the configurations <span class="math notranslate nohighlight">\((\mathbf{v}, \mathbf{h})\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eqn-rbm-joint-probability">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eqn-rbm-joint-probability" title="Permalink to this equation">¶</a></span>\[P_{\textrm{rbm}}(\mathbf{v},\mathbf{h}) = \frac{1}{Z}e^{-E(\mathbf{v},\mathbf{h})},\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight" id="equation-eqn-partition-function">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eqn-partition-function" title="Permalink to this equation">¶</a></span>\[Z = \sum_{\mathbf{v},\mathbf{h}} e^{-E(\mathbf{v},\mathbf{h})}\]</div>
+<p>is a normalisation factor called the partition function. The sum in Eq. <a class="reference internal" href="#equation-eqn-partition-function">(3)</a> runs over all binary vectors <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>, i.e., vectors with entries <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. The probability that the model assigns to a visible vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> is then the marginal over the joint probability distribution Eq. <a class="reference internal" href="#equation-eqn-rbm-joint-probability">(2)</a>,</p>
+<div class="math notranslate nohighlight" id="equation-eqn-rbm-visible-probability">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eqn-rbm-visible-probability" title="Permalink to this equation">¶</a></span>\[P_{\textrm{rbm}}(\mathbf{v}) = \sum_{\mathbf{h}} P_{\textrm{rbm}}(\mathbf{v},\mathbf{h}) = \frac{1}{Z}\sum_{h}e^{-E(\mathbf{v},\mathbf{h})}.\]</div>
+<p>As a result of the restriction, the visible units, with the hidden units fixed, are mutually independent: given a choice of the hidden units <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>, we have an <strong>independent</strong> probability distribution for
+<strong>each</strong> visible unit given by</p>
+<div class="math notranslate nohighlight">
+\[	P_{\textrm{rbm}}(v_{i} = 1 | \mathbf{h}) = \sigma(a_{i} + \sum_{j}W_{ij}h_{j}), \qquad i=1,\ldots, n_{\mathrm{v}},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma(x) = 1/(1+e^{-x})\)</span> is the sigmoid function. Similarly, with the visible units fixed, the individual hidden units are also mutually independent with the probability distribution</p>
+<div class="math notranslate nohighlight" id="equation-eqn-rbm-p-h-v">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eqn-rbm-p-h-v" title="Permalink to this equation">¶</a></span>\[P_{\textrm{rbm}}(h_{j} = 1 | \mathbf{v}) = \sigma(b_{j} + \sum_{i}v_{i}W_{ij})\qquad j=1,\ldots, n_{\mathrm{h}}. \]</div>
+<p>The visible (hidden) units can thus be interpreted as artificial neurons connected to the hidden (visible) units with sigmoid activation function and bias <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> (<span class="math notranslate nohighlight">\(\mathbf{b}\)</span>). A direct consequence of this mutual independence is that sampling a vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> or <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> reduces to sampling every component individually. Notice that this simplification comes about due to the restriction that visible (hidden) units do not directly interact amongst themselves, i.e. there are no terms proportional to <span class="math notranslate nohighlight">\(v_i v_j\)</span> or <span class="math notranslate nohighlight">\(h_i h_j\)</span> in Eq. <a class="reference internal" href="#equation-eqn-rbm-energy">(1)</a>. In the following, we explain how one can train an RBM and discuss possible applications of RBMs.</p>
+<div class="section" id="training-an-rbm">
+<h3>Training an RBM<a class="headerlink" href="#training-an-rbm" title="Permalink to this headline">¶</a></h3>
+<p>Consider a set of binary input data <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span>, <span class="math notranslate nohighlight">\(k=1,\ldots,M\)</span>, drawn from a probability distribution <span class="math notranslate nohighlight">\(P_{\textrm{data}}(\mathbf{x})\)</span>. The aim of the training is to tune the parameters <span class="math notranslate nohighlight">\(\lbrace \mathbf{a}, \mathbf{b}, W \rbrace\)</span> in an RBM such that after training <span class="math notranslate nohighlight">\(P_{\textrm{rbm}}(\mathbf{x}) \approx  P_{\textrm{data}}(\mathbf{x})\)</span>. The standard approach to solve this problem is the maximum likelihood principle, in other words we want to find the parameters <span class="math notranslate nohighlight">\(\lbrace \mathbf{a}, \mathbf{b}, W \rbrace\)</span> which maximize the probability that our model produces the data <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span>.</p>
+<p>Maximizing the likelihood <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{a},\mathbf{b},W) =  \prod P_{\textrm{rbm}}(\mathbf{x}_{k})\)</span> is equivalent to training the RBM using a loss function we have encountered before, the negative log-likelihood</p>
+<div class="math notranslate nohighlight">
+\[	L(\mathbf{a},\mathbf{b},W) = - \sum_{k=1}^{M} \log P_{\textrm{rbm}}(\mathbf{x}_{k}).\]</div>
+<p>For the gradient descent, we need derivatives of the loss function of the form</p>
+<div class="math notranslate nohighlight" id="equation-eqn-log-likelihood-derivative">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eqn-log-likelihood-derivative" title="Permalink to this equation">¶</a></span>\[\frac{\partial L(\mathbf{a},\mathbf{b},W)}{\partial W_{ij}} = -\sum_{k=1}^{M} \frac{\partial\log P_{\textrm{rbm}}(\mathbf{x}_{k})}{\partial W_{ij}}.\]</div>
+<p>This derivative consists of two terms,</p>
+<div class="math notranslate nohighlight" id="equation-eqn-rbm-derivatives">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eqn-rbm-derivatives" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+        \frac{\partial\log P_{\textrm{rbm}}(\mathbf{x})}{\partial W_{ij}} %&amp;= \frac{\partial}{\partial W_{ij}}\left( -\log \sum_{\bm{vh}} e^{E(\mathbf{v},\mathbf{h})} + \log \sum_{\mathbf{h}} e^{E(\mathbf{x},\mathbf{h})}  \right) \\
+        %&amp;= -\frac{1}{Z}\sum_{\bm{vh}}v_{i}h_{j}e^{E(\mathbf{v},\mathbf{h})} +  \frac{1}{\sum_{\mathbf{h}}e^{E(\mathbf{x},\mathbf{h})}} \sum_{h}x_{i}h_{j}e^{E(\mathbf{x},\mathbf{h})}\\
+        %&amp;= \sum_{h_{j}}x_{i}h_{j} P_{\textrm{rbm}}(h_{j}|\mathbf{x}) - \sum_{\mathbf{v},\mathbf{h}} v_{i} h_{j} P_{\textrm{rbm}}(\mathbf{v},\mathbf{h}) \\
+        &amp;= x_{i}P_{\textrm{rbm}}(h_{j}=1|\mathbf{x}) - \sum_{\mathbf{v}} v_{i} P_{\textrm{rbm}}(h_{j}=1|\mathbf{v}) P_{\textrm{rbm}}(\mathbf{v})
+\end{split}\end{split}\]</div>
+<p>and similarly simple forms are found for the derivatives with respect to the components of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. We can then iteratively update the parameters just as we have done in Chapter <span class="xref myst"></span>,</p>
+<div class="math notranslate nohighlight">
+\[W_{ij} \rightarrow W_{ij} - \eta \frac{\partial L(a,b,W)}{\partial W_{ij}}\]</div>
+<p>with a sufficiently small learning rate <span class="math notranslate nohighlight">\(\eta\)</span>. As we have seen in the previous chapter in the context of backpropagation, we can reduce the computational cost by replacing the summation over the whole data set in Eq. <a class="reference internal" href="#equation-eqn-log-likelihood-derivative">(6)</a> with a summation over a small randomly chosen batch of samples. This reduction in the computational cost comes at the expense of noise, but at the same time it can help to improve generalization.</p>
+<p>However, there is one more problem: The second summation in Eq. <a class="reference internal" href="#equation-eqn-rbm-derivatives">(7)</a>, which contains <span class="math notranslate nohighlight">\(2^{n_v}\)</span> terms, cannot be efficiently evaluated exactly. Instead, we have to approximate the sum by sampling the visible layer <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> from the marginal probability distribution <span class="math notranslate nohighlight">\(P_{\textrm{rbm}}(\mathbf{v})\)</span>. This sampling can be done using <em>Gibbs sampling</em> as follows:</p>
+<div class="admonition-gibbs-sampling admonition" id="alg-gibbs-sampling">
+<p class="admonition-title">Gibbs-Sampling</p>
+<p><strong>Input:</strong> Any visible vector <span class="math notranslate nohighlight">\(\mathbf{v}(0)\)</span>  <br />
+<strong>Output:</strong> Visible vector <span class="math notranslate nohighlight">\(\mathbf{v}(r)\)</span>  <br />
+<strong>for:</strong> <span class="math notranslate nohighlight">\(n=1\)</span>\dots <span class="math notranslate nohighlight">\(r\)</span>  <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> sample <span class="math notranslate nohighlight">\(\mathbf{h}(n)\)</span> from <span class="math notranslate nohighlight">\(P_{\rm rbm}(\mathbf{h}|\mathbf{v}=\mathbf{v}(n-1))\)</span>  <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> sample <span class="math notranslate nohighlight">\(\mathbf{v}(n)\)</span> from <span class="math notranslate nohighlight">\(P_{\rm rbm}(\mathbf{v}|\mathbf{h}=\mathbf{h}(n))\)</span>  <br />
+<strong>end</strong></p>
+</div>
+<p>With sufficiently many steps <span class="math notranslate nohighlight">\(r\)</span>, the vector <span class="math notranslate nohighlight">\(\mathbf{v}(r)\)</span> is an unbiased sample drawn from <span class="math notranslate nohighlight">\(P_{\textrm{rbm}}(\mathbf{v})\)</span>. By repeating the procedure, we can obtain multiple samples to estimate the summation. Note that this is still rather computationally expensive, requiring multiple evaluations on the model.</p>
+<p>The key innovation which allows the training of an RBM to be computationally feasible was proposed by Geoffrey Hinton (2002). Instead of obtaining multiple samples, we simply perform the Gibbs sampling with <span class="math notranslate nohighlight">\(r\)</span> steps and estimate the summation with a single sample, in other words we replace the second summation in Eq. <a class="reference internal" href="#equation-eqn-rbm-derivatives">(7)</a> with</p>
+<div class="math notranslate nohighlight">
+\[\sum_{\mathbf{v}} v_{i} P_{\textrm{rbm}}(h_{j}=1|\mathbf{v}) P_{\textrm{rbm}}(\mathbf{v}) \rightarrow v'_{i} P_{\textrm{rbm}}(h_{j}=1|\mathbf{v}'),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{v}' = \mathbf{v}(r)\)</span> is simply the sample obtained from <span class="math notranslate nohighlight">\(r\)</span>-step Gibbs sampling. With this modification, the gradient, Eq. <a class="reference internal" href="#equation-eqn-rbm-derivatives">(7)</a>, can be approximated as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial\log P_{\textrm{rbm}}(\mathbf{x})}{\partial W_{ij}} \approx x_{i}P_{\textrm{rbm}}(h_{j}=1|\mathbf{x}) -  v'_{i} P_{\textrm{rbm}}(h_{j}=1|\mathbf{v}').\]</div>
+<p>This method is known as <em>contrastive divergence</em>. Although the quantity computed is only a biased estimator of the gradient, this approach is found to work well in practice. The complete algorithm for training a RBM with <span class="math notranslate nohighlight">\(r\)</span>-step contrastive divergence can be summarised as follows:</p>
+<div class="admonition-contrastive-divergence admonition" id="alg-contrastive-divergence">
+<p class="admonition-title">Contrastive divergence</p>
+<p><strong>Input:</strong> Dataset <span class="math notranslate nohighlight">\(\mathcal{D} = \lbrace \ \mathbf{x}_{1}, \ \mathbf{x}_{2}, \dots \ \mathbf{x}_{M} \rbrace\)</span> drawn from a distribution <span class="math notranslate nohighlight">\(P(x)\)</span>} <br />
+initialize the RBM weights <span class="math notranslate nohighlight">\(\lbrace \mathbf{a},\mathbf{b},W \rbrace\)</span> <br />
+Initialize <span class="math notranslate nohighlight">\(\Delta W_{ij} = \Delta a_{i} = \Delta b_{j} =0\)</span> <br />
+<strong>while:</strong> not converged <strong>do</strong> <br />
+<span class="math notranslate nohighlight">\(\quad\)</span>  select a random batch <span class="math notranslate nohighlight">\(S\)</span> of samples from the dataset <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> <strong>forall</strong> <span class="math notranslate nohighlight">\(\mathbf{x} \in S\)</span> <br />
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> Obtain <span class="math notranslate nohighlight">\(\ \mathbf{v}'\)</span> by <span class="math notranslate nohighlight">\(r\)</span>-step Gibbs sampling starting from <span class="math notranslate nohighlight">\(\ \mathbf{x}\)</span> <br />
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(\Delta W_{ij} \leftarrow \Delta W_{ij} - x_{i}P_{\textrm{rbm}}(h_{j}=1|\ \mathbf{x}) +  v'_{i} P_{\textrm{rbm}}(h_{j}=1|\ \mathbf{h}')\)</span> <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> <strong>end</strong> <br />
+<span class="math notranslate nohighlight">\(\quad\)</span>  <span class="math notranslate nohighlight">\(W_{ij} \leftarrow W_{ij} - \eta\Delta W_{ij}\)</span> <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> (and similarly for <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>) <br />
+<strong>end</strong></p>
+</div>
+<p>Having trained the RBM to represent the underlying data distribution
+<span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span>, there are a few ways one can use the trained model:</p>
+<ol class="simple">
+<li><p><strong>Pretraining</strong> We can use <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> as the initial weights
+and biases for a deep network (c.f. Chapter 4), which is then
+fine-tuned with gradient descent and backpropagation.</p></li>
+<li><p><strong>Generative Modelling</strong> As a generative model, a trained RBM can be
+used to generate new samples via Gibbs sampling
+(Alg. [](alg: Gibbs Sampling)). Some potential uses of the
+generative aspect of the RBM include <em>recommender systems</em> and
+<em>image reconstruction</em>. In the following subsection, we provide an
+example, where an RBM is used to reconstruct a noisy signal.</p></li>
+</ol>
+</div>
+<div class="section" id="example-signal-or-image-reconstruction-denoising">
+<h3>Example: signal or image reconstruction/denoising<a class="headerlink" href="#example-signal-or-image-reconstruction-denoising" title="Permalink to this headline">¶</a></h3>
+<p>A major drawback of the simple RBMs for their application is the fact that they only take binary data as input. As an example, we thus look at simple periodic waveforms with 60 sample points. In particular, we use sawtooth, sine, and square waveforms. In order to have quasi-continuous data, we use eight bits for each point, such that our signal can take values from 0 to 255. Finally, we generate samples to train with a small variation in the maximum value, the periodicity, as well as the center point of each waveform.</p>
+<p>After training the RBM using the contrastive divergence algorithm, we now have a model which represents the data distribution of the binarized waveforms. Consider now a signal which has been corrupted, meaning some parts of the waveform have not been received, in other words they are set to 0. By feeding this corrupted data into the RBM and performing a few iterations of Gibbs sampling (Alg. [](alg: Gibbs Sampling)), we can obtain a reconstruction of the signal, where the missing part has been repaired, as can been seen at the bottom of <a class="reference internal" href="#fig-rbm-reconstruction"><span class="std std-numref">Fig. 4</span></a>.</p>
+<p>Note that the same procedure can be used to reconstruct or denoise images. Due to the limitation to binary data, however, the picture has to either be binarized, or the input size to the RBM becomes fairly large for high-resolution pictures. It is thus not surprising that while RBMs have been popular in the mid-2000s, they have largely been superseded by more modern and architectures such as <em>generative adversarial networks</em> which we shall explore later in the chapter. However, they still serve a pedagogical purpose and could also provide inspiration for future innovations, in particular in science. A recent example is the idea of using an RBM to represent a quantum mechanical state.</p>
+<div class="figure align-default" id="fig-rbm-reconstruction">
+<img alt="../_images/rbm_reconstr.png" src="../_images/rbm_reconstr.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong>Signal reconstruction.</strong> Using an RBM to repair a corrupted signal,
+here a sine and a sawtooth
+waveform.</span><a class="headerlink" href="#fig-rbm-reconstruction" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="training-an-rnn-without-supervision">
+<h2>Training an RNN without supervision<a class="headerlink" href="#training-an-rnn-without-supervision" title="Permalink to this headline">¶</a></h2>
+<p>In Sec. <span class="xref myst"></span>, the RNN was introduced as a classification model. Instead of classifying sequences of data, such as time series, the RNN can also be trained to generate valid sequences itself. Given the RNN introduced in Sec. <span class="xref myst"></span>, the implementation of such a generator is straight-forward and does not require a new architecture. The main difference is that the output <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> of the network given the data point <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> is a guess of the subsequent data point <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> instead of the class to which the whole sequence belongs to. This means in particular that the input and output size are now the same. For training this network, we can once again use the cross-entropy or (negative) log-likelihood as a loss function,</p>
+<div class="math notranslate nohighlight" id="eqn-unsup-rnn">
+<span id="equation-eqn-unsup-rnn"></span><span class="eqno">(8)<a class="headerlink" href="#eqn-unsup-rnn" title="Permalink to this equation">¶</a></span>\[L_{\mathrm{ent}}
+    =-\sum_{t=1}^{m-1} \mathbf{x}_{t+1}\cdot
+    \ln \left(
+    \mathbf{y}_{t}
+    \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> is now the ‘label’ for the input <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}_{t}\)</span> is the output of the network and <span class="math notranslate nohighlight">\(t\)</span> runs over the input sequence with length <span class="math notranslate nohighlight">\(m\)</span>. This training is schematically shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 5</span></a>.</p>
+<p>For generating a new sequence, it is enough to have one single input point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> to start the sequence. Note that since we now can start with a single data point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> and generate a whole sequence of data points <span class="math notranslate nohighlight">\(\{\mathbf{y}_t\}\)</span>, this mode of using an RNN is referred to as <em>one-to-many</em>. This sequence generation is shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 5</span></a>, left.</p>
+<div class="figure align-default" id="fig-rnn-gen">
+<img alt="../_images/generative_RNN2.png" src="../_images/generative_RNN2.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>RNN used as a generator.</strong> For training, left, the input data
+shifted by one, <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span>, are used as the label. For the
+generation of new sequences, right, we input a single data point
+<span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> and the RNN uses the recurrent steps to generate a new
+sequence.</span><a class="headerlink" href="#fig-rnn-gen" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="example-generating-molecules-with-an-rnn">
+<span id="sec-rnn-gen"></span><h3>Example: generating molecules with an RNN<a class="headerlink" href="#example-generating-molecules-with-an-rnn" title="Permalink to this headline">¶</a></h3>
+<p>To illustrate the concept of sequence generation using recurrent neural networks, we use an RNN to generate new molecules. The first question we need to address is how to encode a chemical structure into input data—of sequential form no less—that a machine learning model can read. A common representation of molecular graphs used in chemistry is the <em>simplified molecular-input line-entry system</em>, or SMILES. <a class="reference internal" href="#fig-smiles"><span class="std std-numref">Fig. 6</span></a> shows examples of such SMILES strings for the caffeine, ethanol, and aspirin molecules. We can use the dataset <em>Molecular Sets</em> <a class="footnote-reference brackets" href="#id3" id="id1">3</a>, which contains <span class="math notranslate nohighlight">\(\sim 1.9\)</span>M molecules written in the SMILES format.</p>
+<p>Using the SMILES dataset, we create a dictionary to translate each character that appears in the dataset into an integer. We further use one-hot-encoding to feed each character separately to the RNN. This creates a map from characters in SMILES strings onto an array of numbers. Finally, in order to account for the variable size of the molecules and hence, the variable length of the strings, we can introduce a ‘stop’ character such that the network learns and later generates sequences of arbitrary length.</p>
+<p>We are now ready to use the SMILES strings for training our network as described above, where the input is a one-hot-encoded vector and the output is again a vector of the same size. Note, however, that similar to a classification task, the output vector is a probability distribution over the characters the network believes could come next. Unlike a classification task, where we consider the largest output the best guess of the network, here we sample in each step from the probability distribution <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> to again have a one-hot-encoded vector for the input of the next step.</p>
+<div class="figure align-default" id="fig-smiles">
+<img alt="../_images/SMILES_examples.png" src="../_images/SMILES_examples.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>SMILES.</strong> Examples of molecules and their representation in
+SMILES.</span><a class="headerlink" href="#fig-smiles" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="autoencoders">
+<h2>Autoencoders<a class="headerlink" href="#autoencoders" title="Permalink to this headline">¶</a></h2>
+<p>Autoencoders are neuron-based generative models, initially introduced for dimensionality reduction. The original purpose, thus, is similar to that of PCA or t-SNE that we already encountered in Sec. <span class="xref myst"></span>, namely the reduction of the number of features that describe our input data. Unlike for PCA, where we have a clear recipe how to reduce the number of features, an autoencoder learns the best way of achieving the dimensionality reduction. An obvious question, however, is how to measure the quality of the compression, which is essential for the definition of a loss function and thus, training. In the case of t-SNE, we introduced two probability distributions based on the distance of samples in the original and feature space, respectively, and minimized their difference, for example using the Kullback-Leibler divergence.</p>
+<p>The solution the autoencoder uses is to have a neural network do first, the dimensionality reduction, or encoding to the <em>latent space</em>, <span class="math notranslate nohighlight">\(\mathbf{x}\mapsto \mathbf{e}(\mathbf{x})=\mathbf{z}\)</span>, and then, the decoding back to the original dimension, <span class="math notranslate nohighlight">\(\mathbf{z} \mapsto \mathbf{d}(\mathbf{z})\)</span>, see <a class="reference internal" href="#fig-ae-scheme"><span class="std std-numref">Fig. 7</span></a>. This architecture allows us to directly compare the original input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with the reconstructed output <span class="math notranslate nohighlight">\(\mathbf{d}(\mathbf{e}(\mathbf{x}))\)</span>, such that the autoencoder trains itself unsupervised by minimizing the difference. A good example of a loss function that achieves successful training and that we have encountered already several times is the cross entropy,</p>
+<div class="math notranslate nohighlight">
+\[L_{\rm ae} = - \sum_i \mathbf{x}_i \cdot \ln[ \mathbf{d}(\mathbf{e}(\mathbf{x}_i))].\]</div>
+<p>In other words, we compare point-wise the difference between the input to the encoder with the decoder’s output.</p>
+<p>Intuitively, the latent space with its lower dimension presents a bottleneck for the information propagation from input to output. The goal of training is to find and keep the most relevant information for the reconstruction to be optimal. The latent space then corresponds to the reduced space in PCA and t-SNE. Note that much like in t-SNE but unlike in PCA, the new features are in general not independent.</p>
+<div class="figure align-default" id="fig-ae-scheme">
+<img alt="../_images/autoencoder.png" src="../_images/autoencoder.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>General autoencoder architecture.</strong> A neural network is used to
+contract a compressed representation of the input in the latent space. A
+second neural network is used to reconstruct the original
+input.</span><a class="headerlink" href="#fig-ae-scheme" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="variational-autoencoders">
+<h3>Variational autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this headline">¶</a></h3>
+<p>A major problem of the approach introduced in the previous section is its tendency to overfitting. As an extreme example, a sufficiently complicated encoder-decoder pair could learn to map all data in the training set onto a single variable and back to the data. Such a network would indeed accomplish completely lossless compression and decompression. However, the network would not have extracted any useful information from the dataset and thus, would completely fail to compress and decompress previously unseen data. Moreover, as in the case of the dimensionality-reduction schemes discussed in Sec. <span class="xref myst"></span>, we would like to analyze the latent space images and extract new information about the data. Finally, we might also want to use the decoder part of the autoencoder as a generator for new data. For these reasons, it is essential that we combat overfitting as we have done in the previous chapters by regularization.</p>
+<p>The question then becomes how one can effectively regularize the autoencoder. First, we need to analyze what properties we would like the latent space to fulfil. We can identify two main properties:</p>
+<ol class="simple">
+<li><p>If two input data points are close (according to some measure),
+their images in the latent space should also be close. We call this
+property <em>continuity</em>.</p></li>
+<li><p>Any point in the latent space should be mapped through the decoder
+onto a meaningful data point, a property we call <em>completeness</em>.</p></li>
+</ol>
+<p>While there are principle ways to achieve regularization along similar paths as discussed in the previous section on supervised learning, we will discuss here a solution that is particularly useful as a generative model: the <em>variational autoencoder</em> (VAE).</p>
+<div class="figure align-default" id="fig-vae">
+<img alt="../_images/vae.png" src="../_images/vae.png" />
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>Architecture of variational autoencoder.</strong> Instead of outputting a
+point <span class="math notranslate nohighlight">\(z\)</span> in the latent space, the encoder provides a distribution
+<span class="math notranslate nohighlight">\(N(\boldsymbol \mu, \boldsymbol \sigma)\)</span>, parametrized by the means <span class="math notranslate nohighlight">\(\boldsymbol \mu\)</span> and the
+standard deviations <span class="math notranslate nohighlight">\(\boldsymbol \sigma\)</span>. The input <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> for the decoder is
+then drawn from <span class="math notranslate nohighlight">\(N(\boldsymbol \mu, \boldsymbol \sigma)\)</span>.</span><a class="headerlink" href="#fig-vae" title="Permalink to this image">¶</a></p>
+</div>
+<p>The idea behind VAEs is for the encoder to output not just an exact point <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in the latent space, but a (factorized) Normal distribution of points, <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)\)</span>. In particular, the output of the encoder comprises two vectors, the first representing the means, <span class="math notranslate nohighlight">\(\boldsymbol \mu\)</span>, and the second the standard deviations, <span class="math notranslate nohighlight">\(\boldsymbol \sigma\)</span>. The input for the decoder is then sampled from this distribution, <span class="math notranslate nohighlight">\(\mathbf{z} \sim \mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)\)</span>, and the original input is reconstructed and compared to the original input for training. In addition to the standard loss function comparing input and output of the VAE, we further add a regularization term to the loss function such that the distributions from the encoder are close to a standard normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol 0, \boldsymbol 1)\)</span>. Using the Kullback-Leibler divergence, Eq. <span class="xref myst"></span>, to measure the deviation from the standard normal distribution, the full loss function then reads</p>
+<div class="math notranslate nohighlight" id="equation-eqn-loss-vae">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eqn-loss-vae" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    L_{\rm vae} &amp;= -\sum_i \mathbf{x}^{\rm in}_i \ln \mathbf{x}^{\rm out}_i + {\rm KL} (\mathcal{N}(\boldsymbol \mu_i, \boldsymbol \sigma_i)|| \mathcal{N}(\boldsymbol 0, \boldsymbol 1))\nonumber\\
+    &amp;= -\sum_i \mathbf{x}^{\rm in}_i \ln \mathbf{x}^{\rm out}_i + \frac12 \sum_k [\sigma_{i,k}^2 + \mu_{i,k}^2 -1 -2 \ln\sigma_{i,k}].
+\end{aligned}\end{split}\]</div>
+<p>In this expression, the first term quantifies the reconstruction loss with <span class="math notranslate nohighlight">\(\mathbf{x}_i^{\rm in}\)</span> the input to and <span class="math notranslate nohighlight">\(\mathbf{x}_i^{\rm out}\)</span> the reconstructed data from the VAE. The second term is the regularization on the latent space for each input data point, which for two (diagonal) Normal distributions can be simplified, see second line of Eq. <a class="reference internal" href="#equation-eqn-loss-vae">(9)</a>. This procedure regularizes the training through the introduction of noise, similar to the dropout layer in Section <span class="xref myst"></span>. However, the regularization here not only generically increases generalization, but also enforces the desired structure in the latent space.</p>
+<p>The structure of a VAE is shown in <a class="reference internal" href="#fig-vae"><span class="std std-numref">Fig. 8</span></a>. By enforcing the mean and variance structure of the encoder output, the latent space fulfills the requirements outlined above. This type of structure can then serve as a generative model for many different data types: anything from human faces to complicated molecular structures. Hence, the variational autoencoder goes beyond extracting information from a dataset, but can be used for the scientific discovery. Note, finally, that the general structure of the variational autoencoder can be applied beyond the simple example above. As an example, a different distribution function can be enforced in the latent space other than the standard Normal distribution, or a different neural network can be used as encoder and decoder, such as a RNN.</p>
+</div>
+</div>
+<div class="section" id="generative-adversarial-networks">
+<h2>Generative adversarial networks<a class="headerlink" href="#generative-adversarial-networks" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will be a concerned with a type of generative neural network, the generative adversarial network (GAN), which gained a very high popularity in recent years. Before getting into the details about this method, we give a quick systematic overview over types of generative methods, to place GANs in proper relation to them <a class="footnote-reference brackets" href="#id4" id="id2">4</a>.</p>
+<div class="section" id="types-of-generative-models">
+<h3>Types of generative models<a class="headerlink" href="#types-of-generative-models" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="fig-generative-taxonomy">
+<img alt="../_images/GenerativeTaxonomy.png" src="../_images/GenerativeTaxonomy.png" />
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Maximum likelihood approaches to generative
+modeling.</strong></span><a class="headerlink" href="#fig-generative-taxonomy" title="Permalink to this image">¶</a></p>
+</div>
+<p>We restrict ourselves to methods that are based on the <em>maximum likelihood principle</em>. The role of the model is to provide an estimate <span class="math notranslate nohighlight">\(p_{\text{model}}(\mathbf{x};\boldsymbol \theta)\)</span> of a probability distribution parametrized by parameters <span class="math notranslate nohighlight">\(\boldsymbol \theta\)</span>. The likelihood is the probability that the model assigns to the training data</p>
+<div class="math notranslate nohighlight">
+\[\prod_{i=1}^mp_{\text{model}}(\mathbf{x}_{i};\boldsymbol \theta),\]</div>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> is again the number of samples in the data <span class="math notranslate nohighlight">\(\{\mathbf{x}_i\}\)</span>. The goal is to choose the parameters <span class="math notranslate nohighlight">\(\boldsymbol \theta\)</span> such as to maximize the likelihood.
+Thanks to the equality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\boldsymbol \theta^*=&amp;\,\underset{\boldsymbol \theta}{\text{argmax}}\prod_{i=1}^mp_{\text{model}}(\mathbf{x}_{i};\boldsymbol \theta)\\
+=&amp;\,\underset{\boldsymbol \theta}{\text{argmax}}\sum_{i=1}^m\mathrm{log}\,p_{\text{model}}(\mathbf{x}_{i};\boldsymbol \theta)
+\end{split}\end{split}\]</div>
+<p>we can just as well work with the sum of logarithms, which is easier to handle. As we explained previously (see section on t-SNE), the maximization is equivalent to the minimization of the cross-entropy between two probability distributions: the ‘true’ distribution <span class="math notranslate nohighlight">\(p_{\mathrm{data}}(\mathbf{x})\)</span> from which the data has been drawn and <span class="math notranslate nohighlight">\(p_{\text{model}}(\mathbf{x};\boldsymbol \theta)\)</span>. While we do not have access to <span class="math notranslate nohighlight">\(p_{\mathrm{data}}(\mathbf{x})\)</span> in principle, we estimate it empirically as a distribution peaked at the <span class="math notranslate nohighlight">\(m\)</span> data points we have.</p>
+<p>Methods can now be distinguished by the way <span class="math notranslate nohighlight">\(p_{\mathrm{model}}\)</span> is defined and evaluated (see <a class="reference internal" href="#fig-generative-taxonomy"><span class="std std-numref">Fig. 9</span></a>). We differentiate between models that define <span class="math notranslate nohighlight">\(p_{\mathrm{data}}(\mathbf{x})\)</span> <em>explicitly</em> through some functional form. They have the general advantage that maximization of the likelihood is rather straight-forward, since we have direct access to this function. The downside is that the functional forms are generically limiting the ability of the model to fit the data distribution or become computationally intractable.</p>
+<p>Among those explicit density models, we can further distinguish between those that represent a computationally tractable density and those that do not. An example for tractable explicit density models are <em>fully visible belief networks</em> (FVBNs) that decompose the probability distribution over an <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> into a product of conditional probabilities</p>
+<div class="math notranslate nohighlight">
+\[p_{\mathrm{model}}(\mathbf{x})=\prod_{j=1}^n\, p_{\mathrm{model}}(x_j|x_1,\cdots,x_{j-1}).\]</div>
+<p>We can already see that, once we use the model to draw new samples, this is done one entry of the vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> at a time (first <span class="math notranslate nohighlight">\(x_1\)</span> is drawn, then, knowing it, <span class="math notranslate nohighlight">\(x_2\)</span> is drawn etc.). This is computationally costly and not parallelizable but is useful for tasks that are anyway sequential (like generation of human speech, where the so-called WaveNet employs FVBNs).</p>
+<p>Models that encode an explicit density, but require approximations to maximize the likelihood that can either be variational in nature or use stochastic methods. We have seen examples for either. Variational methods define a lower bound to the log likelihood which can be maximized</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{x};\boldsymbol \theta)\leq \mathrm{log}\,p_{\text{model}}(\mathbf{x};\boldsymbol \theta).\]</div>
+<p>The algorithm produces a maximum value of the log-likelihood that is at least as high as the value for <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> obtained (when summed over all data points). Variational autoencoders belong to this category. Their most obvious shortcoming is that <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{x};\boldsymbol \theta)\)</span> may represent a very bad lower bound to the log-likelihood (and is in general not guaranteed to converge to it for infinite model size), so that the distribution represented by the model is very different from <span class="math notranslate nohighlight">\(p_{\mathrm{data}}\)</span>. Stochastic methods, in contrast, often rely on a Markov chain process: The model is defined by a probability <span class="math notranslate nohighlight">\(q(\mathbf{x}'|\mathbf{x})\)</span> from which the current sample <span class="math notranslate nohighlight">\(\mathbf{x}'\)</span> is drawn, which depends on the previously drawn sample <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (but not any others). RBMs are an example for this. They have the advantage that there is some rigorously proven convergence to <span class="math notranslate nohighlight">\(p_{\text{model}}\)</span> with large enough size of the RBM, but the convergence may be slow. Like with FVBNs, the drawing process is sequential and thus not easily parallelizable.</p>
+<p>All these classes of models allow for explicit representations of the probability density function approximations. In contrast, for GANs and related models, there is only an indirect access to said probability density: The model allows us to sample from it. Naturally, this makes optimization potentially harder, but circumvents many of the other previously mentioned problems. In particular</p>
+<ul class="simple">
+<li><p>GANs can generate samples in parallel</p></li>
+<li><p>there are few restrictions on the form of the generator function (as
+compared to Boltzmann machines, for instance, which have a
+restricted form to make Markov chain sampling work)</p></li>
+<li><p>no Markov chains are needed</p></li>
+<li><p>no variational bound is needed and some GAN model families are known
+to be asymptotically consistent (meaning that for a large enough
+model they are approximations to any probability distribution).</p></li>
+</ul>
+<p>GANs have been immensely successful in several application scenarios. Their superiority against other methods is, however, often assessed subjectively. Most of performance comparison have been in the field of image generation, and largely on the ImageNet database. Some of the standard tasks evaluated in this context are:</p>
+<ul class="simple">
+<li><p>generate an image from a sentence or phrase that describes its
+content (“a blue flower”)</p></li>
+<li><p>generate realistic images from sketches</p></li>
+<li><p>generate abstract maps from satellite photos</p></li>
+<li><p>generate a high-resolution (“super-resolution”) image from a lower
+resolution one</p></li>
+<li><p>predict a next frame in a video.</p></li>
+</ul>
+<p>As far as more science-related applications are concerned, GANs have
+been used to</p>
+<ul class="simple">
+<li><p>predict the impact of climate change on individual houses</p></li>
+<li><p>generate new molecules that have been later synethsized.</p></li>
+</ul>
+<p>In the light of these examples, it is of fundamental importance to understand that GANs enable (and excel at) problems with multi-modal outputs. That means the problems are such that a single input corresponds to many different ‘correct’ or ‘likely’ outputs. (In contrast to a mathematical function, which would always produce the same output.) This is important to keep in mind in particular in scientific applications, where we often search for <em>the one answer</em>. Only if that is not the case, GANs can actually play out their strengths.</p>
+<p>Let us consider image super-resolution as an illustrative example: Conventional (deterministic) methods of increasing image resolution would necessarily lead to some blurring or artifacts, because the information that can be encoded in the finer pixel grid simply is not existent in the input data. A GAN, in contrast, will provide a possibility how a realistic image could have looked if it had been taken with higher resolution. This way they add information that may differ from the true scene of the image that was taken – a process that is obviously not yielding a unique answer since many versions of the information added may correspond to a realistic image.</p>
+<div class="figure align-default" id="fig-gan-scheme">
+<img alt="../_images/GAN.png" src="../_images/GAN.png" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Architecture of a GAN.</strong></span><a class="headerlink" href="#fig-gan-scheme" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="the-working-principle-of-gans">
+<h3>The working principle of GANs<a class="headerlink" href="#the-working-principle-of-gans" title="Permalink to this headline">¶</a></h3>
+<p>The optimization of all neural network models we discussed so far was formulated as minimization of a cost function. For GANs, while such a formulation is a also possible, a much more illuminating perspective is viewing the GAN as a <em>game</em> between two players, the <em>generator</em> (<span class="math notranslate nohighlight">\(G\)</span>) and the <em>discriminator</em> (<span class="math notranslate nohighlight">\(D\)</span>), see <a class="reference internal" href="#fig-gan-scheme"><span class="std std-numref">Fig. 10</span></a>. The role of <span class="math notranslate nohighlight">\(G\)</span> is to generate from some random input <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> drawn from a simple distribution samples that could be mistaken from being drawn from <span class="math notranslate nohighlight">\(p_{\mathrm{data}}\)</span>. The task of <span class="math notranslate nohighlight">\(D\)</span> is to classify its input as generated by <span class="math notranslate nohighlight">\(G\)</span> or coming from the data. Training should improve the performance of both <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(G\)</span> at their respective tasks simultaneously. After training is completed, <span class="math notranslate nohighlight">\(G\)</span> can be used to draw samples that closely resembles those drawn from <span class="math notranslate nohighlight">\(p_{\mathrm{data}}\)</span>. In summary</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+D_{\boldsymbol \theta_D}&amp;:\ \mathbf{x}\mapsto \text{binary true/false},\\
+G_{\boldsymbol \theta_G}&amp;:\ \mathbf{z}\mapsto \mathbf{x},
+\end{split}\end{split}\]</div>
+<p>where we have also indicated the two sets of parameters on which the two functions depend: <span class="math notranslate nohighlight">\(\boldsymbol \theta_D\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol \theta_G\)</span>, respectively. The game is then defined by two cost functions. The discriminator wants to minimize <span class="math notranslate nohighlight">\(J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> by only changing <span class="math notranslate nohighlight">\(\boldsymbol \theta_D\)</span>, while the generator <span class="math notranslate nohighlight">\(J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> by only changing <span class="math notranslate nohighlight">\(\boldsymbol \theta_G\)</span>. So, each players cost depends on both their and the other players parameters, the latter of which cannot be controlled by the player. The solution to this game optimization problem is a (local) minimum, i.e., a point in <span class="math notranslate nohighlight">\((\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span>-space where <span class="math notranslate nohighlight">\(J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> has a local minimum with respect to <span class="math notranslate nohighlight">\(\boldsymbol \theta_D\)</span> and <span class="math notranslate nohighlight">\(J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> has a local minimum with respect to <span class="math notranslate nohighlight">\(\boldsymbol \theta_G\)</span>. In game theory such a solution is called a Nash equilibrium. Let us now specify possible choices for the cost functions as well as for <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<p>The most important requirement of <span class="math notranslate nohighlight">\(G\)</span> is that it is differentiable. It thus can (in contrast to VAEs) not have discrete variables on the output layer. A typical representation is a deep (possibly convolutional) neural network. A popular Deep Conventional architecture is called DCGAN. Then <span class="math notranslate nohighlight">\(\boldsymbol \theta_G\)</span> are the networks weights and biases. The input <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is drawn from some simple prior distribution, e.g., the uniform distribution or a normal distribution. (The specific choice of this distribution is secondary, as long as we use the same during training and when we use the generator by itself.) It is important that <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> has at least as high a dimension as <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> if the full multi-dimensional <span class="math notranslate nohighlight">\(p_{\text{model}}\)</span> is to be approximated. Otherwise the model will perform some sort of dimensional reduction. Several tweaks have also been used, such as feeding some components of <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> into a hidden instead of the input layer and adding noise to hidden layers.</p>
+<p>The training proceeds in steps. At each step, a minibatch of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is drawn from the data set and a minibatch of <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is sampled from the prior distribution. Using this, gradient descent-type updates are performed: One update of <span class="math notranslate nohighlight">\(\boldsymbol \theta_D\)</span> using the gradient of <span class="math notranslate nohighlight">\(J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> and one of <span class="math notranslate nohighlight">\(\boldsymbol \theta_G\)</span> using the gradient of <span class="math notranslate nohighlight">\(J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span>.</p>
+</div>
+<div class="section" id="the-cost-functions">
+<h3>The cost functions<a class="headerlink" href="#the-cost-functions" title="Permalink to this headline">¶</a></h3>
+<p>For <span class="math notranslate nohighlight">\(D\)</span>, the cost function of choice is the cross-entropy as with standard binary classifiers that have sigmoid output. Given that the labels are ‘1’ for data and ‘0’ for <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> samples, it is simply</p>
+<div class="math notranslate nohighlight">
+\[J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)
+=-\frac{1}{2 N_1}\sum_i\,\log\,D(\mathbf{x}_i)-\frac{1}{2 N_2}\sum_j\log (1-D(G(\mathbf{z}_j))),\]</div>
+<p>where the sums over <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> run over the respective minibatches, which contain <span class="math notranslate nohighlight">\(N_1\)</span> and <span class="math notranslate nohighlight">\(N_2\)</span> points.</p>
+<p>For <span class="math notranslate nohighlight">\(G\)</span> more variations of the cost functions have been explored. Maybe the most intuitive one is</p>
+<div class="math notranslate nohighlight">
+\[J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)=-J_D(\boldsymbol \theta_D,\boldsymbol \theta_G),\]</div>
+<p>which corresponds to the so-called <em>zero-sum</em> or <em>minmax</em> game. Its solution is formally given by</p>
+<div class="math notranslate nohighlight" id="equation-eqn-gan-minmax">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eqn-gan-minmax" title="Permalink to this equation">¶</a></span>\[\boldsymbol \theta_G^\star=\underset{\boldsymbol \theta_G}{\text{arg min}}\ \ \underset{\boldsymbol \theta_D}{\text{max}}
+\left[-J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\right].\]</div>
+<p>This form of the cost is convenient for theoretical analysis, because there is only a single target function, which helps drawing parallels to conventional optimization. However, other cost functions have been proven superior in practice. The reason is that minimization can get trapped very far from an equilibrium: When the discriminator manages to learn rejecting generator samples with high confidence, the gradient of the generator will be very small, making its optimization very hard.</p>
+<p>Instead, we can use the cross-entropy also for the generator cost function (but this time from the generator’s perspective)</p>
+<div class="math notranslate nohighlight">
+\[J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)=-\frac{1}{2 N_2}\sum_j\log\, D(G(\mathbf{z}_j)).\]</div>
+<p>Now the generator maximizes the probability of the discriminator being mistaken. This way, each player still has a strong gradient when the player is loosing the game. We observe that this version of <span class="math notranslate nohighlight">\(J_G(\boldsymbol \theta_D,\boldsymbol \theta_G)\)</span> has no direct dependence of the training data. Of course, such a dependence is implicit via <span class="math notranslate nohighlight">\(D\)</span>, which has learned from the training data. This indirect dependence also acts like a regularizer, preventing overfitting: <span class="math notranslate nohighlight">\(G\)</span> has no possibility to directly ‘fit’ its output to training data.</p>
+</div>
+<div class="section" id="remarks">
+<h3>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h3>
+<p>In closing this section, we comment on a few properties of GANs, which also mark frontiers for improvements. One global problem is that GANs are typically difficult to train: they require large training sets and are highly susceptible to hyper-parameter fluctuations. It is currently an active topic of research to compensate for this with the structural modification and novel loss function formulations.</p>
+<div class="section" id="mode-collapse">
+<h4>Mode collapse<a class="headerlink" href="#mode-collapse" title="Permalink to this headline">¶</a></h4>
+<p>This may describe one of the most obvious problems of GANs: it refers to a situation where <span class="math notranslate nohighlight">\(G\)</span> does not explore the full space to which <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> belongs, but rather maps several inputs <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> to the same output. Mode collapse can be more or less severe. For instance a <span class="math notranslate nohighlight">\(G\)</span> trained on generating images may always resort to certain fragments or patterns of images. A formal reason for mode collapse is when the simultaneous gradient descent gravitates towards a solution</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol \theta_G^\star=\underset{\boldsymbol \theta_D}{\text{arg max}}\ \ \underset{\boldsymbol \theta_G}{\text{min}}
+\left[-J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\right],\]</div>
+<p>instead of the order in Eq. <span class="xref myst"></span>. (A priori it is not clear which of the two solutions is closer to the algorithm’s doing.) Note that the interchange of min and max in general corresponds to a different solution: It is now sufficient for <span class="math notranslate nohighlight">\(G\)</span> to always produce one (and the same) output that is classified as data by <span class="math notranslate nohighlight">\(D\)</span> with very high probability. Due to the mode collapse problem, GANs are not good at exploring ergodically the full space of possible outputs. They rather produce few very good possible outputs.</p>
+<p>One strategy to fight mode collapse is called <em>minibatch features</em>. Instead of letting <span class="math notranslate nohighlight">\(D\)</span> rate one sample at a time, a minibatch of real and generated samples is considered at once. It then detects whether the generated samples are unusually close to each other.</p>
+</div>
+<div class="section" id="arithmetics-with-gans">
+<h4>Arithmetics with GANs<a class="headerlink" href="#arithmetics-with-gans" title="Permalink to this headline">¶</a></h4>
+<p>It has been demonstrated that GANs can do linear arithmetics with inputs to add or remove abstract features from the output. This has been demonstrated using a DCGAN trained on images of faces. The gender and the feature ‘wearing glasses’ can be added or subtracted and thus changed at will. Of course such a result is only empirical, there is no formal mathematical theory why it works.</p>
+</div>
+<div class="section" id="using-gans-with-labelled-data">
+<h4>Using GANs with labelled data<a class="headerlink" href="#using-gans-with-labelled-data" title="Permalink to this headline">¶</a></h4>
+<p>It has been shown that, if (partially) labeled data is available, using the labels when training <span class="math notranslate nohighlight">\(D\)</span> may improve the performance of <span class="math notranslate nohighlight">\(G\)</span>. In this constellation, <span class="math notranslate nohighlight">\(G\)</span> has still the same task as before and does not interact with the labels. If data with <span class="math notranslate nohighlight">\(n\)</span> classes exist, then <span class="math notranslate nohighlight">\(D\)</span> will be constructed as a classifier for <span class="math notranslate nohighlight">\((n+1)\)</span> classes, where the extra class corresponds to ‘fake’ data that <span class="math notranslate nohighlight">\(D\)</span> attributes to coming from <span class="math notranslate nohighlight">\(G\)</span>. If a data point has a label, then this label is used as a reference in the cost function. If a datapoint has no label, then the first <span class="math notranslate nohighlight">\(n\)</span> outputs of <span class="math notranslate nohighlight">\(D\)</span> are summed up.</p>
+</div>
+<div class="section" id="one-sided-label-smoothing">
+<h4>One-sided label smoothing<a class="headerlink" href="#one-sided-label-smoothing" title="Permalink to this headline">¶</a></h4>
+<p>This technique is useful not only for the <span class="math notranslate nohighlight">\(D\)</span> in GANs but also other binary classification problems with neural networks. Often we observe that classifiers give proper results, but show a too confident probability. This overshooting confidence can be counteracted by one-sided label smoothing. The idea is to simply replace the target value for the real examples with a value slightly less than 1, e.g., 0.9. This smoothes the distribution of the discriminator. Why do we only perform this off-set one-sided and not also give a small nonzero value <span class="math notranslate nohighlight">\(\beta\)</span> to the fake samples target values? If we were to do this, the optimal function for <span class="math notranslate nohighlight">\(D\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[D^\star(\mathbf{x})=\frac{p_{\mathrm{data}}(\mathbf{x})+\beta p_{\mathrm{model}}(\mathbf{x})}{p_{\mathrm{data}}(\mathbf{x})+  p_{\mathrm{model}}(\mathbf{x})}.\]</div>
+<p>Consider now a range of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> for which <span class="math notranslate nohighlight">\(p_{\mathrm{data}}(\mathbf{x})\)</span> is small but <span class="math notranslate nohighlight">\(p_{\mathrm{model}}(\mathbf{x})\)</span> is large (a “spurious mode”). <span class="math notranslate nohighlight">\(D^\star(\mathbf{x})\)</span> will have a peak near this spurious mode. This means <span class="math notranslate nohighlight">\(D\)</span> reinforces incorrect behavior of <span class="math notranslate nohighlight">\(G\)</span>. This will encourage <span class="math notranslate nohighlight">\(G\)</span> to reproduce samples that it already makes (irrespective of whether they are anything like real data).</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/molecularsets/moses">https://github.com/molecularsets/moses</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p>following “NIPS 2016 Tutorial: Generative Adversarial Netoworks”
+Ian Goodfellow, arXiv:1701.001160</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_without_neural_network-1.html" title="previous page">Structuring Data without Neural Networks {#sec:structuring_data}</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
