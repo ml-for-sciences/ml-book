@@ -278,7 +278,6 @@ equations*
     &=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
 \end{aligned}
 ```
-**Problem**
 
 Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. [](eqn:bellman-optimality-1b) defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are

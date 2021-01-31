@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Machine Learning for Scientists &#8212; Machine Learning for Sciences</title>
+    <title>Concluding remarks &#8212; Machine Learning for Sciences</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="Reinforcement Learning" href="ml_reinforcement-learning.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -86,7 +86,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+    <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    Introduction
@@ -112,8 +112,8 @@
    Reinforcement Learning
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ml_conclusion.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Concluding remarks
   </a>
  </li>
@@ -157,7 +157,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/index.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/docs/ml_conclusion.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -189,20 +189,58 @@
         
               <div>
                 
-  <div class="section" id="machine-learning-for-scientists">
-<h1>Machine Learning for Scientists<a class="headerlink" href="#machine-learning-for-scientists" title="Permalink to this headline">¶</a></h1>
-<p>This is an introductory machine learning course specifically developed with STEM students in mind,
-written by <a class="reference external" href="https://twitter.com/UZHMat">Condensed Matters</a> and <a class="reference external" href="https://twitter.com/QMAI_TUDelft">QMAI_TUDelft</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>These lectures were built using the new Sphinx-based <a class="reference external" href="https://beta.jupyterbook.org/intro.html">Jupyter Book
-2.0</a> tool set, as part of the
-<a class="reference external" href="https://ebp.jupyterbook.org/en/latest/">ExecutableBookProject</a>.
-Instructions for how to build them from source can be found in the Jupyter
-Book documentation.</p>
-<p>Built based on <a class="reference external" href="https://github.com/executablebooks/quantecon-mini-example">executable book example</a></p>
-</div>
-<div class="toctree-wrapper compound">
+  <div class="section" id="concluding-remarks">
+<h1>Concluding remarks<a class="headerlink" href="#concluding-remarks" title="Permalink to this headline">¶</a></h1>
+<p>In this lecture, ‘Introduction to Machine Learning for the Sciences’, we
+have discussed common structures and algorithms of machine learning to
+analyze data or learn policies to achieve a given goal. Even though
+machine learning is often associated with neural networks, we have first
+introduced methods commonly known from statistical analysis, such as
+linear regression. Neural networks, which we used for most of this
+lecture, are much less controlled than these conventional methods. As an
+example, we do not try to find an absolute minimum in the optimization
+procedure, but one of many almost degenerate minima. This uncertainty
+might feel like a loss of control to a scientist, but it is crucial for
+the successful generalization of the trained network</p>
+<p>The goal of our discussions was not to provide the details needed for an
+actual implementation—as all standard algorithms are provided by
+standard libraries such as TensorFlow or PyTorch, this is indeed not
+necessary—but to give an overview over the most important terminology
+and the common algorithms. We hope that such an overview is helpful for
+reading the literature and deciding, whether a given method is suitable
+for your own problems.</p>
+<p>To help with the use of machine learning in your own research, here a
+few lessons for a successful machine learner:</p>
+<ol class="simple">
+<li><p>Your learning result can only be as good as your data set.</p></li>
+<li><p>Understand your data, its structure and biases.</p></li>
+<li><p>Try simpler algorithms first.</p></li>
+<li><p>Don’t be afraid of lingo. Not everything that sounds fancy actually
+is.</p></li>
+<li><p>Neural networks are better at interpolating than extrapolating.</p></li>
+<li><p>Neural networks represent smooth functions well, not discontinuous
+or spiky ones.</p></li>
+</ol>
+<p>Regarding the use of machine learning in a scientific setting, several
+points should be kept in mind. First, unlike in many other applications,
+scientific data often exhibits specific structure, correlations, or
+biases, which are known beforehand. It is thus important to use our
+prior knowledge in the construction of the neural network and the loss
+function. There are also many situations, where the output of the
+network has to satisfy conditions, such as symmetries, to be meaningful
+in a given context. This should ideally be included in the definition of
+the network. Finally, scientific analysis needs to be well defined and
+reproducible. Machine learning, with its intrinsic stochastic nature,
+does not easily satisfy these conditions. It is thus crucial to document
+carefully the architecture and all hyperparameters of a network and
+training. The results should be compared to conventional statistical
+methods, their robustness to variations in the structure of the network
+and the hyperparameters should be checked.</p>
+<div class="figure align-default" id="fig-final-overview">
+<img alt="../_images/overview_ml.png" src="../_images/overview_ml.png" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>Machine Learning overview.</strong> Methods covered in this lecture from
+the point of view of
+tasks.</span><a class="headerlink" href="#fig-final-overview" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 
@@ -234,7 +272,7 @@ Book documentation.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="introduction.html" title="next page">Introduction</a>
+    <a class='left-prev' id="prev-link" href="ml_reinforcement-learning.html" title="previous page">Reinforcement Learning</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

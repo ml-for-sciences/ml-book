@@ -56,6 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Concluding remarks" href="ml_conclusion.html" />
     <link rel="prev" title="Interpretability of Neural Networks" href="ml_interpretability.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -110,6 +111,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Reinforcement Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_conclusion.html">
+   Concluding remarks
   </a>
  </li>
 </ul>
@@ -446,7 +452,6 @@ equations</em></p>
     &amp;= \max_a E(R_{t+1} + \gamma v_*(S_{t+1}) | S_t = s, A_t = a)\\
     &amp;=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
 \end{aligned}\end{split}\]</div>
-<p><strong>Problem</strong></p>
 <p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <span class="xref myst"></span> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are</p>
 <div class="math notranslate nohighlight">
@@ -627,6 +632,7 @@ randomly.</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ml_interpretability.html" title="previous page">Interpretability of Neural Networks</a>
+    <a class='right-next' id="next-link" href="ml_conclusion.html" title="next page">Concluding remarks</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
