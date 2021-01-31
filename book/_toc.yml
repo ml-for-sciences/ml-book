@@ -1,10 +1,15 @@
 # - file: README
 - file: docs/index
-  sections:
+- part: Lecture
+  chapters:
     - file: docs/introduction
     - file: docs/ml_without_neural_network-1
     - file: docs/ml_unsupervised
     - file: docs/ml_interpretability
     - file: docs/ml_reinforcement-learning
     - file: docs/ml_conclusion
+- part: Exercises
+  chapters:
+  - file: docs/pca
+
     
