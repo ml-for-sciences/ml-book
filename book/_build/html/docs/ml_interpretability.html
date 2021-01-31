@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interpretability of Neural Networks &#8212; Machine Learning for Sciences</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Unsupervised Learning" href="ml_unsupervised.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Sciences</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_without_neural_network-1.html">
+   Structuring Data without Neural Networks {#sec:structuring_data}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Interpretability of Neural Networks
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/ml_interpretability.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dreaming-and-the-problem-of-extrapolation">
+   Dreaming and the problem of extrapolation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adversarial-attacks">
+   Adversarial attacks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpreting-autoencoders">
+   Interpreting autoencoders
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="interpretability-of-neural-networks">
+<span id="sec-interpretability"></span><h1>Interpretability of Neural Networks<a class="headerlink" href="#interpretability-of-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>In particular for applications in science, we not only want to obtain a neural network that excels at performing a given task, but we also seek an understanding how the problem was solved. Ideally, we want to know underlying principles, deduce causal relations, identify abstracted notions. This is the topic of interpretability.</p>
+<div class="section" id="dreaming-and-the-problem-of-extrapolation">
+<h2>Dreaming and the problem of extrapolation<a class="headerlink" href="#dreaming-and-the-problem-of-extrapolation" title="Permalink to this headline">¶</a></h2>
+<p>Exploring the weights and intermediate activations of a neural network
+in order to understand what the network has learnt, very quickly becomes
+unfeasible or uninformative for large network architectures. In this
+case, we can try a different approach, where we focus on the inputs to
+the neural network, rather than the intermediate activations.</p>
+<p>More precisely, let us consider a neural network classifier <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>,
+depending on the weights <span class="math notranslate nohighlight">\(W\)</span>, which maps an input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to a
+probability distribution over <span class="math notranslate nohighlight">\(n\)</span> classes
+<span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x}|W) \in \mathbb{R}^{n}\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[F_{i}(\mathbf{x}|\theta) \geq 0 \ \ \  \mathrm{and} \ \ \  \sum_{i} F_{i}(\mathbf{x}|\theta) = 1.\]</div>
+<p>We want to minimise the distance between the output of the network <span class="math notranslate nohighlight">\(\mathbf{f(\mathbf{x})}\)</span> and a chosen target output <span class="math notranslate nohighlight">\(\mathbf{y}_{\textrm{target}}\)</span>, which can be done by minimizing the loss function</p>
+<div class="math notranslate nohighlight" id="equation-eqn-dreaming-loss">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eqn-dreaming-loss" title="Permalink to this equation">¶</a></span>\[    L = |\mathbf{f}(\mathbf{x}) - \mathbf{y}_{\textrm{target}}|^{2}.\]</div>
+<p>However, unlike in supervised learning where the loss minimization was done with
+respect to the weights <span class="math notranslate nohighlight">\(W\)</span> of the network, here we are interested in
+minimizing with respect to the input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> while keeping the weights
+<span class="math notranslate nohighlight">\(W\)</span> fixed. This can be achieved using gradient descent, i.e.</p>
+<div class="math notranslate nohighlight" id="equation-eqn-dreaming-update">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eqn-dreaming-update" title="Permalink to this equation">¶</a></span>\[    \mathbf{x} \rightarrow \mathbf{x} - \eta \frac{\partial L}{\partial \mathbf{x}},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta\)</span> is the learning rate. With a sufficient number of
+iterations, our initial input <span class="math notranslate nohighlight">\(\mathbf{x}^{0}\)</span> will be transformed into the
+final input <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{f(\mathbf{x}^*)} \approx \mathbf{y}_{\textrm{target}}.\]</div>
+<p>By choosing the target output to correspond to a particular class, e.g.,
+<span class="math notranslate nohighlight">\(\mathbf{y}_{\textrm{target}} = (1, 0, 0, \dots)\)</span>, we are then essentially
+finding examples of inputs which the network would classify as belonging
+to the chosen class. This procedure is called <em>dreaming</em>.</p>
+<p>Let us apply this technique to a binary classification example. We
+consider a dataset <a class="footnote-reference brackets" href="#id3" id="id1">3</a> consisting of images of healthy and unhealthy
+plant leaves. Some samples from the dataset are shown in the top row of
+<a class="reference internal" href="#fig-dreaming"><span class="std std-numref">Fig. 11</span></a>. After training a deep convolutional network
+to classify the leaves (reaching a test accuracy of around <span class="math notranslate nohighlight">\(95\%\)</span>), we
+start with a random image as our initial input <span class="math notranslate nohighlight">\(\mathbf{x}^{0}\)</span> and perform
+gradient descent on the input, as described above, to arrive at the
+final image <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> which our network confidently classifies.</p>
+<div class="figure align-default" id="fig-dreaming">
+<img alt="../_images/dreaming_examples.png" src="../_images/dreaming_examples.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text"><strong>Plant leaves.</strong> Top: Some samples from the plants dataset. Bottom:
+Samples generated by using the “dreaming” procedure starting from
+random noise.</span><a class="headerlink" href="#fig-dreaming" title="Permalink to this image">¶</a></p>
+</div>
+<p>In bottom row of <a class="reference internal" href="#fig-dreaming"><span class="std std-numref">Fig. 11</span></a>, we show three examples produced using the ‘dreaming’ technique. On first sight, it might be astonishing that the final image actually does not even remotely resemble a leaf. How could it be that the network has such a high accuracy of around <span class="math notranslate nohighlight">\(95\%\)</span>, yet we have here a confidently classified image which is essentially just noise. Although this seem surprising, a closer inspection reveals the problem: The noisy image <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> looks nothing like the samples in the dataset with which we trained our network. By feeding this image into our network, we are asking it to make an extrapolation, which as can be seen leads to an uncontrolled behavior. This is a key issue which plagues most data driven machine learning approaches. With few exceptions, it is very difficult to train a model capable of performing reliable extrapolations. Since scientific research is often in the business of making extrapolations, this is an extremely important point of caution to keep in mind.</p>
+<p>While it might seem obvious that any model should only be predictive for
+data that ‘resembles’ those in the training set, the precise meaning of
+‘resembles’ is actually more subtle than one imagines. For example, if
+one trains a ML model using a dataset of images captured using a Canon
+camera but subsequently decide to use the model to make predictions on
+images taken with a Nikon camera, we could actually be in for a
+surprise. Even though the images may ‘resemble’ each other to our naked
+eye, the different cameras can have a different noise profile which
+might not be perceptible to the human eye. We shall see in the next
+section that even such minute image distortions can already be
+sufficient to completely confuse our model.</p>
+</div>
+<div class="section" id="adversarial-attacks">
+<h2>Adversarial attacks<a class="headerlink" href="#adversarial-attacks" title="Permalink to this headline">¶</a></h2>
+<p>As we have seen, it is possible to modify the input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> so that the
+corresponding model approximates a chosen target output. This concept
+can also be applied to generate <em>adverserial examples</em>, i.e. images
+which have been intentionally modified to cause a model to misclassify
+it. In addition, we usually want the modification to be minimal or
+almost imperceptible to the human eye.</p>
+<p>One common method for generating adversarial examples is known as the
+<em>fast gradient sign method</em>. Starting from an input <span class="math notranslate nohighlight">\(\mathbf{x}^{0}\)</span> which
+our model correctly classifies, we choose a target output <span class="math notranslate nohighlight">\(\mathbf{y}^{*}\)</span>
+which corresponds to a wrong classification, and follow the procedure
+described in the previous section with a slight modification. Instead of
+updating the input according to
+Eq. <a class="reference internal" href="#equation-eqn-dreaming-update">(12)</a> we use the following update rule:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} \rightarrow \mathbf{x} - \eta \  \textrm{sign}\left(\frac{\partial L}{\partial \mathbf{x}}\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is given be Eq. <a class="reference internal" href="#equation-eqn-dreaming-loss">(11)</a>. The <span class="math notranslate nohighlight">\(\textrm{sign}(\dots) \in \lbrace -1, 1 \rbrace\)</span> both serves to enhance the signal and also acts as constraint to limit the size of the modification. By choosing <span class="math notranslate nohighlight">\(\eta = \frac{\epsilon}{T}\)</span> and performing only <span class="math notranslate nohighlight">\(T\)</span> iterations, we can then guarantee that each component of the final input <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[|x^{*}_{i} - x^{0}_{i}| \leq \epsilon,\]</div>
+<p>which is important since we want our final image <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> to be only minimally modified. We summarize this algorithm as follows:</p>
+<div class="admonition-fast-gradient-sign-method admonition" id="alg-fgsm">
+<p class="admonition-title">Fast Gradient Sign Method</p>
+<p><strong>Input:</strong> A classification model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, a loss function <span class="math notranslate nohighlight">\(L\)</span>, an initial image <span class="math notranslate nohighlight">\(\mathbf{x}^{0}\)</span>, a target label <span class="math notranslate nohighlight">\(\mathbf{y}_{\textrm{target}}\)</span>, perturbation size <span class="math notranslate nohighlight">\(\epsilon\)</span> and number of iterations <span class="math notranslate nohighlight">\(T\)</span>  <br />
+<strong>Output:</strong> Adversarial example <span class="math notranslate nohighlight">\(\mathbf{x}^{*}\)</span> with <span class="math notranslate nohighlight">\(|x^{*}_{i} - x^{0}_{i}| \leq \epsilon\)</span>  <br />
+<span class="math notranslate nohighlight">\(\eta = \epsilon/T\)</span> <br />
+<strong>for:</strong> i=1\dots T <strong>do</strong>  <br />
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{x} - \eta \ \textrm{sign}\left(\frac{\partial L}{\partial \mathbf{x}}\right)\)</span>  <br />
+<strong>end</strong></p>
+</div>
+<p>This process of generating adversarial examples is called an
+<em>adversarial attack</em>, which we can classify under two broad categories:
+<em>white box</em> and <em>black box</em> attacks. In a white box attack, the attacker
+has full access to the network <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> and is thus able to compute or
+estimate the gradients with respect to the input. On the other hand, in
+a black box attack, the adversarial examples are generated without using
+the target network <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. In this case, a possible strategy for the
+attacker is to train his own model <span class="math notranslate nohighlight">\(\mathbf{g}\)</span>, find an adversarial example
+for his model and use it against his target <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> without actually
+having access to it. Although it might seem surprising, this strategy
+has been found to work albeit with a lower success rate as compared to
+white box methods. We shall illustrate these concepts in the example
+below.</p>
+<div class="figure align-default" id="fig-white-box-attack">
+<img alt="../_images/white_box_example.png" src="../_images/white_box_example.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text"><strong>Adversarial examples.</strong> Generated using the fast gradient sign
+method with <span class="math notranslate nohighlight">\(T=1\)</span> iteration and <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>. The target model is
+Google’s <em>InceptionV3</em> deep convolutional network with a test accuracy
+of <span class="math notranslate nohighlight">\(\sim 95\%\)</span> on the binary (“Healthy” vs “Unhealthy”) plants
+dataset.</span><a class="headerlink" href="#fig-white-box-attack" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>We shall use the same plant leaves classification example as above. The target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> which we want to ‘attack’ is a <em>pretrained</em> model using Google’s well known <em>InceptionV3</em> deep convolutional neural network containing over <span class="math notranslate nohighlight">\(20\)</span> million parameters<a class="footnote-reference brackets" href="#id4" id="id2">4</a>. The model achieved a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>. Assuming we have access to the gradients of the model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we can then consider a white box attack. Starting from an image in the dataset which the target model correctly classifies and applying the fast gradient sign method (Alg. <span class="xref myst"></span>) with <span class="math notranslate nohighlight">\(\epsilon=0.01\)</span> and <span class="math notranslate nohighlight">\(T=1\)</span>, we obtain an adversarial image which differs from the original image by almost imperceptible amount of noise as depicted on the left of <a class="reference internal" href="#fig-white-box-attack"><span class="std std-numref">Fig. 12</span></a>. Any human would still correctly identify the image but yet the network, which has around <span class="math notranslate nohighlight">\(95\%\)</span> accuracy has completely failed.</p>
+<div class="figure align-default" id="fig-black-box-attack">
+<img alt="../_images/black_box_attack.png" src="../_images/black_box_attack.png" />
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Black Box Adversarial Attack.</strong></span><a class="headerlink" href="#fig-black-box-attack" title="Permalink to this image">¶</a></p>
+</div>
+<p>If, however, the gradients and outputs of the target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> are
+hidden, the above white box attack strategy becomes unfeasible. In this
+case, we can adopt the following ‘black box attack’ strategy. We train a
+secondary model <span class="math notranslate nohighlight">\(\mathbf{g}\)</span>, and then applying the FGSM algorithm to
+<span class="math notranslate nohighlight">\(\mathbf{g}\)</span> to generate adversarial examples for <span class="math notranslate nohighlight">\(\mathbf{g}\)</span>. Note that it is
+not necessary for <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> to have the same network architecture as the
+target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. In fact, it is possible that we do not even know
+the architecture of our target model.</p>
+<p>Let us consider another pretrained network based on <em>MobileNet</em> containing about <span class="math notranslate nohighlight">\(2\)</span> million parameters. After retraining the top classification layer of this model to a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>, we apply the FGSM algorithm to generate some adversarial examples. If we now test these examples on our target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we notice a significant drop in the accuracy as shown on the graph on the right of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 13</span></a>. The fact that the drop in accuracy is greater for the black box generated adversarial images as compared to images with random noise (of the same scale) added to it, shows that adversarial images have some degree of transferability between models. As a side note, on the left of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 13</span></a> we observe that black box attacks are more effective when only <span class="math notranslate nohighlight">\(T=1\)</span> iteration of the FGSM algorithm is used, contrary to the situation for the white box attack. This is because, with more iterations, the method has a tendency towards overfitting the secondary model, resulting in adversarial images which are less transferable.</p>
+<p>These forms of attacks highlight a serious vulnerability of such data
+driven machine learning techniques. Defending against such attack is an
+active area of research but it is largely a cat and mouse game between
+the attacker and defender.</p>
+</div>
+</div>
+<div class="section" id="interpreting-autoencoders">
+<h2>Interpreting autoencoders<a class="headerlink" href="#interpreting-autoencoders" title="Permalink to this headline">¶</a></h2>
+<p>Previously we have learned about a broad scope of application of
+generative models. We have seen that autoencoders can serve as powerful
+generative models in the scientific context by extracting the compressed
+representation of the input and using it to generate new instances of
+the problem. It turns out that in the simple enough problems one can
+find a meaningful interpretation of the latent representation that may
+be novel enough to help us get new insight into the problem we are
+analyzing.</p>
+<p>In 2020, the group of Renato Renner considered a machine learning
+perspective on one of the most historically important problems in
+physics: Copernicus heliocentric system of the solar orbits. Via series
+of careful and precise measurements of positions of objects in the night
+sky, Copernicus conjectured that Sun is the center of the solar system
+and other planets are orbiting around it. Let us now ask the following
+question: is it possible to build a neural network that receives the
+same observation angles Copernicus did and deduces the same conclusion
+from them?</p>
+<div class="figure align-default" id="fig-copernicus">
+<img alt="../_images/copernicus.png" src="../_images/copernicus.png" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text"><strong>The Copernicus problem.</strong> Relation between angles in heliocentric
+and geocentric coordinate
+system.</span><a class="headerlink" href="#fig-copernicus" title="Permalink to this image">¶</a></p>
+</div>
+<p>Renner group inputted into the autoencoder the angles of Mars and Sun as
+observed from Earth (<span class="math notranslate nohighlight">\(\alpha_{ES}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{EM}\)</span> in <a class="reference internal" href="#fig-copernicus"><span class="std std-numref">Fig. 14</span></a>) in certain times and asked the autoencoder
+to predict the angles at other times. When analyzing the trained model
+they realized that the two latent neurons included in their model are
+storing information in the <strong>heliocentric coordinates</strong>! In particular,
+one observes that the information stored in the latent space is a linear
+combination of angles between Sun and Mars, <span class="math notranslate nohighlight">\(\gamma_{SM}\)</span> and Sun and
+Earth <span class="math notranslate nohighlight">\(\gamma_{SE}\)</span>. In other words, just like Copernicus, the
+autoencoder has learned, that the most efficient way to store the
+information given is to transform it into the heliocentric coordinate
+system.</p>
+<p>While this fascinating example is a great way to show the generative
+models can be interpreted in some important cases, in general the
+question of interpretability is still very much open and subject to
+ongoing research. In the instances discussed earlier in this book, like
+generation of molecules, where the input is compressed through several
+layers of transformations requiring a complex dictionary and the
+dimension of the latent space is high, interpreting latent space becomes
+increasingly challenging.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>Source: https://data.mendeley.com/datasets/tywbtsjrjv/1</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p>This is an example of <em>transfer learning</em>. The base model,
+InceptionV3, has been trained on a different classification dataset,
+<em>ImageNet</em>, with over <span class="math notranslate nohighlight">\(1000\)</span> classes. To apply this network to our
+binary classification problem, we simply replace the top layer with
+a simple duo-output dense softmax layer. We keep the weights of the
+base model fixed and only train the top layer.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_unsupervised.html" title="previous page">Unsupervised Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

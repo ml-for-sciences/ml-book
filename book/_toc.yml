@@ -4,4 +4,5 @@
     - file: docs/introduction
     - file: docs/ml_without_neural_network-1
     - file: docs/ml_unsupervised
+    - file: docs/ml_interpretability
     
