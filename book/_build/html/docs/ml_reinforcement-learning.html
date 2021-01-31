@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reinforcement Learning &#8212; Machine Learning for Sciences</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Interpretability of Neural Networks" href="ml_interpretability.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Sciences</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_without_neural_network-1.html">
+   Structuring Data without Neural Networks {#sec:structuring_data}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Reinforcement Learning
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/ml_reinforcement-learning.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploration-versus-exploitation">
+   Exploration versus exploitation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finite-markov-decision-process">
+   Finite Markov decision process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#policies-and-value-functions">
+   Policies and value functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#temporal-difference-learning">
+   Temporal-difference learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-approximation">
+   Function approximation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="reinforcement-learning">
+<span id="sec-rl"></span><h1>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">¶</a></h1>
+<p>In the previous sections, we have introduced data-based learning, where
+we are given a dataset <span class="math notranslate nohighlight">\(\{\mathbf{x}_i\}\)</span> for training. Depending on whether
+we are given labels <span class="math notranslate nohighlight">\(y_i\)</span> with each data point, we have further divided
+our learning task as either being supervised or unsupervised,
+respectively. The aim of machine learning is then to classify unseen
+data (supervised), or extract useful information from the data and
+generate new data resembling the data in the given dataset
+(unsupervised). However, the concept of learning as commonly understood
+certainly encompasses other forms of learning that are not falling into
+these data-driven categories.</p>
+<p>An example for a form of learning not obviously covered by supervised or
+unsupervised learning is learning how to walk: in particular, a child
+that learns how to walk does not first collect data on all possible ways
+of successfully walking to extract rules on how to walk best. Rather,
+the child performs an action, sees what happens, and then adjusts their
+actions accordingly. This kind of learning thus happens best
+‘on-the-fly’, in other words while performing the attempted task.
+<em>Reinforcement learning</em> formalizes this different kind of learning and
+introduces suitable (computational) methods.</p>
+<p>As we will explain in the following, the framework of reinforcement
+learning considers an <em>agent</em>, that interacts with an <em>environment</em>
+through actions, which, on the one hand, changes the <em>state</em> of the
+agent and on the other hand, leads to a <em>reward</em>. Whereas we tried to
+minimize a loss function in the previous sections, the main goal of
+reinforcement learning is to maximize this reward by learning an
+appropriate <em>policy</em>. One way of reformulating this task is to find a
+<em>value function</em>, which associates to each state (or state-action pair)
+a value, or expected total reward. Note that, importantly, to perform
+our learning task we do not require knowledge, a <em>model</em>, of the
+environment. All that is needed is feedback to our actions in the form
+of a reward signal and a new state. We stress again that we study in the
+following methods that learn at each time step. One could also devise
+methods, where an agent tries a policy many times and judges only the
+final outcome.</p>
+<p>The framework of reinforcement learning is very powerful and versatile.
+Examples include:</p>
+<ul class="simple">
+<li><p>We can train a robot to perform a task, such as using an arm to
+collect samples. The state of the agent is the position of the robot
+arm, the actions move the arm, and the agent receives a reward for
+each sample collected.</p></li>
+<li><p>We can use reinforcement learning to optimize experiments, such as
+chemical reactions. In this case, the state contains the
+experimental conditions, such as temperature, solvent composition,
+or pH and the actions are all possible ways of changing these state
+variables. The reward is a function of the yield, the purity, or the
+cost. Note that reinforcement learning can be used at several levels
+of this process: While one agent might be trained to target the
+experimental conditions directly, another agent could be trained to
+reach the target temperature by adjusting the current running
+through a heating element.</p></li>
+<li><p>We can train an agent to play a game, with the state being the
+current state of the game and a reward is received once for winning.
+The most famous example for such an agent is Google’s AlphaGo, which
+outperforms humans in the game of Go. A possible way of applying
+reinforcement learning in the sciences is to phrase a problem as a
+game. An example, where such rephrasing was successfully applied, is
+error correction for (topological) quantum computers.</p></li>
+<li><p>In the following, we will use a toy example to illustrate the
+concepts introduced: We want to train an agent to help us with the
+plants in our lab: in particular, the state of the agent is the
+water level. The agent can turn on and off a growth lamp and it can
+send us a message if we need to show up to water the plants.
+Obviously, we would like to optimize the growth of the plants and
+not have them die.</p></li>
+</ul>
+<p>As a full discussion of reinforcement learning goes well beyond the
+scope of this lecture, we will focus in the following on the main ideas
+and terminology with no claim of completeness.</p>
+<div class="section" id="exploration-versus-exploitation">
+<span id="sec-expl-v-expl"></span><h2>Exploration versus exploitation<a class="headerlink" href="#exploration-versus-exploitation" title="Permalink to this headline">¶</a></h2>
+<p>We begin our discussion with a simple example that demonstrates some
+important aspects of reinforcement learning. In particular, we discuss a
+situation, where the reward does not depend on a state, but only on the
+action taken. The agent is a doctor, who has to choose from <span class="math notranslate nohighlight">\(n\)</span> actions,
+the treatments, for a given disease, with the reward depending on the
+recovery of the patient. The doctor ‘learns on the job’ and tries to
+find the best treatment. The <em>value</em> of a treatment <span class="math notranslate nohighlight">\(a\in\mathcal{A}\)</span> is
+denoted by <span class="math notranslate nohighlight">\(q_* (a) = E( r )\)</span>, the expectation value of our reward.</p>
+<p>Unfortunately, there is an uncertainty in the outcome of each treatment,
+such that it is not enough to perform each treatment just once to know
+the best one. Rather, only by performing a treatment many times we find
+a good estimate <span class="math notranslate nohighlight">\(Q_t(a) \approx q_*(a)\)</span>. Here, <span class="math notranslate nohighlight">\(Q_t(a)\)</span> is our estimate
+of the value of <span class="math notranslate nohighlight">\(a\)</span> after <span class="math notranslate nohighlight">\(t\)</span> (time-) steps. Obviously, we should not
+perform a bad treatment many times, only to have a better estimate for
+its failure. We could instead try each action once and then continue for
+the rest of the time with the action that performed best. This strategy
+is called a <em>greedy</em> method and <em>exploits</em> our knowledge of the system.
+Again, this strategy bears risks, as the uncertainty in the outcome of
+the treatment means that we might use a suboptimal treatment. It is thus
+crucial to <em>explore</em> other actions. This dilemma is called the ‘conflict
+between exploration and exploitation’. A common strategy is to use the
+best known action <span class="math notranslate nohighlight">\(a_* = {\rm argmax}_a Q_t(a)\)</span> most of the time, but
+with probability <span class="math notranslate nohighlight">\(\epsilon\)</span> chose randomly one of the other actions.
+This strategy of choosing the next action is called <em><span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy</em>.</p>
+</div>
+<div class="section" id="finite-markov-decision-process">
+<h2>Finite Markov decision process<a class="headerlink" href="#finite-markov-decision-process" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="fig-mdp">
+<img alt="../_images/mdp.png" src="../_images/mdp.png" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
+interaction.</span><a class="headerlink" href="#fig-mdp" title="Permalink to this image">¶</a></p>
+</div>
+<p>After this introductory example, we introduce the idealized form of
+reinforcement learning with a Markov decision process (MDP). At each
+time step <span class="math notranslate nohighlight">\(t\)</span>, the agent starts from a state <span class="math notranslate nohighlight">\(S_t\in \mathcal{S}\)</span>,
+performs an action <span class="math notranslate nohighlight">\(A_t\in\mathcal{A}\)</span>, which, through interaction with
+the environment, leads to a reward <span class="math notranslate nohighlight">\(R_{t+1}\in \mathcal{R}\)</span> and moves
+the agent to a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. This agent-environment interaction
+is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 15</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
+<p>For our toy example, the sensor we have only shows whether the water
+level is high (h) or low (l), so that the state space of our agent is
+<span class="math notranslate nohighlight">\(\mathcal{S} = \{ {\rm h}, {\rm l} \}\)</span>. In both cases, our agent can
+choose to turn the growth lamps on or off, or in the case of low water,
+he can choose to send us a message so we can go and water the plants.
+The available actions are thus
+<span class="math notranslate nohighlight">\(\mathcal{A} = \{{\rm on}, {\rm off}, {\rm text}\}\)</span>. When the growth
+lamps are on, the plants grow faster, which leads to a bigger reward,
+<span class="math notranslate nohighlight">\(r_{\rm on} &gt; r_{\rm off}&gt;0\)</span>. Furthermore, there is a penalty for
+texting us, but an even bigger penalty for letting the plants die,
+<span class="math notranslate nohighlight">\(0 &gt; r_{\rm text} &gt; r_{\rm fail}\)</span>.</p>
+<p>A model of the environment provides the probability of ending in state
+<span class="math notranslate nohighlight">\(s'\)</span> with reward <span class="math notranslate nohighlight">\(r\)</span>, starting from a state <span class="math notranslate nohighlight">\(s\)</span> and choosing the action
+<span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(p(s', r | s, a)\)</span>. In this case, the dynamics of the Markov
+decision process is completely characterized. Note that the process is a
+Markov process, since the next state and reward only depend on the
+current state and chosen action.</p>
+<p>In our toy example, being in state ‘high’ and having the growth lamp on
+will provide a reward of <span class="math notranslate nohighlight">\(r_{\rm on}\)</span> and keep the agent in ‘high’ with
+probability <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm on} | \rm {h}, {\rm on}) = \alpha\)</span>, while
+with <span class="math notranslate nohighlight">\(1-\alpha\)</span> the agent will end up with a low water level. However,
+if the agent turns the lamps off, the reward is <span class="math notranslate nohighlight">\(r_{\rm off}\)</span> and the
+probability of staying in state ‘high’ is <span class="math notranslate nohighlight">\(\alpha' &gt; \alpha\)</span>. For the
+case of a low water level, the probability of staying in low despite the
+lamps on is <span class="math notranslate nohighlight">\(p({\rm l}, r_{\rm on} | \rm {l}, {\rm on}) = \beta\)</span>, which
+means that with probability <span class="math notranslate nohighlight">\(1 - \beta\)</span>, our plants run out of water. In
+this case, we will need to get new plants and we will water them , of
+course, such that
+<span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm fail} | \rm {l}, {\rm on}) = 1-\beta\)</span>. As with high
+water levels, turning the lamps off reduces our rewards, but increases
+our chance of not losing the plants, <span class="math notranslate nohighlight">\(\beta' &gt; \beta\)</span>. Finally, if the
+agent should choose to send us a text, we will refill the water, such
+that <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm text} | {\rm l}, {\rm text}) = 1\)</span>. The whole
+Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 16</span></a>.</p>
+<p>From the probability for the next reward and state, we can also
+calculate the expected reward starting from state <span class="math notranslate nohighlight">\(s\)</span> and choosing
+action <span class="math notranslate nohighlight">\(a\)</span>, namely</p>
+<div class="math notranslate nohighlight">
+\[r(s, a) = \sum_{r\in\mathcal{R}} r \sum_{s'\in\mathcal{S}} p(s', r | s, a).\]</div>
+<p>Obviously, the value of an action now depends on the state the agent is
+in, such that we write <span class="math notranslate nohighlight">\(q_* (s, a)\)</span>. Alternatively, we can also assign
+to each state a value <span class="math notranslate nohighlight">\(v_*(s)\)</span>, which quantizes the optimal reward from
+this state.</p>
+<div class="figure align-default" id="fig-mdp-example">
+<img alt="../_images/mdp_example.png" src="../_images/mdp_example.png" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
+states ‘high’ and ‘low’ are denoted with large circles, the actions with
+small black circles, and the arrows correspond to the probabilities and
+rewards.</span><a class="headerlink" href="#fig-mdp-example" title="Permalink to this image">¶</a></p>
+</div>
+<p>Finally, we can define what we want to accomplish by learning: knowing
+our current state <span class="math notranslate nohighlight">\(s\)</span>, we want to know what action to choose such that
+our future total reward is maximized. Importantly, we want to accomplish
+this without any prior knowledge of how to optimize rewards directly.
+This poses yet another question: what is the total reward? We usually
+distinguish tasks with a well-defined end point <span class="math notranslate nohighlight">\(t=T\)</span>, so-called
+<em>episodic tasks</em>, from <em>continuous tasks</em> that go on for ever. The total
+reward for the former is simply the total <em>return</em></p>
+<div class="math notranslate nohighlight">
+\[G_t = R_{t+1} + R_{t+2} + R_{t+3} + \cdots + R_T.\]</div>
+<p>As such a sum is not guaranteed to converge for a continuous task, the total reward is the <em>discounted return</em></p>
+<div class="math notranslate nohighlight" id="equation-eqn-disc-return">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eqn-disc-return" title="Permalink to this equation">¶</a></span>\[G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^\infty \gamma^k R_{t+k+1},\]</div>
+<p>with <span class="math notranslate nohighlight">\(0 \leq \gamma &lt;  1\)</span> the discount rate.
+Equation <a class="reference internal" href="#equation-eqn-disc-return">(13)</a> is more general and can be used for an
+episodic task by setting <span class="math notranslate nohighlight">\(\gamma = 1\)</span> and <span class="math notranslate nohighlight">\(R_t = 0\)</span> for <span class="math notranslate nohighlight">\(t&gt;T\)</span>. Note that
+for rewards which are bound, this sum is guaranteed to converge to a
+finite value.</p>
+</div>
+<div class="section" id="policies-and-value-functions">
+<h2>Policies and value functions<a class="headerlink" href="#policies-and-value-functions" title="Permalink to this headline">¶</a></h2>
+<p>A policy <span class="math notranslate nohighlight">\(\pi(a | s)\)</span> is the probability of choosing the action <span class="math notranslate nohighlight">\(a\)</span> when
+in state <span class="math notranslate nohighlight">\(s\)</span>. We can thus formulate our learning task as finding the
+policy that maximizes our reward and reinforcement learning as adapting
+an agent’s policy as a result of its experience. For a given policy, we
+can define the value function of a state <span class="math notranslate nohighlight">\(s\)</span> as the expected return from
+starting in that state and using the policy function <span class="math notranslate nohighlight">\(\pi\)</span> for choosing
+all our future actions. We can write this as</p>
+<div class="math notranslate nohighlight" id="equation-eqn-value-function">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eqn-value-function" title="Permalink to this equation">¶</a></span>\[v_\pi(s) \equiv E_\pi (G_t | S_t = s).\]</div>
+<p>Alternatively, we can define the action-value function of <span class="math notranslate nohighlight">\(\pi\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[q_\pi (s, a) \equiv E_\pi(G_t | S_t = s, A_t = a).\]</div>
+<p>This is the expectation value for the return starting in state <span class="math notranslate nohighlight">\(s\)</span> and choosing
+action <span class="math notranslate nohighlight">\(a\)</span>, but using the policy <span class="math notranslate nohighlight">\(\pi\)</span> for all future actions. Note that
+one of the key ideas of reinforcement learning is to use such value
+functions, instead of the policy, to organize our learning process.</p>
+<p>The value function of Eq. <a class="reference internal" href="#equation-eqn-value-function">(14)</a> satisfies a self-consistency equation,</p>
+<div class="math notranslate nohighlight" id="equation-eqn-be-expect">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eqn-be-expect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    v_\pi(s) &amp;= E_\pi ( R_{t+1} + \gamma G_{t+1} | S_t = s)\\
+    &amp;= \sum_a \pi(a | s) \sum_{s', r} p(s', r | s, a) [ r + \gamma v_\pi (s')].\end{aligned}\end{split}\]</div>
+<p>This equation, known as the <em>Bellman equation</em>, relates the value of
+state <span class="math notranslate nohighlight">\(s\)</span> to the expected reward and the (discounted) value of the next
+state after having chosen an action under the policy <span class="math notranslate nohighlight">\(\pi(a|s)\)</span>.</p>
+<p>As an example, we can write the Bellman equation for the strategy of
+always leaving the lamps on in our toy model. Then, we find the system
+of linear equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+    v_{\rm on}({\rm h}) &amp;= p({\rm h}, r_{\rm on} | {\rm h}, {\rm on}) [r_{\rm on} + \gamma v_{\rm on} ({\rm h})] + p({\rm l}, r_{\rm on} | {\rm h}, {\rm on}) [r_{\rm on} + \gamma v_{\rm on} ({\rm l})] \nonumber\\
+    &amp; = r_{\rm on} + \gamma [\alpha v_{\rm on}({\rm h}) + (1-\alpha) v_{\rm on}({\rm l})],\\
+    v_{\rm on}({\rm l}) &amp;=  \beta[r_{\rm on} + \gamma v_{\rm on}({\rm l})] + (1-\beta) [r_{\rm fail} + \gamma v_{\rm on}({\rm h})],
+\end{aligned}\end{split}\]</div>
+<p>from which we can solve easily for <span class="math notranslate nohighlight">\(v_{\rm on}({\rm h})\)</span> and <span class="math notranslate nohighlight">\(v_{\rm on}({\rm l})\)</span>.</p>
+<p>Instead of calculating the value function for all possible policies, we
+can directly try and find the optimal policy <span class="math notranslate nohighlight">\(\pi_*\)</span>, for which
+<span class="math notranslate nohighlight">\(v_{\pi_*}(s) &gt; v_{\pi'}(s)\)</span> for all policies <span class="math notranslate nohighlight">\(\pi'\)</span> and
+<span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>. For this policy, we find the <em>Bellman optimality
+equations</em></p>
+<div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-1">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eqn-bellman-optimality-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    v_*(s) &amp;= \max_a q_{\pi_*}(s, a)\nonumber\\
+    &amp;= \max_a E(R_{t+1} + \gamma v_*(S_{t+1}) | S_t = s, A_t = a)\\
+    &amp;=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
+\end{aligned}\end{split}\]</div>
+<p><strong>Problem</strong></p>
+<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <span class="xref myst"></span> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
+For our toy example, the two equations for the value functions are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_*({\rm h}) = \max \left\{\begin{array}{l} r_{\rm on} + \gamma [\alpha v_*({\rm h}) + (1-\alpha) v_*({\rm l})] \\ 
+    r_{\rm off} + \gamma [\alpha' v_*({\rm h}) + (1-\alpha') v_*({\rm l})] \end{array}\right.\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_*({\rm l}) = \max \left\{\begin{array}{l} \beta[r_{\rm on} + \gamma v_*({\rm l})] + (1-\beta) [r_{\rm fail} + \gamma v_*({\rm h})] \\ 
+    \beta'[r_{\rm off} + \gamma v_*({\rm l})] + (1-\beta') [r_{\rm fail} + \gamma v_*({\rm h})]\\
+    r_{\rm text} + \gamma v_*({\rm h})\end{array}\right. .\end{split}\]</div>
+<p>Note that equivalent equations to Eqs. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(16)</a> hold for the state-action value function</p>
+<div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-2">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eqn-bellman-optimality-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    q_*(s, a) &amp;= E(R_{t+1} + \gamma \max_{a'} q_*(S_{t+1},a'))\\
+    &amp;= \sum_{s', r} p(s', r | s, a) [ r + \gamma \max_{a'} q_* (s', a')].
+\end{aligned}\end{split}\]</div>
+<p>Once we know <span class="math notranslate nohighlight">\(v_*\)</span>, the optimal policy <span class="math notranslate nohighlight">\(\pi_* (a| s)\)</span> is the greedy
+policy that chooses the action <span class="math notranslate nohighlight">\(a\)</span> that maximizes the right-hand side of
+Eq. <span class="xref myst"></span>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
+then we can directly choose the action which maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
+namely <span class="math notranslate nohighlight">\(\pi_*(a | s) = {\rm argmax}_{a'} q_*(s, a')\)</span>, without looking
+one step ahead.</p>
+<p>While Eqs <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(16)</a> or <a class="reference internal" href="#equation-eqn-bellman-optimality-2">(17)</a> can be solved explicitly for a sufficiently simple system, such an approach, which corresponds to an exhaustive search, is often not feasible. In the following, we distinguish two levels of complexity: First, if the explicit solution is too hard, but we can still keep track of all possible value functions—we can choose either the state or the state-action value function—we can use a <em>tabular</em> approach. A main difficulty in this case is the evaluation of a policy, or prediction, which is needed to improve on the policy. While various methods for <em>policy evaluation</em> and <em>policy improvement</em> exist, we will discuss in the following an approach called <em>temporal-difference learning</em>. Second, in many cases the space of possible states is much too large to allow for a complete knowledge of all value functions. In this case, we additionally need to approximate the value functions. For this purpose, we can use the methods encountered in the previous chapters, such as (deep) neural networks.</p>
+</div>
+<div class="section" id="temporal-difference-learning">
+<h2>Temporal-difference learning<a class="headerlink" href="#temporal-difference-learning" title="Permalink to this headline">¶</a></h2>
+<p>If we cannot explicitly solve the Bellman optimality equations—the
+case most often encountered—then we need to find the optimal policy by
+some other means. If the state space is still small enough to keep track
+of all value functions, we can tabulate the value function for all the
+states and a given policy and thus, speak of <em>tabular methods</em>. The most
+straight-forward approach, referred to as <em>policy iteration</em>, proceeds
+in two steps: First, given a policy <span class="math notranslate nohighlight">\(\pi(a|s)\)</span>, the value function
+<span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is evaluated. Second, after this <em>policy evaluation</em>, we
+can improve on the given policy <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> using the greedy policy</p>
+<div class="math notranslate nohighlight" id="equation-eqn-greedy-improvement">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eqn-greedy-improvement" title="Permalink to this equation">¶</a></span>\[\pi'(a|s) = {\rm argmax}_a  \sum_{s', r} p(s', r| s, a) [r + \gamma v_\pi(s')].\]</div>
+<p>This second step is called <em>policy improvement</em>. The full policy iteration then proceeds iteratively</p>
+<div class="math notranslate nohighlight">
+\[\pi_0 \rightarrow v_{\pi_0} \rightarrow \pi_1 \rightarrow v_{\pi_1} \rightarrow \pi_2 \rightarrow \cdots\]</div>
+<p>until convergence to <span class="math notranslate nohighlight">\(v_*\)</span> and hence <span class="math notranslate nohighlight">\(\pi_*\)</span>. Note that, indeed, the Bellman optimality equation <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(16)</a> is the fixed-point equation for this procedure.</p>
+<p>Policy iteration requires a full evaluation of the value function of
+<span class="math notranslate nohighlight">\(\pi_k\)</span> for every iteration <span class="math notranslate nohighlight">\(k\)</span>, which is usually a costly calculation.
+Instead of fully evaluating the value function under a fixed policy, we
+can also directly try and calculate the optimal value function by
+iteratively solving the Bellman optimality equation,</p>
+<div class="math notranslate nohighlight">
+\[v^{[k+1]} (s) = \max_a \sum_{s', r} p(s', r| s, a) [r + \gamma v^{[k]}(s')].\]</div>
+<p>Note that once we have converged to the optimal value function, the
+optimal policy is given by the greedy policy corresponding to the
+right-hand side of Eq. <a class="reference internal" href="#equation-eqn-greedy-improvement">(18)</a>. An alternative way of interpreting this iterative procedure is to perform policy improvement every time we update the value function, instead of finishing the policy evaluation each time before policy improvement. This procedure is called <em>value iteration</em> and is an example of a <em>generalized policy iteration</em>, the idea of allowing policy evaluation and policy improvement to interact while learning.</p>
+<p>In the following, we want to use such a generalized policy iteration scheme for the (common) case, where we do not have a model for our environment. In this model-free case, we have to perform the (generalized) policy improvement using only our interactions with the environment. It is instructive to first think about how to evaluate a policy. We have seen in Eqs. <a class="reference internal" href="#equation-eqn-value-function">(14)</a> and <a class="reference internal" href="#equation-eqn-be-expect">(15)</a> that the value function can also be written as an expectation value,</p>
+<div class="math notranslate nohighlight" id="equation-eqn-policy-evaluation">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eqn-policy-evaluation" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    v_{\pi} (s) &amp;= E_\pi (G_t | S_t = s)\\
+    &amp;= E_\pi (R_{t+1} + \gamma v_{\pi}(S_{t+1})| S_t = s).
+\end{aligned}\end{split}\]</div>
+<p>We can thus either try to directly sample the expectation value of the
+first line—this can be done using <em>Monte Carlo sampling</em> over possible
+state-action sequences—or we try to use the second line to iteratively
+solve for the value function. In both cases, we start from state <span class="math notranslate nohighlight">\(S_t\)</span>
+and choose an action <span class="math notranslate nohighlight">\(A_t\)</span> according to the policy we want to evaluate.
+The agent’s interaction with the environment results in the reward
+<span class="math notranslate nohighlight">\(R_{t+1}\)</span> and the new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. Using the second line,
+Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation">(19)</a>, goes under the name
+<em>temporal-difference learning</em> and is in many cases the most efficient
+method. In particular, we make the following updates</p>
+<div class="math notranslate nohighlight" id="equation-eqn-policy-evaluation-modelfree">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eqn-policy-evaluation-modelfree" title="Permalink to this equation">¶</a></span>\[v_\pi^{[k+1]} (S_t) = v_\pi^{[k]}(S_t) + \alpha [R_{t+1} + \gamma v_\pi^{[k]} (S_{t+1}) - v_\pi^{[k]} (S_{t}) ].\]</div>
+<p>The expression in the brackets is the difference between our new estimate and the old estimate of the value function and <span class="math notranslate nohighlight">\(\alpha&lt;1\)</span> is a learning rate. As we look one step ahead for our new estimate, the method is called one-step temporal difference method.</p>
+<p>We now want to use generalized policy iteration to find the optimal
+value. We already encountered a major difficulty when improving a policy
+using a value function based on experience in
+Sec. <a class="reference internal" href="#sec-expl-v-expl"><span class="std std-ref">Exploration versus exploitation</span></a>: it is difficult to maintain enough
+exploration over possible action-state pairs and not end up exploiting
+the current knowledge. However, this sampling is crucial for both Monte
+Carlo methods and the temporal-difference learning we discuss here. In
+the following, we will discuss two different methods of performing the
+updates, both working on the state-action value function, instead of the
+value function. Both have in common that we look one step ahead to
+update the state-action value function. A general update should then be
+of the form</p>
+<div class="math notranslate nohighlight">
+\[q^{[k+1]} (S_t, a) = q^{[k]}(S_t, a) + \alpha [R_{t+1} + \gamma q^{[k]} (S_{t+1}, a') - q^{[k]} (S_{t}, a) ]\]</div>
+<p>and the question is then what action <span class="math notranslate nohighlight">\(a\)</span> we should take for the state-action pair and what action <span class="math notranslate nohighlight">\(a'\)</span> should be taken in the new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>.</p>
+<p>Starting from a state <span class="math notranslate nohighlight">\(S_0\)</span>, we first choose an action <span class="math notranslate nohighlight">\(A_0\)</span> according
+to a policy derived from the current estimate of the state-action value
+function <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, such as an <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy policy. For the first
+approach, we perform updates as</p>
+<div class="math notranslate nohighlight">
+\[q^{[k+1]} (S_t, A_t) = q^{[k]}(S_t, A_t) + \alpha [R_{t+1} + \gamma q^{[k]} (S_{t+1}, A_{t+1}) - q^{[k]} (S_{t}, A_t) ].\]</div>
+<p>As above, we are provided a reward <span class="math notranslate nohighlight">\(R_{t+1}\)</span> and a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>
+through our interaction with the environment. To choose the action
+<span class="math notranslate nohighlight">\(A_{t+1}\)</span>, we again use a policy derived from <span class="math notranslate nohighlight">\(Q^{[k]}(s=S_{t+1}, a)\)</span>.
+Since we are using the policy for choosing the action in the next state
+<span class="math notranslate nohighlight">\(S_{t+1}\)</span>, this approach is called <em>on-policy</em>. Further, since in this
+particular case, we use the quintuple
+<span class="math notranslate nohighlight">\(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1}\)</span>, this algorithm is referred to as
+<em>Sarsa</em>. Finally, note that for the next step, we use <span class="math notranslate nohighlight">\(S_{t+1}, A_{t+1}\)</span>
+as the state-action pair for which <span class="math notranslate nohighlight">\(q^{[k]}(s,a)\)</span> is updated.</p>
+<p>Alternatively, we only keep the state <span class="math notranslate nohighlight">\(S_t\)</span> from the last step and first
+choose the action <span class="math notranslate nohighlight">\(A_t\)</span> for the update using the current policy. Then,
+we choose our action from state <span class="math notranslate nohighlight">\(S_{t+1}\)</span> in greedy fashion, which
+effectively uses <span class="math notranslate nohighlight">\(Q^{[k]}(s=S_t, a)\)</span> as an approximation for
+<span class="math notranslate nohighlight">\(q_*(s=S_t, a)\)</span>. This leads to</p>
+<div class="math notranslate nohighlight">
+\[q^{[k+1]} (S_t, A_t) = q^{[k]}(S_t, A_t) + \alpha [R_{t+1} + \gamma \max_a q^{[k]} (S_{t+1}, a) - q^{[k]} (S_{t}, A_t) ].\]</div>
+<p>and is a so-called <em>off-policy</em> approach. The algorithm, a variant of
+which is used in AlphaGo, is called <em>Q-learning</em>.</p>
+</div>
+<div class="section" id="function-approximation">
+<h2>Function approximation<a class="headerlink" href="#function-approximation" title="Permalink to this headline">¶</a></h2>
+<p>When the state-action space becomes very large, we face two problems:
+First, we can not use tabular methods anymore, since we can not store
+all values. Second and more important, even if we could store all the
+values, the probability of visiting all state-action pairs with the
+above algorithms becomes increasingly unlikely, in other words most
+states will never be visited during training. Ideally, we should thus
+identify states that are ‘similar’, assign them ‘similar’ value, and
+choose ‘similar’ actions when in these states. This grouping of similar
+states is exactly the kind of <em>generalization</em> we tried to achieve in
+the previous sections. Not surprisingly, reinforcement learning is most
+successful when combined with neural networks.</p>
+<p>In particular, we can parametrize a value function
+<span class="math notranslate nohighlight">\(\hat{v}_\pi(s; \theta)\)</span> and try to find parameters <span class="math notranslate nohighlight">\(\theta\)</span> such that
+<span class="math notranslate nohighlight">\(\hat{v}_\pi(s; \theta) \approx v_\pi(s)\)</span>. This approximation can be
+done using the supervised-learning methods encountered in the previous
+sections, where the target, or label, is given by the new estimate. In
+particular, we can use the <em>mean squared value error</em> to formulate a
+gradient descent method for an update procedure analogous to
+Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation-modelfree">(20)</a>. Starting from a state <span class="math notranslate nohighlight">\(S\)</span>
+and choosing an action <span class="math notranslate nohighlight">\(A\)</span> according to the policy <span class="math notranslate nohighlight">\(\pi(a|S)\)</span>, we update
+the parameters</p>
+<div class="math notranslate nohighlight">
+\[\theta^{[k+1]} = \theta^{[k]} + \alpha [R +\gamma \hat{v}_\pi(S'; \theta^{[k]}) - \hat{v}_\pi(S; \theta^{[k]}) ] \nabla \hat{v}_\pi (S;\theta^{[k]})\]</div>
+<p>with <span class="math notranslate nohighlight">\(0&lt; \alpha &lt; 1\)</span> again the learning rate. Note that, even though the
+new estimate also depends on <span class="math notranslate nohighlight">\(\theta^{[k]}\)</span>, we only take the derivative
+with respect to the old estimate. This method is thus referred to as
+<em>semi-gradient method</em>. In an similar fashion, we can reformulate the
+Sarsa algorithm introduced for generalized gradient iteration.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>We assume here an episodic task. At the very beginning of
+training, we may initialize the state-action value function
+randomly.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_interpretability.html" title="previous page">Interpretability of Neural Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
