@@ -12,5 +12,6 @@
   chapters:
   - file: docs/pca
   - file: docs/Linear-regression
+  - file: docs/NN-opt-reg
 
     
