@@ -137,12 +137,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Linear-regression.html">
-   Setup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Linear-regression.html#linear-regression">
-   Linear regression
+   Linear Regression
   </a>
  </li>
 </ul>
@@ -362,7 +357,7 @@ dataset.</span><a class="headerlink" href="#fig-white-box-attack" title="Permali
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<p>We shall use the same plant leaves classification example as above. The target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> which we want to ‘attack’ is a <em>pretrained</em> model using Google’s well known <em>InceptionV3</em> deep convolutional neural network containing over <span class="math notranslate nohighlight">\(20\)</span> million parameters<a class="footnote-reference brackets" href="#id4" id="id2">4</a>. The model achieved a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>. Assuming we have access to the gradients of the model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we can then consider a white box attack. Starting from an image in the dataset which the target model correctly classifies and applying the fast gradient sign method (Alg. <span class="xref myst"></span>) with <span class="math notranslate nohighlight">\(\epsilon=0.01\)</span> and <span class="math notranslate nohighlight">\(T=1\)</span>, we obtain an adversarial image which differs from the original image by almost imperceptible amount of noise as depicted on the left of <a class="reference internal" href="#fig-white-box-attack"><span class="std std-numref">Fig. 12</span></a>. Any human would still correctly identify the image but yet the network, which has around <span class="math notranslate nohighlight">\(95\%\)</span> accuracy has completely failed.</p>
+<p>We shall use the same plant leaves classification example as above. The target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> which we want to ‘attack’ is a <em>pretrained</em> model using Google’s well known <em>InceptionV3</em> deep convolutional neural network containing over <span class="math notranslate nohighlight">\(20\)</span> million parameters<a class="footnote-reference brackets" href="#id4" id="id2">4</a>. The model achieved a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>. Assuming we have access to the gradients of the model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we can then consider a white box attack. Starting from an image in the dataset which the target model correctly classifies and applying the fast gradient sign method with <span class="math notranslate nohighlight">\(\epsilon=0.01\)</span> and <span class="math notranslate nohighlight">\(T=1\)</span>, we obtain an adversarial image which differs from the original image by almost imperceptible amount of noise as depicted on the left of <a class="reference internal" href="#fig-white-box-attack"><span class="std std-numref">Fig. 12</span></a>. Any human would still correctly identify the image but yet the network, which has around <span class="math notranslate nohighlight">\(95\%\)</span> accuracy has completely failed.</p>
 <div class="figure align-default" id="fig-black-box-attack">
 <img alt="../_images/black_box_attack.png" src="../_images/black_box_attack.png" />
 <p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Black Box Adversarial Attack.</strong></span><a class="headerlink" href="#fig-black-box-attack" title="Permalink to this image">¶</a></p>

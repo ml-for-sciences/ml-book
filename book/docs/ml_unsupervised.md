@@ -141,8 +141,7 @@ $P(\mathbf{x})$, there are a few ways one can use the trained model:
     fine-tuned with gradient descent and backpropagation.
 
 2.  **Generative Modelling** As a generative model, a trained RBM can be
-    used to generate new samples via Gibbs sampling
-    (Alg. [](alg: Gibbs Sampling)). Some potential uses of the
+    used to generate new samples via Gibbs sampling. Some potential uses of the
     generative aspect of the RBM include *recommender systems* and
     *image reconstruction*. In the following subsection, we provide an
     example, where an RBM is used to reconstruct a noisy signal.
@@ -151,7 +150,7 @@ $P(\mathbf{x})$, there are a few ways one can use the trained model:
 
 A major drawback of the simple RBMs for their application is the fact that they only take binary data as input. As an example, we thus look at simple periodic waveforms with 60 sample points. In particular, we use sawtooth, sine, and square waveforms. In order to have quasi-continuous data, we use eight bits for each point, such that our signal can take values from 0 to 255. Finally, we generate samples to train with a small variation in the maximum value, the periodicity, as well as the center point of each waveform.
 
-After training the RBM using the contrastive divergence algorithm, we now have a model which represents the data distribution of the binarized waveforms. Consider now a signal which has been corrupted, meaning some parts of the waveform have not been received, in other words they are set to 0. By feeding this corrupted data into the RBM and performing a few iterations of Gibbs sampling (Alg. [](alg: Gibbs Sampling)), we can obtain a reconstruction of the signal, where the missing part has been repaired, as can been seen at the bottom of {numref}`fig:RBM_reconstruction`.
+After training the RBM using the contrastive divergence algorithm, we now have a model which represents the data distribution of the binarized waveforms. Consider now a signal which has been corrupted, meaning some parts of the waveform have not been received, in other words they are set to 0. By feeding this corrupted data into the RBM and performing a few iterations of Gibbs sampling, we can obtain a reconstruction of the signal, where the missing part has been repaired, as can been seen at the bottom of {numref}`fig:RBM_reconstruction`.
 
 Note that the same procedure can be used to reconstruct or denoise images. Due to the limitation to binary data, however, the picture has to either be binarized, or the input size to the RBM becomes fairly large for high-resolution pictures. It is thus not surprising that while RBMs have been popular in the mid-2000s, they have largely been superseded by more modern and architectures such as *generative adversarial networks* which we shall explore later in the chapter. However, they still serve a pedagogical purpose and could also provide inspiration for future innovations, in particular in science. A recent example is the idea of using an RBM to represent a quantum mechanical state.
 
