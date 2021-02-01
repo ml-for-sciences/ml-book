@@ -16,5 +16,6 @@
   - file: docs/exoplanets_RNN_CNN
   - file: docs/Molecule_gen_RNN
   - file: docs/Anomaly_Detection_RNN_AE_VAE
+  - file: docs/Transfer-learning-attacks
 
     
