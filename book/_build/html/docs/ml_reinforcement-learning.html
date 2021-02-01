@@ -146,6 +146,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="Classification.html">
+   Classification without Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Classification.html#dense-neural-networks">
+   Dense Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="NN-opt-reg.html">
    Machine Learning Optimizers
   </a>
@@ -524,7 +534,7 @@ equations</em></p>
     &amp;= \max_a E(R_{t+1} + \gamma v_*(S_{t+1}) | S_t = s, A_t = a)\\
     &amp;=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
 \end{aligned}\end{split}\]</div>
-<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <span class="xref myst"></span> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
+<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(16)</a> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}v_*({\rm h}) = \max \left\{\begin{array}{l} r_{\rm on} + \gamma [\alpha v_*({\rm h}) + (1-\alpha) v_*({\rm l})] \\ 
@@ -542,7 +552,7 @@ For our toy example, the two equations for the value functions are</p>
 \end{aligned}\end{split}\]</div>
 <p>Once we know <span class="math notranslate nohighlight">\(v_*\)</span>, the optimal policy <span class="math notranslate nohighlight">\(\pi_* (a| s)\)</span> is the greedy
 policy that chooses the action <span class="math notranslate nohighlight">\(a\)</span> that maximizes the right-hand side of
-Eq. <span class="xref myst"></span>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
+Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(16)</a>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 then we can directly choose the action which maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 namely <span class="math notranslate nohighlight">\(\pi_*(a | s) = {\rm argmax}_{a'} q_*(s, a')\)</span>, without looking
 one step ahead.</p>

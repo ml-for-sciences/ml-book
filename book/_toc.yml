@@ -13,6 +13,7 @@
   - file: docs/pca
   - file: docs/Dimensionality_reduction
   - file: docs/Linear-regression
+  - file: docs/Classification
   - file: docs/NN-opt-reg
   - file: docs/CNNs
   - file: docs/exoplanets_RNN_CNN

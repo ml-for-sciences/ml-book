@@ -279,7 +279,7 @@ equations*
 \end{aligned}
 ```
 
-Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. [](eqn:bellman-optimality-1b) defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
+Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. [](eqn:bellman-optimality-1) defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are
 
 ```{math}
@@ -307,7 +307,7 @@ Note that equivalent equations to Eqs. [](eqn:bellman-optimality-1) hold for th
 
 Once we know $v_*$, the optimal policy $\pi_* (a| s)$ is the greedy
 policy that chooses the action $a$ that maximizes the right-hand side of
-Eq. [](eqn:bellman-optimality-1b). If, instead, we know $q_*(s,a)$,
+Eq. [](eqn:bellman-optimality-1). If, instead, we know $q_*(s,a)$,
 then we can directly choose the action which maximizes $q_*(s,a)$,
 namely $\pi_*(a | s) = {\rm argmax}_{a'} q_*(s, a')$, without looking
 one step ahead.
