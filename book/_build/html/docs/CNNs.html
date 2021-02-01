@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convolutional Neural Networks &#8212; Machine Learning for Sciences</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discovery of Exoplanets with RNNs and CNNs" href="exoplanets_RNN_CNN.html" />
+    <link rel="prev" title="Machine Learning Optimizers" href="NN-opt-reg.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Sciences</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_without_neural_network-1.html">
+   Structuring Data without Neural Networks {#sec:structuring_data}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pca.html">
+   Principle Component Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Dimensionality_reduction.html">
+   Dimensionality Reduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear-regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="NN-opt-reg.html">
+   Machine Learning Optimizers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="NN-opt-reg.html#learning-rate-scheduling">
+   Learning Rate Scheduling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="NN-opt-reg.html#regularizing-neural-networks">
+   Regularizing Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="exoplanets_RNN_CNN.html">
+   Discovery of Exoplanets with RNNs and CNNs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Denoising.html">
+   Denoising with Restricted Boltzmann Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Molecule_gen_RNN.html">
+   Molecule Generation with an RNN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Anomaly_Detection_RNN_AE_VAE.html">
+   Anomaly Detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Transfer-learning-attacks.html">
+   Transfer Learning and Adversarial Attacks
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/CNNs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-simple-convolutional-network">
+   A simple convolutional network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-augmentation">
+   Data Augmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-rate-reduction">
+   Learning rate reduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#committee-machine">
+   Committee Machine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#state-of-the-art-performance">
+   State-of-the-art performance
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPool2D</span>
+<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">RMSprop</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">ImageDataGenerator</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">ReduceLROnPlateau</span>
+</pre></div>
+</div>
+<div class="section" id="convolutional-neural-networks">
+<h1>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>In the lectures, we have been introduced to a variety of neural network layers: 1) dense layers, 2) dropout layers, 3) convolutional layers and 4) pooling layers. With this set of layers, it is already possible to achieve new state-of-the-art performance i.e. <span class="math notranslate nohighlight">\(\geq\)</span> 99.7% accuracy on the MNIST dataset. In this exercise, we will walk through an example of a simple convolutional network with the main objective of familiarising oneself with a general machine learning workflow.</p>
+<p>First let us load and prepare the data set. Notice that we have split the data into training, validation and testing sets. In addition, we have reshaped the images to include an additional dimension which is required for convolutional layers. Convolutional layers take as input images from one or more channels and output images to one or more channels. The additional dimension stores the information from these multiple channels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>  
+
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+	<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_train.shape =&#39;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_train.shape =&#39;</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_val.shape =&#39;</span><span class="p">,</span> <span class="n">x_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_val.shape =&#39;</span><span class="p">,</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_test.shape =&#39;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_test.shape =&#39;</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+11493376/11490434 [==============================] - 0s 0us/step
+x_train.shape = (50000, 28, 28, 1)
+y_train.shape = (50000,)
+x_val.shape = (10000, 28, 28, 1)
+y_val.shape = (10000,)
+x_test.shape = (10000, 28, 28, 1)
+y_test.shape = (10000,)
+</pre></div>
+</div>
+<div class="section" id="a-simple-convolutional-network">
+<h2>A simple convolutional network<a class="headerlink" href="#a-simple-convolutional-network" title="Permalink to this headline">¶</a></h2>
+<p>In this first part, we simply want to try out a very simple convolutional neural network and compare its performance with a dense network with similar number of parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_conv_model</span><span class="p">():</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+  <span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+  <span class="k">return</span> <span class="n">model</span>
+
+<span class="k">def</span> <span class="nf">make_dense_model</span><span class="p">():</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+  <span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+  <span class="k">return</span> <span class="n">model</span>
+
+<span class="n">simple_conv_model</span> <span class="o">=</span> <span class="n">make_conv_model</span><span class="p">()</span>
+<span class="n">dense_model</span> <span class="o">=</span> <span class="n">make_dense_model</span><span class="p">()</span>
+<span class="n">simple_conv_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">dense_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 28, 28, 10)        260       
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 28, 28, 10)        2510      
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 14, 14, 10)        0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1960)              0         
+_________________________________________________________________
+dense (Dense)                (None, 64)                125504    
+_________________________________________________________________
+dropout (Dropout)            (None, 64)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                650       
+=================================================================
+Total params: 128,924
+Trainable params: 128,924
+Non-trainable params: 0
+_________________________________________________________________
+Model: &quot;sequential_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+flatten_1 (Flatten)          (None, 784)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 512)               401920    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 512)               0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 256)               131328    
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 10)                2570      
+=================================================================
+Total params: 535,818
+Trainable params: 535,818
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<p>Now let us train the models and compare its validation and test accuracies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">86</span>
+
+<span class="n">simple_conv_history</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dense_history</span> <span class="o">=</span> <span class="n">dense_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">),</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Having trained the models, we can now evaluate and plot the accuracies on the validation and training sets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_conv_test_loss</span><span class="p">,</span> <span class="n">simple_conv_test_acc</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">dense_test_loss</span><span class="p">,</span> <span class="n">dense_test_acc</span> <span class="o">=</span> <span class="n">dense_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dense_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;dense training accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dense_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;b-&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;dense val accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">dense_test_acc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;dense test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv training accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g-&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv val accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.94</span><span class="p">,</span> <span class="mf">1.005</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 1s 2ms/step - loss: 0.0432 - accuracy: 0.9907
+313/313 [==============================] - 1s 2ms/step - loss: 0.1149 - accuracy: 0.9806
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/cnn_output_8_2.png" /></p>
+<p>We do indeed see that the validation accuracies are an extremely good approximation of the test accuracies as one would expect if the datasets were split randomly and each set still contains sufficient number of samples. However, in practice, if we were selecting hyperparameters based on the validation data, the accuracies would then be biased towards the validation set and then the true generalisation accuracy of the model should then be evaluated using the testing set. On the hand, we do see that models are overfitted since the training accuracies are exceeding the validation and test accuracies significantly.</p>
+<p>On a separate note, we do see that the convolutional layers do improve the performance substantially despite having similar number of parameters. This is particular to this problem since image classification are often insensitive towards translations which are well handled by convolutional layers.</p>
+</div>
+<div class="section" id="data-augmentation">
+<h2>Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h2>
+<p>It is obvious that with more data, we would be able to achieve better performances. One reason for this is that with more data, the problem of overfitting is reduced. Hence, there have been many elaborate schemes for expanding a dataset. For image classification tasks such as here, a common approach is simply to augment the data with small translations and rotations of the original data samples. This works for our case because we know that even if a digit is rotated and translated, the classification of that digit would not change. This can be done easily using the following function from keras.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span>
+        <span class="n">featurewise_center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># set input mean to 0 over the dataset</span>
+        <span class="n">samplewise_center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># set each sample mean to 0</span>
+        <span class="n">featurewise_std_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># divide inputs by std of the dataset</span>
+        <span class="n">samplewise_std_normalization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># divide each input by its std</span>
+        <span class="n">zca_whitening</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># apply ZCA whitening</span>
+        <span class="n">rotation_range</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># randomly rotate images in the range (degrees)</span>
+        <span class="n">zoom_range</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="c1"># Randomly zoom image </span>
+        <span class="n">width_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># randomly shift images horizontally </span>
+        <span class="n">height_shift_range</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># randomly shift images vertically </span>
+        <span class="n">horizontal_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># randomly flip images</span>
+        <span class="n">vertical_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># randomly flip images</span>
+
+<span class="n">datagen</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_conv_model</span> <span class="o">=</span> <span class="n">make_conv_model</span><span class="p">()</span>
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">86</span>
+<span class="n">simple_conv_aug_history</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">datagen</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">),</span>
+    <span class="n">steps_per_epoch</span><span class="o">=</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Now lets reevaluate our test and validation accuracies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_conv_aug_test_loss</span><span class="p">,</span> <span class="n">simple_conv_aug_test_acc</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_aug_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug training accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_aug_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g-&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug val accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_aug_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.94</span><span class="p">,</span> <span class="mf">1.005</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 1s 2ms/step - loss: 0.0209 - accuracy: 0.9937
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/cnn_output_14_2.png" /></p>
+<p>With the data set augmentation, we do indeed see some improvement in the final test or generalisation accuracy. Notice also that the training accuracy is now below the validation and test accuracy. This is because in each epoch, new data samples are generated via translations and rotations such that it is extremely difficult for the model to overfit.</p>
+</div>
+<div class="section" id="learning-rate-reduction">
+<h2>Learning rate reduction<a class="headerlink" href="#learning-rate-reduction" title="Permalink to this headline">¶</a></h2>
+<p>To further improve accuracies, it can sometimes be helpful to reduce the learning as one approach convergence. There are many different scheme to achieve this. A common method is to monitor a certain metric, for instance the validation accuracy, and to reduce the learning rate when the chosen metric is not improving for a certain number of epochs. Here, we monitor the validation accuracy and reduce the learning rate by half when the accuracy is not improving after 3 epochs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">learning_rate_reduction</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">,</span> 
+                                            <span class="n">patience</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                                            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                            <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                                            <span class="n">min_lr</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">86</span>
+
+<span class="n">simple_conv_model</span> <span class="o">=</span> <span class="n">make_conv_model</span><span class="p">()</span>
+
+<span class="n">simple_conv_aug_lr_history</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">datagen</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">),</span>
+    <span class="n">steps_per_epoch</span><span class="o">=</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="n">batch_size</span><span class="p">,</span> 
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">learning_rate_reduction</span><span class="p">],</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Epoch 00013: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00022: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00025: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">simple_conv_aug_lr_test_loss</span><span class="p">,</span> <span class="n">simple_conv_aug_lr_test_acc</span> <span class="o">=</span> <span class="n">simple_conv_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_aug_lr_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g:&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug lr training accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">simple_conv_aug_lr_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="s2">&quot;g-&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug lr val accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_aug_lr_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug lr test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_aug_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv aug test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">simple_conv_test_acc</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simple conv test accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.94</span><span class="p">,</span> <span class="mf">1.005</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 1s 2ms/step - loss: 0.0180 - accuracy: 0.9944
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/cnn_output_19_2.png" /></p>
+</div>
+<div class="section" id="committee-machine">
+<h2>Committee Machine<a class="headerlink" href="#committee-machine" title="Permalink to this headline">¶</a></h2>
+<p>Finally, a possible way to improve the accuracy is simply to train multiple models and then to average the output from the various models. This is a form of committee machine known as ensemble averaging. The functional api of keras provides a very simple way to average across multiple models. This might take a while so it would be helpful to run it on google colab or some other external servers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an ensemble of models</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_conv_model</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">86</span>
+
+<span class="c1"># Fit the model</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">datagen</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+                    <span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">),</span>
+                    <span class="n">steps_per_epoch</span><span class="o">=</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="n">batch_size</span><span class="p">,</span>
+                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">learning_rate_reduction</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>
+                   <span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">models</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;loss and accuracy:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Epoch 00009: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00013: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00022: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00025: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+
+Epoch 00028: ReduceLROnPlateau reducing learning rate to 3.125000148429535e-05.
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00020: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00024: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00018: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00027: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00009: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00018: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00028: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00022: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00026: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+313/313 [==============================] - 1s 2ms/step - loss: 0.0195 - accuracy: 0.9932
+model 0 loss and accuracy: [0.01947448030114174, 0.9932000041007996]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0182 - accuracy: 0.9938
+model 1 loss and accuracy: [0.01823325641453266, 0.9937999844551086]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0192 - accuracy: 0.9935
+model 2 loss and accuracy: [0.01915612816810608, 0.9934999942779541]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0197 - accuracy: 0.9938
+model 3 loss and accuracy: [0.019724765792489052, 0.9937999844551086]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0212 - accuracy: 0.9930
+model 4 loss and accuracy: [0.02119877189397812, 0.9929999709129333]
+</pre></div>
+</div>
+<p>Now we can average across the models and evaluate the ensemble average as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Average</span><span class="p">()(</span><span class="n">yi</span><span class="p">)</span>
+<span class="n">Committee</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">Committee</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+
+<span class="n">committee_conv_loss</span><span class="p">,</span> <span class="n">committee_conv_acc</span> <span class="o">=</span> <span class="n">Committee</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 1s 3ms/step - loss: 0.0145 - accuracy: 0.9950
+</pre></div>
+</div>
+<p>Comparing with the accuracy of the individual models, we do see an increase in the performance over each individual model.</p>
+</div>
+<div class="section" id="state-of-the-art-performance">
+<h2>State-of-the-art performance<a class="headerlink" href="#state-of-the-art-performance" title="Permalink to this headline">¶</a></h2>
+<p>Now lets see if we can push the accuracy of our models close to the state-of-the-art performance of about 99.7%. We shall use all the techniques so far, except that we would use a larger convolutional model with more layers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_deep_conv_model</span><span class="p">():</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;Same&#39;</span><span class="p">,</span> 
+                  <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+
+  <span class="c1"># optimizer = RMSprop(lr=0.001, rho=0.9, epsilon=1e-08, decay=0.0)</span>
+  <span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+  <span class="k">return</span> <span class="n">model</span>
+
+
+<span class="c1"># Create an ensemble of models</span>
+<span class="n">deep_models</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_deep_conv_model</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">86</span>
+
+<span class="c1"># Fit the model</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">datagen</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+                    <span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">),</span>
+                    <span class="n">steps_per_epoch</span><span class="o">=</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="n">batch_size</span><span class="p">,</span>
+                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">learning_rate_reduction</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>
+                   <span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">deep_models</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">deep_models</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;loss and accuracy:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">deep_models</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Average</span><span class="p">()(</span><span class="n">yi</span><span class="p">)</span>
+<span class="n">deep_Committee</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">deep_Committee</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+
+<span class="n">deep_committee_conv_loss</span><span class="p">,</span> <span class="n">deep_committee_conv_acc</span> <span class="o">=</span> <span class="n">deep_Committee</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Epoch 00019: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00025: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00029: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00010: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00017: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00020: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00027: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+
+Epoch 00030: ReduceLROnPlateau reducing learning rate to 3.125000148429535e-05.
+
+Epoch 00008: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00019: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00025: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+
+Epoch 00028: ReduceLROnPlateau reducing learning rate to 3.125000148429535e-05.
+
+Epoch 00015: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00022: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00026: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00029: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+
+Epoch 00010: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+
+Epoch 00014: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+
+Epoch 00023: ReduceLROnPlateau reducing learning rate to 0.0001250000059371814.
+
+Epoch 00026: ReduceLROnPlateau reducing learning rate to 6.25000029685907e-05.
+
+Epoch 00029: ReduceLROnPlateau reducing learning rate to 3.125000148429535e-05.
+313/313 [==============================] - 1s 2ms/step - loss: 0.0117 - accuracy: 0.9957
+model 0 loss and accuracy: [0.011735166423022747, 0.9957000017166138]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0094 - accuracy: 0.9966
+model 1 loss and accuracy: [0.009402372874319553, 0.9965999722480774]
+313/313 [==============================] - 1s 2ms/step - loss: 0.0091 - accuracy: 0.9971
+model 2 loss and accuracy: [0.009083079174160957, 0.9970999956130981]
+313/313 [==============================] - 1s 3ms/step - loss: 0.0121 - accuracy: 0.9962
+model 3 loss and accuracy: [0.012146216817200184, 0.9962000250816345]
+313/313 [==============================] - 1s 3ms/step - loss: 0.0111 - accuracy: 0.9971
+model 4 loss and accuracy: [0.01112508587539196, 0.9970999956130981]
+313/313 [==============================] - 2s 5ms/step - loss: 0.0076 - accuracy: 0.9974
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">deep_models</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Average</span><span class="p">()(</span><span class="n">yi</span><span class="p">)</span>
+<span class="n">deep_Committee</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">deep_Committee</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+
+<span class="n">deep_committee_conv_loss</span><span class="p">,</span> <span class="n">deep_committee_conv_acc</span> <span class="o">=</span> <span class="n">deep_Committee</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 2s 5ms/step - loss: 0.0076 - accuracy: 0.9974
+</pre></div>
+</div>
+<p>We get quite close to the state of the art performance (check https://en.wikipedia.org/wiki/MNIST_database). The question is how much further can one go. Is it possible to get 100% accuracy? Actually it should not be possible, because some samples in the dataset might be wrongly labelled or is completely unreadable even for a human. Lets look at some of the misclassified samples in the testing set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">deep_Committee</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">misclassified_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">predictions</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of misclassified samples =&quot;</span><span class="p">,</span> <span class="n">misclassified_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">misclassified_samples</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_test</span><span class="p">[</span><span class="n">s</span><span class="p">][:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">s</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="n">s</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>number of misclassified samples = 26
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/cnn_output_29_1.png" /></p>
+<p>In the above plot, we have shown the true prediction in blue and the network prediction in red. Inspecting some of the figures, we might actually agree with the network prediction on some occassions.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="NN-opt-reg.html" title="previous page">Machine Learning Optimizers</a>
+    <a class='right-next' id="next-link" href="exoplanets_RNN_CNN.html" title="next page">Discovery of Exoplanets with RNNs and CNNs</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
