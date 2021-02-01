@@ -120,7 +120,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ml_conclusion.html">
-   Concluding remarks
+   Concluding Remarks
   </a>
  </li>
 </ul>
@@ -132,7 +132,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pca.html">
-   Principle component analysis (PCA)
+   Principle Component Analysis
   </a>
  </li>
  <li class="toctree-l1">
@@ -147,12 +147,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="#learning-rate-scheduling">
-   Learning rate scheduling
+   Learning Rate Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="#regularizing-neural-networks">
-   Regularizing neural networks
+   Regularizing Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -163,6 +163,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="Molecule_gen_RNN.html">
    Molecule Generation with an RNN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Anomaly_Detection_RNN_AE_VAE.html">
+   Anomaly Detection
   </a>
  </li>
 </ul>
@@ -242,7 +247,7 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-rate-scheduling">
-   Learning rate scheduling
+   Learning Rate Scheduling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -264,7 +269,7 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#regularizing-neural-networks">
-   Regularizing neural networks
+   Regularizing Neural Networks
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -493,7 +498,7 @@ Epoch 50/50
 <p>As already discussed in class, the Adam optimizer shows the best performance as it combines a momentum gradient approach with an adaptive learning rate. NAdam is further improvement, using the Nesterov update instead of vanilla momentum optimization.</p>
 </div>
 <div class="section" id="learning-rate-scheduling">
-<h1>Learning rate scheduling<a class="headerlink" href="#learning-rate-scheduling" title="Permalink to this headline">¶</a></h1>
+<h1>Learning Rate Scheduling<a class="headerlink" href="#learning-rate-scheduling" title="Permalink to this headline">¶</a></h1>
 <p>When training a neural network, we can tune the performance by optimizing a large set of hyperparameters. The most important parameter among them is the learning rate. A learning rate that is set too small will slow down the training, as we update the weights of the network in tiny steps. On the other hand, if the learning rate is set too high, the training can diverge.
 Usually we want to start with a large learning rate to make fast progress and then slow down the training close to the optimum. This can be achieved by using learning rate schedules, which we will investigate in this exercise.</p>
 <ul class="simple">
@@ -671,7 +676,7 @@ Epoch 50/50
 </div>
 </div>
 <div class="section" id="regularizing-neural-networks">
-<h1>Regularizing neural networks<a class="headerlink" href="#regularizing-neural-networks" title="Permalink to this headline">¶</a></h1>
+<h1>Regularizing Neural Networks<a class="headerlink" href="#regularizing-neural-networks" title="Permalink to this headline">¶</a></h1>
 <p>We discussed the bias-variance trade-off, which describes the problem of creating models which generalize well to unseen data. Neural networks are extremely susceptible to overfitting, as the vast number of parameters allows to perfectly represent the training data. Two common ways to address overfitting are either creating more data or using a regularization of the model. You already got to know regularization with regards to linear regression, which we will now extend to neural networks. We start with a norm regularization of the weights.</p>
 <div class="section" id="l2-regularization">
 <h2>L2 Regularization<a class="headerlink" href="#l2-regularization" title="Permalink to this headline">¶</a></h2>

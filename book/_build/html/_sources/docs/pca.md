@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 ```
 
-# Principle component analysis (PCA)
+# Principle Component Analysis 
 
 In scientific settings, we usually deal with datasets of high dimension, i.e. many features. In order to interpret such datasets, we have to reduce their dimensionality in an interpretable way, such that most of the information in the data is preserved. Many techniques exist for this purpose, but in this exercise we want to focus on principal component analysis (PCA). Its idea is simple—reduce the dimensionality of a dataset, for instance by combining features, while preserving as much ‘variability’ (i.e. statistical information) as possible.
 

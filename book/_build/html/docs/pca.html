@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Principle component analysis (PCA) &#8212; Machine Learning for Sciences</title>
+    <title>Principle Component Analysis &#8212; Machine Learning for Sciences</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Regression" href="Linear-regression.html" />
-    <link rel="prev" title="Concluding remarks" href="ml_conclusion.html" />
+    <link rel="prev" title="Concluding Remarks" href="ml_conclusion.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -120,7 +120,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ml_conclusion.html">
-   Concluding remarks
+   Concluding Remarks
   </a>
  </li>
 </ul>
@@ -132,7 +132,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Principle component analysis (PCA)
+   Principle Component Analysis
   </a>
  </li>
  <li class="toctree-l1">
@@ -147,12 +147,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="NN-opt-reg.html#learning-rate-scheduling">
-   Learning rate scheduling
+   Learning Rate Scheduling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="NN-opt-reg.html#regularizing-neural-networks">
-   Regularizing neural networks
+   Regularizing Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -163,6 +163,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="Molecule_gen_RNN.html">
    Molecule Generation with an RNN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Anomaly_Detection_RNN_AE_VAE.html">
+   Anomaly Detection
   </a>
  </li>
 </ul>
@@ -243,8 +248,8 @@
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 </pre></div>
 </div>
-<div class="section" id="principle-component-analysis-pca">
-<h1>Principle component analysis (PCA)<a class="headerlink" href="#principle-component-analysis-pca" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="principle-component-analysis">
+<h1>Principle Component Analysis<a class="headerlink" href="#principle-component-analysis" title="Permalink to this headline">¶</a></h1>
 <p>In scientific settings, we usually deal with datasets of high dimension, i.e. many features. In order to interpret such datasets, we have to reduce their dimensionality in an interpretable way, such that most of the information in the data is preserved. Many techniques exist for this purpose, but in this exercise we want to focus on principal component analysis (PCA). Its idea is simple—reduce the dimensionality of a dataset, for instance by combining features, while preserving as much ‘variability’ (i.e. statistical information) as possible.</p>
 <p>In this exercise we will be using the Wisconsin breast cancer dataset, which consists of 596 samples and 30 features. The features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image and are linked with a label, malignant or benign.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -409,7 +414,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ml_conclusion.html" title="previous page">Concluding remarks</a>
+    <a class='left-prev' id="prev-link" href="ml_conclusion.html" title="previous page">Concluding Remarks</a>
     <a class='right-next' id="next-link" href="Linear-regression.html" title="next page">Linear Regression</a>
 
     </div>

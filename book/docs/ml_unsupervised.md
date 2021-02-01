@@ -418,7 +418,7 @@ This may describe one of the most obvious problems of GANs: it refers to a situa
 \left[-J_D(\boldsymbol \theta_D,\boldsymbol \theta_G)\right],
 ```
 
-instead of the order in Eq. [](eq:GAN-Minmax). (A priori it is not clear which of the two solutions is closer to the algorithm's doing.) Note that the interchange of min and max in general corresponds to a different solution: It is now sufficient for $G$ to always produce one (and the same) output that is classified as data by $D$ with very high probability. Due to the mode collapse problem, GANs are not good at exploring ergodically the full space of possible outputs. They rather produce few very good possible outputs.
+instead of the order in Eq. [](eqn:GAN-Minmax). (A priori it is not clear which of the two solutions is closer to the algorithm's doing.) Note that the interchange of min and max in general corresponds to a different solution: It is now sufficient for $G$ to always produce one (and the same) output that is classified as data by $D$ with very high probability. Due to the mode collapse problem, GANs are not good at exploring ergodically the full space of possible outputs. They rather produce few very good possible outputs.
 
 One strategy to fight mode collapse is called *minibatch features*. Instead of letting $D$ rate one sample at a time, a minibatch of real and generated samples is considered at once. It then detects whether the generated samples are unusually close to each other.
 

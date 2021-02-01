@@ -1,4 +1,4 @@
-# Concluding remarks
+# Concluding Remarks
 
 In this lecture, 'Introduction to Machine Learning for the Sciences', we
 have discussed common structures and algorithms of machine learning to
