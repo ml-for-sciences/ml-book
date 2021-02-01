@@ -11,6 +11,7 @@
 - part: Exercises
   chapters:
   - file: docs/pca
+  - file: docs/Dimensionality_reduction
   - file: docs/Linear-regression
   - file: docs/NN-opt-reg
   - file: docs/exoplanets_RNN_CNN
