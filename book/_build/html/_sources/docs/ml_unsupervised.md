@@ -346,7 +346,7 @@ been used to
 
 -   predict the impact of climate change on individual houses
 
--   generate new molecules that have been later synethsized.
+-   generate new molecules that have been later synthesized.
 
 In the light of these examples, it is of fundamental importance to understand that GANs enable (and excel at) problems with multi-modal outputs. That means the problems are such that a single input corresponds to many different 'correct' or 'likely' outputs. (In contrast to a mathematical function, which would always produce the same output.) This is important to keep in mind in particular in scientific applications, where we often search for *the one answer*. Only if that is not the case, GANs can actually play out their strengths.
 
