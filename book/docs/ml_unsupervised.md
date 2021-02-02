@@ -136,11 +136,11 @@ $\quad$ (and similarly for $\mathbf{a}$ and $\mathbf{b}$) <br />
 Having trained the RBM to represent the underlying data distribution
 $P(\mathbf{x})$, there are a few ways one can use the trained model:
 
-1.  **Pretraining** We can use $W$ and $\mathbf{b}$ as the initial weights
+1.  **Pretraining:** We can use $W$ and $\mathbf{b}$ as the initial weights
     and biases for a deep network (c.f. Chapter 4), which is then
     fine-tuned with gradient descent and backpropagation.
 
-2.  **Generative Modelling** As a generative model, a trained RBM can be
+2.  **Generative Modelling:** As a generative model, a trained RBM can be
     used to generate new samples via Gibbs sampling. Some potential uses of the
     generative aspect of the RBM include *recommender systems* and
     *image reconstruction*. In the following subsection, we provide an
@@ -251,7 +251,7 @@ standard deviations $\boldsymbol \sigma$. The input $\mathbf{z}$ for the decoder
 then drawn from $N(\boldsymbol \mu, \boldsymbol \sigma)$.
 ```
 
-The idea behind VAEs is for the encoder to output not just an exact point $\mathbf{z}$ in the latent space, but a (factorized) Normal distribution of points, $\mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)$. In particular, the output of the encoder comprises two vectors, the first representing the means, $\boldsymbol \mu$, and the second the standard deviations, $\boldsymbol \sigma$. The input for the decoder is then sampled from this distribution, $\mathbf{z} \sim \mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)$, and the original input is reconstructed and compared to the original input for training. In addition to the standard loss function comparing input and output of the VAE, we further add a regularization term to the loss function such that the distributions from the encoder are close to a standard normal distribution $\mathcal{N}(\boldsymbol 0, \boldsymbol 1)$. Using the Kullback-Leibler divergence, Eq. [](eq:KL), to measure the deviation from the standard normal distribution, the full loss function then reads 
+The idea behind VAEs is for the encoder to output not just an exact point $\mathbf{z}$ in the latent space, but a (factorized) Normal distribution of points, $\mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)$. In particular, the output of the encoder comprises two vectors, the first representing the means, $\boldsymbol \mu$, and the second the standard deviations, $\boldsymbol \sigma$. The input for the decoder is then sampled from this distribution, $\mathbf{z} \sim \mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)$, and the original input is reconstructed and compared to the original input for training. In addition to the standard loss function comparing input and output of the VAE, we further add a regularization term to the loss function such that the distributions from the encoder are close to a standard normal distribution $\mathcal{N}(\boldsymbol 0, \boldsymbol 1)$. Using the Kullback-Leibler divergence, Eq. [](eqn:KL), to measure the deviation from the standard normal distribution, the full loss function then reads 
 ```{math}
 :label: eqn:loss_vae
 \begin{aligned}
