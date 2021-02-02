@@ -100,7 +100,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ml_without_neural_network-1.html">
-   Structuring Data without Neural Networks {#sec:structuring_data}
+   Structuring Data without Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
@@ -413,7 +413,7 @@ This strategy of choosing the next action is called <em><span class="math notran
 <h2>Finite Markov decision process<a class="headerlink" href="#finite-markov-decision-process" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="fig-mdp">
 <img alt="../_images/mdp.png" src="../_images/mdp.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
 interaction.</span><a class="headerlink" href="#fig-mdp" title="Permalink to this image">¶</a></p>
 </div>
 <p>After this introductory example, we introduce the idealized form of
@@ -422,7 +422,7 @@ time step <span class="math notranslate nohighlight">\(t\)</span>, the agent sta
 performs an action <span class="math notranslate nohighlight">\(A_t\in\mathcal{A}\)</span>, which, through interaction with
 the environment, leads to a reward <span class="math notranslate nohighlight">\(R_{t+1}\in \mathcal{R}\)</span> and moves
 the agent to a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. This agent-environment interaction
-is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 20</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
+is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 23</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
 <p>For our toy example, the sensor we have only shows whether the water
 level is high (h) or low (l), so that the state space of our agent is
 <span class="math notranslate nohighlight">\(\mathcal{S} = \{ {\rm h}, {\rm l} \}\)</span>. In both cases, our agent can
@@ -456,7 +456,7 @@ water levels, turning the lamps off reduces our rewards, but increases
 our chance of not losing the plants, <span class="math notranslate nohighlight">\(\beta' &gt; \beta\)</span>. Finally, if the
 agent should choose to send us a text, we will refill the water, such
 that <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm text} | {\rm l}, {\rm text}) = 1\)</span>. The whole
-Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 21</span></a>.</p>
+Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 24</span></a>.</p>
 <p>From the probability for the next reward and state, we can also
 calculate the expected reward starting from state <span class="math notranslate nohighlight">\(s\)</span> and choosing
 action <span class="math notranslate nohighlight">\(a\)</span>, namely</p>
@@ -468,7 +468,7 @@ to each state a value <span class="math notranslate nohighlight">\(v_*(s)\)</spa
 this state.</p>
 <div class="figure align-default" id="fig-mdp-example">
 <img alt="../_images/mdp_example.png" src="../_images/mdp_example.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
 states ‘high’ and ‘low’ are denoted with large circles, the actions with
 small black circles, and the arrows correspond to the probabilities and
 rewards.</span><a class="headerlink" href="#fig-mdp-example" title="Permalink to this image">¶</a></p>
@@ -485,9 +485,9 @@ reward for the former is simply the total <em>return</em></p>
 \[G_t = R_{t+1} + R_{t+2} + R_{t+3} + \cdots + R_T.\]</div>
 <p>As such a sum is not guaranteed to converge for a continuous task, the total reward is the <em>discounted return</em></p>
 <div class="math notranslate nohighlight" id="equation-eqn-disc-return">
-<span class="eqno">(39)<a class="headerlink" href="#equation-eqn-disc-return" title="Permalink to this equation">¶</a></span>\[G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^\infty \gamma^k R_{t+k+1},\]</div>
+<span class="eqno">(46)<a class="headerlink" href="#equation-eqn-disc-return" title="Permalink to this equation">¶</a></span>\[G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^\infty \gamma^k R_{t+k+1},\]</div>
 <p>with <span class="math notranslate nohighlight">\(0 \leq \gamma &lt;  1\)</span> the discount rate.
-Equation <a class="reference internal" href="#equation-eqn-disc-return">(39)</a> is more general and can be used for an
+Equation <a class="reference internal" href="#equation-eqn-disc-return">(46)</a> is more general and can be used for an
 episodic task by setting <span class="math notranslate nohighlight">\(\gamma = 1\)</span> and <span class="math notranslate nohighlight">\(R_t = 0\)</span> for <span class="math notranslate nohighlight">\(t&gt;T\)</span>. Note that
 for rewards which are bound, this sum is guaranteed to converge to a
 finite value.</p>
@@ -502,7 +502,7 @@ can define the value function of a state <span class="math notranslate nohighlig
 starting in that state and using the policy function <span class="math notranslate nohighlight">\(\pi\)</span> for choosing
 all our future actions. We can write this as</p>
 <div class="math notranslate nohighlight" id="equation-eqn-value-function">
-<span class="eqno">(40)<a class="headerlink" href="#equation-eqn-value-function" title="Permalink to this equation">¶</a></span>\[v_\pi(s) \equiv E_\pi (G_t | S_t = s).\]</div>
+<span class="eqno">(47)<a class="headerlink" href="#equation-eqn-value-function" title="Permalink to this equation">¶</a></span>\[v_\pi(s) \equiv E_\pi (G_t | S_t = s).\]</div>
 <p>Alternatively, we can define the action-value function of <span class="math notranslate nohighlight">\(\pi\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[q_\pi (s, a) \equiv E_\pi(G_t | S_t = s, A_t = a).\]</div>
@@ -510,9 +510,9 @@ all our future actions. We can write this as</p>
 action <span class="math notranslate nohighlight">\(a\)</span>, but using the policy <span class="math notranslate nohighlight">\(\pi\)</span> for all future actions. Note that
 one of the key ideas of reinforcement learning is to use such value
 functions, instead of the policy, to organize our learning process.</p>
-<p>The value function of Eq. <a class="reference internal" href="#equation-eqn-value-function">(40)</a> satisfies a self-consistency equation,</p>
+<p>The value function of Eq. <a class="reference internal" href="#equation-eqn-value-function">(47)</a> satisfies a self-consistency equation,</p>
 <div class="math notranslate nohighlight" id="equation-eqn-be-expect">
-<span class="eqno">(41)<a class="headerlink" href="#equation-eqn-be-expect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(48)<a class="headerlink" href="#equation-eqn-be-expect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     v_\pi(s) &amp;= E_\pi ( R_{t+1} + \gamma G_{t+1} | S_t = s)\\
     &amp;= \sum_a \pi(a | s) \sum_{s', r} p(s', r | s, a) [ r + \gamma v_\pi (s')].\end{aligned}\end{split}\]</div>
 <p>This equation, known as the <em>Bellman equation</em>, relates the value of
@@ -534,12 +534,12 @@ can directly try and find the optimal policy <span class="math notranslate nohig
 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>. For this policy, we find the <em>Bellman optimality
 equations</em></p>
 <div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-1">
-<span class="eqno">(42)<a class="headerlink" href="#equation-eqn-bellman-optimality-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(49)<a class="headerlink" href="#equation-eqn-bellman-optimality-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     v_*(s) &amp;= \max_a q_{\pi_*}(s, a)\nonumber\\
     &amp;= \max_a E(R_{t+1} + \gamma v_*(S_{t+1}) | S_t = s, A_t = a)\\
     &amp;=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
 \end{aligned}\end{split}\]</div>
-<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(42)</a> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
+<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}v_*({\rm h}) = \max \left\{\begin{array}{l} r_{\rm on} + \gamma [\alpha v_*({\rm h}) + (1-\alpha) v_*({\rm l})] \\ 
@@ -549,19 +549,19 @@ For our toy example, the two equations for the value functions are</p>
 \[\begin{split}v_*({\rm l}) = \max \left\{\begin{array}{l} \beta[r_{\rm on} + \gamma v_*({\rm l})] + (1-\beta) [r_{\rm fail} + \gamma v_*({\rm h})] \\ 
     \beta'[r_{\rm off} + \gamma v_*({\rm l})] + (1-\beta') [r_{\rm fail} + \gamma v_*({\rm h})]\\
     r_{\rm text} + \gamma v_*({\rm h})\end{array}\right. .\end{split}\]</div>
-<p>Note that equivalent equations to Eqs. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(42)</a> hold for the state-action value function</p>
+<p>Note that equivalent equations to Eqs. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> hold for the state-action value function</p>
 <div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-2">
-<span class="eqno">(43)<a class="headerlink" href="#equation-eqn-bellman-optimality-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(50)<a class="headerlink" href="#equation-eqn-bellman-optimality-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     q_*(s, a) &amp;= E(R_{t+1} + \gamma \max_{a'} q_*(S_{t+1},a'))\\
     &amp;= \sum_{s', r} p(s', r | s, a) [ r + \gamma \max_{a'} q_* (s', a')].
 \end{aligned}\end{split}\]</div>
 <p>Once we know <span class="math notranslate nohighlight">\(v_*\)</span>, the optimal policy <span class="math notranslate nohighlight">\(\pi_* (a| s)\)</span> is the greedy
 policy that chooses the action <span class="math notranslate nohighlight">\(a\)</span> that maximizes the right-hand side of
-Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(42)</a>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
+Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 then we can directly choose the action which maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 namely <span class="math notranslate nohighlight">\(\pi_*(a | s) = {\rm argmax}_{a'} q_*(s, a')\)</span>, without looking
 one step ahead.</p>
-<p>While Eqs <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(42)</a> or <a class="reference internal" href="#equation-eqn-bellman-optimality-2">(43)</a> can be solved explicitly for a sufficiently simple system, such an approach, which corresponds to an exhaustive search, is often not feasible. In the following, we distinguish two levels of complexity: First, if the explicit solution is too hard, but we can still keep track of all possible value functions—we can choose either the state or the state-action value function—we can use a <em>tabular</em> approach. A main difficulty in this case is the evaluation of a policy, or prediction, which is needed to improve on the policy. While various methods for <em>policy evaluation</em> and <em>policy improvement</em> exist, we will discuss in the following an approach called <em>temporal-difference learning</em>. Second, in many cases the space of possible states is much too large to allow for a complete knowledge of all value functions. In this case, we additionally need to approximate the value functions. For this purpose, we can use the methods encountered in the previous chapters, such as (deep) neural networks.</p>
+<p>While Eqs <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> or <a class="reference internal" href="#equation-eqn-bellman-optimality-2">(50)</a> can be solved explicitly for a sufficiently simple system, such an approach, which corresponds to an exhaustive search, is often not feasible. In the following, we distinguish two levels of complexity: First, if the explicit solution is too hard, but we can still keep track of all possible value functions—we can choose either the state or the state-action value function—we can use a <em>tabular</em> approach. A main difficulty in this case is the evaluation of a policy, or prediction, which is needed to improve on the policy. While various methods for <em>policy evaluation</em> and <em>policy improvement</em> exist, we will discuss in the following an approach called <em>temporal-difference learning</em>. Second, in many cases the space of possible states is much too large to allow for a complete knowledge of all value functions. In this case, we additionally need to approximate the value functions. For this purpose, we can use the methods encountered in the previous chapters, such as (deep) neural networks.</p>
 </div>
 <div class="section" id="temporal-difference-learning">
 <h2>Temporal-difference learning<a class="headerlink" href="#temporal-difference-learning" title="Permalink to this headline">¶</a></h2>
@@ -575,11 +575,11 @@ in two steps: First, given a policy <span class="math notranslate nohighlight">\
 <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is evaluated. Second, after this <em>policy evaluation</em>, we
 can improve on the given policy <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> using the greedy policy</p>
 <div class="math notranslate nohighlight" id="equation-eqn-greedy-improvement">
-<span class="eqno">(44)<a class="headerlink" href="#equation-eqn-greedy-improvement" title="Permalink to this equation">¶</a></span>\[\pi'(a|s) = {\rm argmax}_a  \sum_{s', r} p(s', r| s, a) [r + \gamma v_\pi(s')].\]</div>
+<span class="eqno">(51)<a class="headerlink" href="#equation-eqn-greedy-improvement" title="Permalink to this equation">¶</a></span>\[\pi'(a|s) = {\rm argmax}_a  \sum_{s', r} p(s', r| s, a) [r + \gamma v_\pi(s')].\]</div>
 <p>This second step is called <em>policy improvement</em>. The full policy iteration then proceeds iteratively</p>
 <div class="math notranslate nohighlight">
 \[\pi_0 \rightarrow v_{\pi_0} \rightarrow \pi_1 \rightarrow v_{\pi_1} \rightarrow \pi_2 \rightarrow \cdots\]</div>
-<p>until convergence to <span class="math notranslate nohighlight">\(v_*\)</span> and hence <span class="math notranslate nohighlight">\(\pi_*\)</span>. Note that, indeed, the Bellman optimality equation <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(42)</a> is the fixed-point equation for this procedure.</p>
+<p>until convergence to <span class="math notranslate nohighlight">\(v_*\)</span> and hence <span class="math notranslate nohighlight">\(\pi_*\)</span>. Note that, indeed, the Bellman optimality equation <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> is the fixed-point equation for this procedure.</p>
 <p>Policy iteration requires a full evaluation of the value function of
 <span class="math notranslate nohighlight">\(\pi_k\)</span> for every iteration <span class="math notranslate nohighlight">\(k\)</span>, which is usually a costly calculation.
 Instead of fully evaluating the value function under a fixed policy, we
@@ -589,10 +589,10 @@ iteratively solving the Bellman optimality equation,</p>
 \[v^{[k+1]} (s) = \max_a \sum_{s', r} p(s', r| s, a) [r + \gamma v^{[k]}(s')].\]</div>
 <p>Note that once we have converged to the optimal value function, the
 optimal policy is given by the greedy policy corresponding to the
-right-hand side of Eq. <a class="reference internal" href="#equation-eqn-greedy-improvement">(44)</a>. An alternative way of interpreting this iterative procedure is to perform policy improvement every time we update the value function, instead of finishing the policy evaluation each time before policy improvement. This procedure is called <em>value iteration</em> and is an example of a <em>generalized policy iteration</em>, the idea of allowing policy evaluation and policy improvement to interact while learning.</p>
-<p>In the following, we want to use such a generalized policy iteration scheme for the (common) case, where we do not have a model for our environment. In this model-free case, we have to perform the (generalized) policy improvement using only our interactions with the environment. It is instructive to first think about how to evaluate a policy. We have seen in Eqs. <a class="reference internal" href="#equation-eqn-value-function">(40)</a> and <a class="reference internal" href="#equation-eqn-be-expect">(41)</a> that the value function can also be written as an expectation value,</p>
+right-hand side of Eq. <a class="reference internal" href="#equation-eqn-greedy-improvement">(51)</a>. An alternative way of interpreting this iterative procedure is to perform policy improvement every time we update the value function, instead of finishing the policy evaluation each time before policy improvement. This procedure is called <em>value iteration</em> and is an example of a <em>generalized policy iteration</em>, the idea of allowing policy evaluation and policy improvement to interact while learning.</p>
+<p>In the following, we want to use such a generalized policy iteration scheme for the (common) case, where we do not have a model for our environment. In this model-free case, we have to perform the (generalized) policy improvement using only our interactions with the environment. It is instructive to first think about how to evaluate a policy. We have seen in Eqs. <a class="reference internal" href="#equation-eqn-value-function">(47)</a> and <a class="reference internal" href="#equation-eqn-be-expect">(48)</a> that the value function can also be written as an expectation value,</p>
 <div class="math notranslate nohighlight" id="equation-eqn-policy-evaluation">
-<span class="eqno">(45)<a class="headerlink" href="#equation-eqn-policy-evaluation" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(52)<a class="headerlink" href="#equation-eqn-policy-evaluation" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     v_{\pi} (s) &amp;= E_\pi (G_t | S_t = s)\\
     &amp;= E_\pi (R_{t+1} + \gamma v_{\pi}(S_{t+1})| S_t = s).
 \end{aligned}\end{split}\]</div>
@@ -603,11 +603,11 @@ solve for the value function. In both cases, we start from state <span class="ma
 and choose an action <span class="math notranslate nohighlight">\(A_t\)</span> according to the policy we want to evaluate.
 The agent’s interaction with the environment results in the reward
 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> and the new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. Using the second line,
-Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation">(45)</a>, goes under the name
+Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation">(52)</a>, goes under the name
 <em>temporal-difference learning</em> and is in many cases the most efficient
 method. In particular, we make the following updates</p>
 <div class="math notranslate nohighlight" id="equation-eqn-policy-evaluation-modelfree">
-<span class="eqno">(46)<a class="headerlink" href="#equation-eqn-policy-evaluation-modelfree" title="Permalink to this equation">¶</a></span>\[v_\pi^{[k+1]} (S_t) = v_\pi^{[k]}(S_t) + \alpha [R_{t+1} + \gamma v_\pi^{[k]} (S_{t+1}) - v_\pi^{[k]} (S_{t}) ].\]</div>
+<span class="eqno">(53)<a class="headerlink" href="#equation-eqn-policy-evaluation-modelfree" title="Permalink to this equation">¶</a></span>\[v_\pi^{[k+1]} (S_t) = v_\pi^{[k]}(S_t) + \alpha [R_{t+1} + \gamma v_\pi^{[k]} (S_{t+1}) - v_\pi^{[k]} (S_{t}) ].\]</div>
 <p>The expression in the brackets is the difference between our new estimate and the old estimate of the value function and <span class="math notranslate nohighlight">\(\alpha&lt;1\)</span> is a learning rate. As we look one step ahead for our new estimate, the method is called one-step temporal difference method.</p>
 <p>We now want to use generalized policy iteration to find the optimal
 value. We already encountered a major difficulty when improving a policy
@@ -669,7 +669,7 @@ done using the supervised-learning methods encountered in the previous
 sections, where the target, or label, is given by the new estimate. In
 particular, we can use the <em>mean squared value error</em> to formulate a
 gradient descent method for an update procedure analogous to
-Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation-modelfree">(46)</a>. Starting from a state <span class="math notranslate nohighlight">\(S\)</span>
+Eq. <a class="reference internal" href="#equation-eqn-policy-evaluation-modelfree">(53)</a>. Starting from a state <span class="math notranslate nohighlight">\(S\)</span>
 and choosing an action <span class="math notranslate nohighlight">\(A\)</span> according to the policy <span class="math notranslate nohighlight">\(\pi(a|S)\)</span>, we update
 the parameters</p>
 <div class="math notranslate nohighlight">
