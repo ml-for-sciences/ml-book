@@ -23,4 +23,8 @@
   - file: docs/Anomaly_Detection_RNN_AE_VAE
   - file: docs/Transfer-learning-attacks
 
+- part: About us
+  chapters:
+  - file: docs/about_us
+
     
