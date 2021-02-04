@@ -12,51 +12,51 @@ written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/e
 
 :img-top: ../cluster.png 
 +++
-**Introduction**
 
+[**Introduction**](sec:introduction)
 ---
 :img-top: ../_static/lecture_specific/structuring_data/circles_pca_kpca.png
 +++
-**Structuring Data without Neural Networks**
+[**Structuring Data without Neural Networks**](sec:structuring_data)
 
 
 
 ---
 :img-top: ../_static/lecture_specific/supervised-ml_wo_NN/Bias-Variance-Tradeoff.png
 +++
-**Supervised Learning without Neural Networks**
+[**Supervised Learning without Neural Networks**](sec:linear-methods-for-supervised-learning)
 
 
 ---
 :img-top: ../_static/lecture_specific/unsupervised-ml/vae.png
 +++
-**Supervised Learning with Neural Networks**
+[**Supervised Learning with Neural Networks**](sec:supervised)
 
 
 
 ---
 :img-top: ../_static/lecture_specific/unsupervised-ml/GenerativeTaxonomy.png
 +++
-**Unsupervised** <br/>
-**Learning**
+[**Unsupervised** <br/>
+**Learning**](sec:unsupervised)
 
 
 ---
 :img-top: ../_static/lecture_specific/interpretability/white_box_example.png
 +++
-**Interpretability of Neural Networks**
+[**Interpretability of Neural Networks**](sec:interpretability)
 
 
 ---
 :img-top: ../_static/lecture_specific/reinforcement/mdp.png
 +++
-**Reinforcement Learning**
+[**Reinforcement Learning**](sec:RL)
 
 
 ---
 :img-top: ../_static/lecture_specific/conclusion/overview_ml.png
 +++
-**Concluding Remarks**
+[**Concluding Remarks**](sec:conclusion)
 
 
 

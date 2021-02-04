@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autoencoders &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generative Adversarial Networks" href="ml_unsupervised-4.html" />
+    <link rel="prev" title="Training an RNN without Supervision" href="ml_unsupervised-2.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: logistic regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/unsupervised_learning/ml_unsupervised-3.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-autoencoders">
+   Variational Autoencoders
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="autoencoders">
+<h1>Autoencoders<a class="headerlink" href="#autoencoders" title="Permalink to this headline">¶</a></h1>
+<p>Autoencoders are neuron-based generative models, initially introduced for dimensionality reduction. The original purpose, thus, is similar to that of PCA or t-SNE that we already encountered in Sec. <a class="reference internal" href="../structuring_data/ml_without_neural_network.html#sec-structuring-data"><span class="std std-ref">Structuring Data without Neural Networks</span></a>, namely the reduction of the number of features that describe our input data. Unlike for PCA, where we have a clear recipe how to reduce the number of features, an autoencoder learns the best way of achieving the dimensionality reduction. An obvious question, however, is how to measure the quality of the compression, which is essential for the definition of a loss function and thus, training. In the case of t-SNE, we introduced two probability distributions based on the distance of samples in the original and feature space, respectively, and minimized their difference, for example using the Kullback-Leibler divergence.</p>
+<p>The solution the autoencoder uses is to have a neural network do first, the dimensionality reduction, or encoding to the <em>latent space</em>, <span class="math notranslate nohighlight">\(\mathbf{x}\mapsto \mathbf{e}(\mathbf{x})=\mathbf{z}\)</span>, and then, the decoding back to the original dimension, <span class="math notranslate nohighlight">\(\mathbf{z} \mapsto \mathbf{d}(\mathbf{z})\)</span>, see <a class="reference internal" href="#fig-ae-scheme"><span class="std std-numref">Fig. 15</span></a>. This architecture allows us to directly compare the original input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with the reconstructed output <span class="math notranslate nohighlight">\(\mathbf{d}(\mathbf{e}(\mathbf{x}))\)</span>, such that the autoencoder trains itself unsupervised by minimizing the difference. A good example of a loss function that achieves successful training and that we have encountered already several times is the cross entropy,</p>
+<div class="math notranslate nohighlight">
+\[L_{\rm ae} = - \sum_i \mathbf{x}_i \cdot \ln[ \mathbf{d}(\mathbf{e}(\mathbf{x}_i))].\]</div>
+<p>In other words, we compare point-wise the difference between the input to the encoder with the decoder’s output.</p>
+<p>Intuitively, the latent space with its lower dimension presents a bottleneck for the information propagation from input to output. The goal of training is to find and keep the most relevant information for the reconstruction to be optimal. The latent space then corresponds to the reduced space in PCA and t-SNE. Note that much like in t-SNE but unlike in PCA, the new features are in general not independent.</p>
+<div class="figure align-default" id="fig-ae-scheme">
+<img alt="../../_images/autoencoder.png" src="../../_images/autoencoder.png" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text"><strong>General autoencoder architecture.</strong> A neural network is used to
+contract a compressed representation of the input in the latent space. A
+second neural network is used to reconstruct the original
+input.</span><a class="headerlink" href="#fig-ae-scheme" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="variational-autoencoders">
+<h2>Variational Autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this headline">¶</a></h2>
+<p>A major problem of the approach introduced in the previous section is its tendency to overfitting. As an extreme example, a sufficiently complicated encoder-decoder pair could learn to map all data in the training set onto a single variable and back to the data. Such a network would indeed accomplish completely lossless compression and decompression. However, the network would not have extracted any useful information from the dataset and thus, would completely fail to compress and decompress previously unseen data. Moreover, as in the case of the dimensionality-reduction schemes discussed in Sec. <a class="reference internal" href="../structuring_data/ml_without_neural_network.html#sec-structuring-data"><span class="std std-ref">Structuring Data without Neural Networks</span></a>, we would like to analyze the latent space images and extract new information about the data. Finally, we might also want to use the decoder part of the autoencoder as a generator for new data. For these reasons, it is essential that we combat overfitting as we have done in the previous chapters by regularization.</p>
+<p>The question then becomes how one can effectively regularize the autoencoder. First, we need to analyze what properties we would like the latent space to fulfil. We can identify two main properties:</p>
+<ol class="simple">
+<li><p>If two input data points are close (according to some measure),
+their images in the latent space should also be close. We call this
+property <em>continuity</em>.</p></li>
+<li><p>Any point in the latent space should be mapped through the decoder
+onto a meaningful data point, a property we call <em>completeness</em>.</p></li>
+</ol>
+<p>While there are principle ways to achieve regularization along similar paths as discussed in the previous section on supervised learning, we will discuss here a solution that is particularly useful as a generative model: the <em>variational autoencoder</em> (VAE).</p>
+<div class="figure align-default" id="fig-vae">
+<img alt="../../_images/vae1.png" src="../../_images/vae1.png" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>Architecture of variational autoencoder.</strong> Instead of outputting a
+point <span class="math notranslate nohighlight">\(z\)</span> in the latent space, the encoder provides a distribution
+<span class="math notranslate nohighlight">\(N(\boldsymbol \mu, \boldsymbol \sigma)\)</span>, parametrized by the means <span class="math notranslate nohighlight">\(\boldsymbol \mu\)</span> and the
+standard deviations <span class="math notranslate nohighlight">\(\boldsymbol \sigma\)</span>. The input <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> for the decoder is
+then drawn from <span class="math notranslate nohighlight">\(N(\boldsymbol \mu, \boldsymbol \sigma)\)</span>.</span><a class="headerlink" href="#fig-vae" title="Permalink to this image">¶</a></p>
+</div>
+<p>The idea behind VAEs is for the encoder to output not just an exact point <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in the latent space, but a (factorized) Normal distribution of points, <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)\)</span>. In particular, the output of the encoder comprises two vectors, the first representing the means, <span class="math notranslate nohighlight">\(\boldsymbol \mu\)</span>, and the second the standard deviations, <span class="math notranslate nohighlight">\(\boldsymbol \sigma\)</span>. The input for the decoder is then sampled from this distribution, <span class="math notranslate nohighlight">\(\mathbf{z} \sim \mathcal{N}(\boldsymbol \mu, \boldsymbol \sigma)\)</span>, and the original input is reconstructed and compared to the original input for training. In addition to the standard loss function comparing input and output of the VAE, we further add a regularization term to the loss function such that the distributions from the encoder are close to a standard normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol 0, \boldsymbol 1)\)</span>. Using the Kullback-Leibler divergence, Eq. <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html#equation-eqn-kl">(6)</a>, to measure the deviation from the standard normal distribution, the full loss function then reads</p>
+<div class="math notranslate nohighlight" id="equation-eqn-loss-vae">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eqn-loss-vae" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+    L_{\rm vae} &amp;= -\sum_i \mathbf{x}^{\rm in}_i \ln \mathbf{x}^{\rm out}_i + {\rm KL} (\mathcal{N}(\boldsymbol \mu_i, \boldsymbol \sigma_i)|| \mathcal{N}(\boldsymbol 0, \boldsymbol 1))\nonumber\\
+    &amp;= -\sum_i \mathbf{x}^{\rm in}_i \ln \mathbf{x}^{\rm out}_i + \frac12 \sum_k [\sigma_{i,k}^2 + \mu_{i,k}^2 -1 -2 \ln\sigma_{i,k}].
+\end{aligned}\end{split}\]</div>
+<p>In this expression, the first term quantifies the reconstruction loss with <span class="math notranslate nohighlight">\(\mathbf{x}_i^{\rm in}\)</span> the input to and <span class="math notranslate nohighlight">\(\mathbf{x}_i^{\rm out}\)</span> the reconstructed data from the VAE. The second term is the regularization on the latent space for each input data point, which for two (diagonal) Normal distributions can be simplified, see second line of Eq. <a class="reference internal" href="#equation-eqn-loss-vae">(42)</a>. This procedure regularizes the training through the introduction of noise, similar to the dropout layer in Section <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html#sec-supervised"><span class="std std-ref">Supervised Learning with Neural Networks</span></a>. However, the regularization here not only generically increases generalization, but also enforces the desired structure in the latent space.</p>
+<p>The structure of a VAE is shown in <a class="reference internal" href="#fig-vae"><span class="std std-numref">Fig. 16</span></a>. By enforcing the mean and variance structure of the encoder output, the latent space fulfills the requirements outlined above. This type of structure can then serve as a generative model for many different data types: anything from human faces to complicated molecular structures. Hence, the variational autoencoder goes beyond extracting information from a dataset, but can be used for the scientific discovery. Note, finally, that the general structure of the variational autoencoder can be applied beyond the simple example above. As an example, a different distribution function can be enforced in the latent space other than the standard Normal distribution, or a different neural network can be used as encoder and decoder, such as a RNN.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/unsupervised_learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_unsupervised-2.html" title="previous page">Training an RNN without Supervision</a>
+    <a class='right-next' id="next-link" href="ml_unsupervised-4.html" title="next page">Generative Adversarial Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise: Classification without Neural Networks &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Supervised Learning with Neural Networks" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html" />
+    <link rel="prev" title="Exercise: Linear Regression" href="Linear-regression.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_supervised_wo_NNs-1.html">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_supervised_wo_NNs-3.html">
+     More than two classes: logistic regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/supervised_learning_wo_NNs/Classification.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lda-classifier">
+   LDA Classifier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic Regression
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span><span class="p">,</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">LinearDiscriminantAnalysis</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">softmax</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+</pre></div>
+</div>
+<div class="section" id="exercise-classification-without-neural-networks">
+<h1>Exercise: Classification without Neural Networks<a class="headerlink" href="#exercise-classification-without-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>In this exercise, we shall compare a few non-neural network classifiers for the two class dataset available by calling <strong>sklearn.datasets.load_iris()</strong>. This dataset has <span class="math notranslate nohighlight">\(K=3\)</span> classes with <span class="math notranslate nohighlight">\(p=4\)</span> features. For ease of visualisation, we shall use only the third and fourth numerical feature, i.e. <span class="math notranslate nohighlight">\(p=2\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+<span class="n">Nsamples</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Nclass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(150, 2)
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/nn_output_2_1.png" /></p>
+<div class="section" id="lda-classifier">
+<h2>LDA Classifier<a class="headerlink" href="#lda-classifier" title="Permalink to this headline">¶</a></h2>
+<p>In a previous exercise, we saw that linear discriminant analysis (LDA) can be used for dimensionality reduction. The procedure can actually also be extended to create a classifier. In LDA, we assume that the conditional probability density of each class <span class="math notranslate nohighlight">\(k\)</span> is distributed according to a multivariate Gaussian</p>
+<div class="math notranslate nohighlight">
+\[f_k(\boldsymbol{x}) = \frac{1}{(2\pi)^{p/2}|W|^{1/2}}\exp{\left( -\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu}_k)^T W^{-1}(\boldsymbol{x} -\boldsymbol{\mu}_k) \right)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\mu}_k\)</span> is mean of the class <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(W\)</span> is the covariance matrix (called the within-class scatter matrix from the previous exercise). Notice the implicit assumption that the density of each class is described by the same covariance matrix. Given the density, Bayes theorem tells us that the probability that a sample <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> is in class <span class="math notranslate nohighlight">\(k\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\textrm{Pr}(G=k | \boldsymbol{x}) = \frac{f_k(\boldsymbol{x}) \pi_k}{\sum_{l=1}^{K} f_l(\boldsymbol{x})\pi_l}.\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_k\)</span> are the priors. Usually the priors are simply set to be proportional to the number of samples in each class, i.e. <span class="math notranslate nohighlight">\(\pi_k = \frac{N_k}{\sum_{l=1}^{K} N_l}\)</span> where <span class="math notranslate nohighlight">\(N_k\)</span> is the number of samples in the class <span class="math notranslate nohighlight">\(k\)</span>. Given the priors, the covariance matrix can be defined as</p>
+<div class="math notranslate nohighlight">
+\[W = \sum_{k=1}^{K} \pi_k W_k\]</div>
+<p>where <span class="math notranslate nohighlight">\(W_k\)</span> is the covariance matrix of class <span class="math notranslate nohighlight">\(k\)</span>. The decision boundary between class <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(l\)</span> is then given by the condition</p>
+<div class="math notranslate nohighlight">
+\[\textrm{Pr}(G=k | \boldsymbol{x}) = \textrm{Pr}(G=l | \boldsymbol{x}).\]</div>
+<p>The decision boundary can be obtained by equating the probabilities</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}    \begin{split}
+    \textrm{Pr}(G=k|\boldsymbol{x}) &amp;= \textrm{Pr}(G=l|\boldsymbol{x}) \\
+    f_{k}(\boldsymbol{x}) \pi_k &amp;= f_{l}(\boldsymbol{x}) \pi_k \\
+    \pi_k\exp{\left( -\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu}_k)^T W^{-1}(\boldsymbol{x} -\boldsymbol{\mu}_k) \right)} &amp;= \pi_l \exp{\left( -\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu}_k)^T W^{-1}(\boldsymbol{x} -\boldsymbol{\mu}_l) \right)} \\
+    \log(\frac{\pi_k}{\pi_l}) - \frac{1}{2} (\boldsymbol{\mu}_k + \boldsymbol{\mu}_l)^{T} W^{-1} (\boldsymbol{\mu}_k - \boldsymbol{\mu}_l) - \boldsymbol{x}^{T} W^{-1}(\boldsymbol{\mu}_k - \boldsymbol{\mu}_{l})&amp;= 0 
+    \end{split}\end{split}\]</div>
+<p>The last line gives the equation for the linear decision boundary. Notice that the term quadratic in <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> vanishes because the covariance matrix for the different classes are assumed to be equal, i.e. we have only 1 covariance matrix <span class="math notranslate nohighlight">\(W\)</span> for all the classes. If we instead allow each class to have its own covariance matrix <span class="math notranslate nohighlight">\(W_k\)</span>, the problem is no longer linear, and we instead have a Quadratic Discriminant Analysis (QDA) which is also commonly used.</p>
+<p>Now we shall implement the LDA classifier on our own using only the numpy and scipy libraries.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">myLDA</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple implementation of the LDA classifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="c1"># Get information about the number of classes and samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nclass_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_</span><span class="p">)</span>
+        <span class="n">nsamp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Split the dataset in to individual classes</span>
+        <span class="n">X_split</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Y</span><span class="o">==</span><span class="n">k</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_</span><span class="p">]</span>
+        <span class="n">N_split</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">Xk</span><span class="p">)</span> <span class="k">for</span> <span class="n">Xk</span> <span class="ow">in</span> <span class="n">X_split</span><span class="p">]</span>
+
+        <span class="c1"># Compute the covariance of each class</span>
+        <span class="n">X_cov</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">Xk</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">Xk</span> <span class="ow">in</span> <span class="n">X_split</span><span class="p">]</span>
+
+        <span class="c1"># Compute the priors for each class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priors_</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nk</span><span class="o">/</span><span class="n">nsamp</span> <span class="k">for</span> <span class="n">Nk</span> <span class="ow">in</span> <span class="n">N_split</span><span class="p">]</span>
+
+        <span class="c1"># Compute the class mean</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu_</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Xk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">Xk</span> <span class="ow">in</span> <span class="n">X_split</span><span class="p">]</span>
+
+        <span class="c1"># Compute the weighted covariance </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">priors_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">X_cov</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nclass_</span><span class="p">)]),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the multivariate normal distribution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">G_</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span> <span class="n">cov</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">W_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probability distribution for over the possible classes given an input x.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unnormalised_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nclass_</span><span class="p">)])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">unnormalised_probs</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">unnormalised_probs</span><span class="p">,</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">plot_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the decision boundary between class k1 and k2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">])</span>
+        <span class="n">w1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W_</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W_</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k2</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">priors_</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">priors_</span><span class="p">[</span><span class="n">k2</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k2</span><span class="p">])</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W_</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_</span><span class="p">[</span><span class="n">k2</span><span class="p">]))</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">x1</span><span class="o">*</span><span class="n">w1</span><span class="p">)</span><span class="o">/</span><span class="n">w2</span> 
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">-</span><span class="si">{1}</span><span class="s2"> boundary&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">))</span>
+
+
+<span class="c1"># Initialise our LDA object</span>
+<span class="n">mylda</span> <span class="o">=</span> <span class="n">myLDA</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot decision boundaries</span>
+<span class="n">mylda</span><span class="o">.</span><span class="n">plot_boundaries</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">xmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">mylda</span><span class="o">.</span><span class="n">plot_boundaries</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">xmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/nn_output_4_0.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># LDA using sklearn</span>
+<span class="n">lda</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;eigen&#39;</span><span class="p">)</span>
+<span class="n">lda</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">lda</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Y</span> <span class="o">==</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">Nsamples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LDA Accuracy =&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+
+<span class="c1"># Compare the sklearn </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sklearn LDA prediction probabilities =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lda</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">48</span><span class="p">:</span><span class="mi">51</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my LDA prediction probabilities =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mylda</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">48</span><span class="p">:</span><span class="mi">51</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LDA Accuracy = 0.96
+sklearn LDA prediction probabilities =
+ [[1.00000000e+00 1.76702478e-11 7.43223369e-26]
+ [1.00000000e+00 5.20426764e-12 1.44284377e-26]
+ [3.43354884e-14 9.87797694e-01 1.22023062e-02]]
+my LDA prediction probabilities =
+ [[1.00000000e+00 1.76702478e-11 7.43223369e-26]
+ [1.00000000e+00 5.20426764e-12 1.44284377e-26]
+ [3.43354884e-14 9.87797694e-01 1.22023062e-02]]
+</pre></div>
+</div>
+</div>
+<div class="section" id="logistic-regression">
+<h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>In the lecture, we already discussed the logistic regression procedure. For multiple classes (<span class="math notranslate nohighlight">\(K&gt;2\)</span>), we can define the logistic regression model as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+f_k(\boldsymbol{x}) &amp;= \alpha_{k} + \sum_{j}\beta_{kj}x_j \\
+\textrm{Pr}(G=k | \boldsymbol{x}) &amp;= \sigma(\boldsymbol{f}(\boldsymbol{x}))_k
+\end{split}\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\sigma(\boldsymbol{f})_k =\frac{e^{f_k}}{\sum_{j} e^{f_j}}\]</div>
+<p>is the softmax function. <span class="math notranslate nohighlight">\(\boldsymbol{\alpha}\)</span> is a <span class="math notranslate nohighlight">\(K \times 1\)</span> vector and <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> is a <span class="math notranslate nohighlight">\(K \times p\)</span> matrix. Notice that this model is similar to a “neural network”, without any hidden units, with just a single softmax output layer. The model can then be trained by performing gradient descent on the cross entropy defined by</p>
+<div class="math notranslate nohighlight">
+\[L(\boldsymbol{x} | \boldsymbol{\alpha}, \boldsymbol{\beta}) = -\sum_{k} y_k \log (\textrm{Pr}(G=k | \boldsymbol{x}))\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_i = 1\)</span> if the true classification of the sample <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> is <span class="math notranslate nohighlight">\(i\)</span>, otherwise <span class="math notranslate nohighlight">\(y_i = 0\)</span>. Noting the close similarity of this loss function with the Kullback–Leibler divergence</p>
+<div class="math notranslate nohighlight">
+\[D(p || q) = \sum_{x} P(x) \log(\frac{P(x)}{Q(x)}),\]</div>
+<p>let us first prove that the KL divergence is non-negative. From basic analysis, we know that <span class="math notranslate nohighlight">\(\log(x) \leq x - 1\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>.
+Using this fact, we can then see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+D(p||q) &amp;= \sum_{x} P(x)\log(\frac{P(x)}{Q(x)}) \\
+&amp;= -\sum_{x} P(x)\log(\frac{Q(x)}{P(x)}) \\
+&amp;\geq \sum_{x} P(x)(\frac{Q(x)}{P(x)} - 1)\\
+&amp;= \sum_{x} Q(x) - P(x) \\
+&amp;= 0
+\end{split}\end{split}\]</div>
+<p>where in the last line we used the fact that the probability distributions <span class="math notranslate nohighlight">\(P(x)\)</span> and <span class="math notranslate nohighlight">\(Q(x)\)</span> are normalised. Going back to the logisitic regression problem, we see that we first need to obtain the derivatives of the loss function w.r.t. the parameters of the model <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>The derivative of the softmax function is given by</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \sigma_{j}}{\partial f_k} = \sigma_j (\delta_{jk} - \sigma_k).\]</div>
+<p>In addition we have the derivatives</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f_{j}}{\partial \alpha_k} = \delta_{jk}, \ \ \ \frac{\partial f_{j}}{\partial \beta_{kl}} = \delta_{jk} x_{l}\]</div>
+<p>Then, the derivative of the loss on a sample <span class="math notranslate nohighlight">\((\boldsymbol{x}, \boldsymbol{y})\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\frac{\partial L}{\partial \beta_{jk}} &amp;= \sum_{l} y_{l} \frac{\partial}{\partial \beta_{jk}} \log(\textrm{Pr}(G=k|\boldsymbol{x})) \\
+&amp;= \sum_{l} y_l \frac{{\partial \sigma_l}/{\partial \beta_{jk}}}{\sigma_{l}} \\
+&amp;= \sum_{l} y_l \frac{\sum_{m}\frac{\partial \sigma_l}{\partial f_m} \frac{\partial f_m}{\partial \beta_{jk}}} {\sigma_{l}} \\
+&amp;= \sum_{l} y_l \frac{\sum_{m} \sigma_{l}(\delta_{lm} - \sigma_m) \cdot (\delta_{mj}x_k)} {\sigma_{l}} \\
+&amp;= (y_j - \sigma_j)x_k
+\end{split} \end{split}\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial L}{\partial \alpha_j} = (y_j - \sigma_j)\]</div>
+<p>By averaging the derivative across the dataset, we can then implement the gradient descent method to solve our optimisation problem.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">myLR</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple implementation of the LR classifier using gradient descent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G_</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nclass_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_</span><span class="p">)</span>
+        <span class="n">nsamp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nfeatures_</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nsamp</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nsamp</span><span class="p">))</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">Y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Y_</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nsamp</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+        <span class="c1"># Randomly initialise the parameters</span>
+        <span class="c1"># Notice that we have a nclass by (nfeatures+1) matrix</span>
+        <span class="c1"># because we have combined the alpha weights as an additional column </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nclass_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nfeatures_</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">niter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform gradient descent with learning rate lr for niter itertations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># We concatenate an additional column of ones in our data matrix for convenience</span>
+        <span class="n">nsamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nsamp</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">)</span>
+            <span class="n">grads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;nk,nj-&gt;kj&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y_</span> <span class="o">-</span> <span class="n">probs</span><span class="p">,</span> <span class="n">Xp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_</span> <span class="o">+=</span> <span class="n">lr</span><span class="o">*</span><span class="n">grads</span>
+
+    <span class="k">def</span> <span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probability distribution for over the possible classes given an input x.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">Xp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">softmax</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gives the most likely class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">preds</span>
+
+    <span class="k">def</span> <span class="nf">plot_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot decision boundary between class k1 and k2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">])</span>
+        <span class="n">w1</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="p">[</span><span class="n">k2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">w2</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="p">[</span><span class="n">k2</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">x1</span><span class="o">*</span><span class="n">w1</span><span class="p">)</span><span class="o">/</span><span class="n">w2</span> 
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">-</span><span class="si">{1}</span><span class="s2"> boundary&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">))</span>
+
+<span class="c1"># Perform logistic regression using our own implementation</span>
+<span class="n">mylr</span> <span class="o">=</span> <span class="n">myLR</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">mylr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">mylr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Y</span> <span class="o">==</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">Nsamples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;myLR Accuracy =&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>myLR Accuracy = 0.96
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comparing with the sklearn implementation</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Y</span> <span class="o">==</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">Nsamples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LR Accuracy =&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LR Accuracy = 0.96
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot decision boundaries</span>
+<span class="n">mylr</span><span class="o">.</span><span class="n">plot_boundaries</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">xmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">mylr</span><span class="o">.</span><span class="n">plot_boundaries</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">xmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/nn_output_9_0.png" /></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/supervised_learning_wo_NNs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Linear-regression.html" title="previous page">Exercise: Linear Regression</a>
+    <a class='right-next' id="next-link" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html" title="next page">Supervised Learning with Neural Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

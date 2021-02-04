@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Principle Component Analysis &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kernel PCA" href="ml_without_neural_network-2.html" />
+    <link rel="prev" title="Structuring Data without Neural Networks" href="ml_without_neural_network.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: logistic regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/structuring_data/ml_without_neural_network-1.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pca-algorithm">
+   PCA Algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   Example
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="principle-component-analysis">
+<h1>Principle Component Analysis<a class="headerlink" href="#principle-component-analysis" title="Permalink to this headline">¶</a></h1>
+<p>At the heart of any machine learning task is data. In order to choose
+the most appropriate machine learning strategy, it is essential that we
+understand the data we are working with. However, very often, we are
+presented with a dataset containing many types of information, called
+<em>features</em> of the data. Such a dataset is also described as being
+high-dimensional. Techniques that extract information from such a
+dataset are broadly summarised as <em>high-dimensional inference</em>. For
+instance, we could be interested in predicting the progress of diabetes
+in patients given features such as age, sex, body mass index, or average
+blood pressure. Extremely high-dimensional data can occur in biology,
+where we might want to compare gene expression pattern in cells. Given a
+multitude of features, it is neither easy to visualise the data nor pick
+out the most relevant information. This is where <em>principle component
+analysis</em> (PCA) can be helpful.</p>
+<p>Very briefly, PCA is a systematic way to find out which feature or
+combination of features varies the most across the data samples. We can
+think of PCA as approximating the data with a high-dimensional
+ellipsoid, where the principal axes of this ellipsoid correspond to the
+principal components. A feature, which is almost constant across the
+samples, in other words has a very short principal axis, might not be
+very useful. PCA then has two main applications: (1) It helps to
+visualise the data in a low dimensional space and (2) it can reduce the
+dimensionality of the input data to an amount that a more complex
+algorithm can handle.</p>
+<div class="section" id="pca-algorithm">
+<h2>PCA Algorithm<a class="headerlink" href="#pca-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>Given a dataset of <span class="math notranslate nohighlight">\(m\)</span> samples with <span class="math notranslate nohighlight">\(n\)</span> data features, we can arrange
+our data in the form of a <span class="math notranslate nohighlight">\(m\)</span> by <span class="math notranslate nohighlight">\(n\)</span> matrix <span class="math notranslate nohighlight">\(X\)</span> where the element
+<span class="math notranslate nohighlight">\(x_{ij}\)</span> corresponds to the value of the <span class="math notranslate nohighlight">\(j\)</span>th data feature of the <span class="math notranslate nohighlight">\(i\)</span>th
+sample. We will also use the <em>feature vector</em> <span class="math notranslate nohighlight">\({x}_i\)</span> for all the <span class="math notranslate nohighlight">\(n\)</span>
+features of one sample <span class="math notranslate nohighlight">\(i=1,\ldots,m\)</span>. The vector <span class="math notranslate nohighlight">\({x}_i\)</span> can take
+values in the <em>feature space</em>, for example <span class="math notranslate nohighlight">\({x}_i \in \mathbb{R}^n\)</span>.
+Going back to our diabetes example, we might have <span class="math notranslate nohighlight">\(10\)</span> data features.
+Furthermore if we are given information regarding <span class="math notranslate nohighlight">\(100\)</span> patients, our
+data matrix <span class="math notranslate nohighlight">\(X\)</span> would have <span class="math notranslate nohighlight">\(100\)</span> rows and <span class="math notranslate nohighlight">\(10\)</span> columns.</p>
+<p>The procedure to perform PCA can then be described as follows:</p>
+<div class="admonition-principle-component-analysis admonition">
+<p class="admonition-title">Principle Component Analysis</p>
+<ol>
+<li><p>Center the data by subtracting from each column the mean of that
+column,</p>
+<div class="math notranslate nohighlight">
+\[{x}_i \mapsto {x}_{i} - \frac{1}{m} \sum_{i=1}^{m} {x}_{i}.
+      %  x_{ij} \longrightarrow x_{ij} - \frac{1}{m} \sum_{i=1}^{m} x_{ij}.\]</div>
+<p>This ensures that the mean of each data feature is zero.</p>
+</li>
+<li><p>Form the <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> (unnormalised) covariance matrix</p>
+<div class="math notranslate nohighlight" id="equation-eqn-pca-covariance-matrix">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eqn-pca-covariance-matrix" title="Permalink to this equation">¶</a></span>\[C = {X}^{T}{X} = \sum_{i=1}^{m} {x}_{i}{x}_{i}^{T}.\]</div>
+</li>
+<li><p>Diagonalize the matrix to the form
+<span class="math notranslate nohighlight">\(C = {X}^{T}{X} = W\Lambda W^{T}\)</span>, where the columns of <span class="math notranslate nohighlight">\(W\)</span> are the
+normalised eigenvectors, or principal components, and <span class="math notranslate nohighlight">\(\Lambda\)</span> is a
+diagonal matrix containing the eigenvalues. It will be helpful to
+arrange the eigenvalues from largest to smallest.</p></li>
+<li><p>Pick the <span class="math notranslate nohighlight">\(l\)</span> largest eigenvalues <span class="math notranslate nohighlight">\(\lambda_1, \dots \lambda_l\)</span>,
+<span class="math notranslate nohighlight">\(l\leq n\)</span> and their corresponding eigenvectors
+<span class="math notranslate nohighlight">\({v}_1 \dots {v}_l\)</span>. Construct the <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(l\)</span> matrix
+<span class="math notranslate nohighlight">\(\widetilde{W} = [{v}_1 \dots {v}_l]\)</span>.</p></li>
+<li><p>Dimensional reduction: Transform the data matrix as</p>
+<div class="math notranslate nohighlight" id="equation-eqn-pca-dimensional-reduction">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eqn-pca-dimensional-reduction" title="Permalink to this equation">¶</a></span>\[        \widetilde{X} = X\widetilde{W}.\]</div>
+</li>
+</ol>
+<p>The transformed data
+matrix <span class="math notranslate nohighlight">\(\widetilde{X}\)</span> now has dimensions <span class="math notranslate nohighlight">\(m\)</span> by <span class="math notranslate nohighlight">\(l\)</span>.</p>
+</div>
+<p>We have thus reduced the dimensionality of the data from <span class="math notranslate nohighlight">\(n\)</span> to <span class="math notranslate nohighlight">\(l\)</span>.
+Notice that there are actually two things happening: First, of course,
+we now only have <span class="math notranslate nohighlight">\(l\)</span> data features. But second, the <span class="math notranslate nohighlight">\(l\)</span> data features
+are new features and not simply a selection of the original data.
+Rather, they are a linear combination of them. Using our diabetes
+example again, one of the “new” data features could be the sum of the
+average blood pressure and the body mass index. These new features are
+automatically extracted by the algorithm.</p>
+<p>But why did we have to go through such an elaborate procedure to do this
+instead of simply removing a couple of features? The reason is that we
+want to maximize the <em>variance</em> in our data. We will give a precise
+definition of the variance later in the chapter, but briefly the
+variance just means the spread of the data. Using PCA, we have
+essentially obtained <span class="math notranslate nohighlight">\(l\)</span> “new” features which maximise the spread of the
+data when plotted as a function of this feature. We illustrate this with
+an example.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Let us consider a very simple dataset with just <span class="math notranslate nohighlight">\(2\)</span> data features. We
+have data, from the Iris dataset <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, a well known dataset on 3
+different species of flowers. We are given information about the petal
+length and petal width. Since there are just <span class="math notranslate nohighlight">\(2\)</span> features, it is easy to
+visualise the data. In <a class="reference internal" href="#fig-iris-pca"><span class="std std-numref">Fig. 3</span></a>, we show how the data is
+transformed under the PCA algorithm.</p>
+<div class="figure align-default" id="fig-iris-pca">
+<img alt="../../_images/Iris-PCA.png" src="../../_images/Iris-PCA.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>PCA on Iris Dataset.</strong></span><a class="headerlink" href="#fig-iris-pca" title="Permalink to this image">¶</a></p>
+</div>
+<p>Notice that there is no dimensional reduction here since <span class="math notranslate nohighlight">\(l = n\)</span>. In
+this case, the PCA algorithm amounts simply to a rotation of the
+original data. However, it still produces <span class="math notranslate nohighlight">\(2\)</span> new features which are
+orthogonal linear combinations of the original features: petal length
+and petal width, i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+        w_1 &amp;= 0.922 \times \textrm{Petal Length} + 0.388 \times \textrm{Petal Width}, \\
+        w_2 &amp;= -0.388 \times \textrm{Petal Length} + 0.922 \times \textrm{Petal Width}.
+\end{split}\end{split}\]</div>
+<p>We see very clearly that the first new feature <span class="math notranslate nohighlight">\(w_1\)</span>
+has a much larger variance than the second feature <span class="math notranslate nohighlight">\(w_2\)</span>. In fact, if we
+are interested in distinguishing the three different species of flowers,
+as in a classification task, its almost sufficient to use only the data
+feature with the largest variance, <span class="math notranslate nohighlight">\(w_1\)</span>. This is the essence of (PCA)
+dimensional reduction.</p>
+<p>Finally, it is important to note that it is not always true that the
+feature with the largest variance is the most relevant for the task and
+it is possible to construct counter examples where the feature with the
+least variance contains all the useful information. However, PCA is
+often a good guiding principle and can yield interesting insights in the
+data. Most importantly, it is also <em>interpretable</em>, i.e., not only does
+it separate the data, but we also learn <em>which</em> linear combination of
+features can achieve this. We will see that for many neural network
+algorithms, in contrast, a lack of interpretability is a big issue.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/iris">https://archive.ics.uci.edu/ml/datasets/iris</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/structuring_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_without_neural_network.html" title="previous page">Structuring Data without Neural Networks</a>
+    <a class='right-next' id="next-link" href="ml_without_neural_network-2.html" title="next page">Kernel PCA</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

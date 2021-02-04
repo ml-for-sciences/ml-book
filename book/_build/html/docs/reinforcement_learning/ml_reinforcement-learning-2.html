@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finite Markov Decision Process &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Policies and Value Functions" href="ml_reinforcement-learning-3.html" />
+    <link rel="prev" title="Exploration versus Exploitation" href="ml_reinforcement-learning-1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: logistic regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/reinforcement_learning/ml_reinforcement-learning-2.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="finite-markov-decision-process">
+<h1>Finite Markov Decision Process<a class="headerlink" href="#finite-markov-decision-process" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-default" id="fig-mdp">
+<img alt="../../_images/mdp1.png" src="../../_images/mdp1.png" />
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
+interaction.</span><a class="headerlink" href="#fig-mdp" title="Permalink to this image">¶</a></p>
+</div>
+<p>After this introductory example, we introduce the idealized form of
+reinforcement learning with a Markov decision process (MDP). At each
+time step <span class="math notranslate nohighlight">\(t\)</span>, the agent starts from a state <span class="math notranslate nohighlight">\(S_t\in \mathcal{S}\)</span>,
+performs an action <span class="math notranslate nohighlight">\(A_t\in\mathcal{A}\)</span>, which, through interaction with
+the environment, leads to a reward <span class="math notranslate nohighlight">\(R_{t+1}\in \mathcal{R}\)</span> and moves
+the agent to a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. This agent-environment interaction
+is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 23</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
+<p>For our toy example, the sensor we have only shows whether the water
+level is high (h) or low (l), so that the state space of our agent is
+<span class="math notranslate nohighlight">\(\mathcal{S} = \{ {\rm h}, {\rm l} \}\)</span>. In both cases, our agent can
+choose to turn the growth lamps on or off, or in the case of low water,
+he can choose to send us a message so we can go and water the plants.
+The available actions are thus
+<span class="math notranslate nohighlight">\(\mathcal{A} = \{{\rm on}, {\rm off}, {\rm text}\}\)</span>. When the growth
+lamps are on, the plants grow faster, which leads to a bigger reward,
+<span class="math notranslate nohighlight">\(r_{\rm on} &gt; r_{\rm off}&gt;0\)</span>. Furthermore, there is a penalty for
+texting us, but an even bigger penalty for letting the plants die,
+<span class="math notranslate nohighlight">\(0 &gt; r_{\rm text} &gt; r_{\rm fail}\)</span>.</p>
+<p>A model of the environment provides the probability of ending in state
+<span class="math notranslate nohighlight">\(s'\)</span> with reward <span class="math notranslate nohighlight">\(r\)</span>, starting from a state <span class="math notranslate nohighlight">\(s\)</span> and choosing the action
+<span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(p(s', r | s, a)\)</span>. In this case, the dynamics of the Markov
+decision process is completely characterized. Note that the process is a
+Markov process, since the next state and reward only depend on the
+current state and chosen action.</p>
+<p>In our toy example, being in state ‘high’ and having the growth lamp on
+will provide a reward of <span class="math notranslate nohighlight">\(r_{\rm on}\)</span> and keep the agent in ‘high’ with
+probability <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm on} | \rm {h}, {\rm on}) = \alpha\)</span>, while
+with <span class="math notranslate nohighlight">\(1-\alpha\)</span> the agent will end up with a low water level. However,
+if the agent turns the lamps off, the reward is <span class="math notranslate nohighlight">\(r_{\rm off}\)</span> and the
+probability of staying in state ‘high’ is <span class="math notranslate nohighlight">\(\alpha' &gt; \alpha\)</span>. For the
+case of a low water level, the probability of staying in low despite the
+lamps on is <span class="math notranslate nohighlight">\(p({\rm l}, r_{\rm on} | \rm {l}, {\rm on}) = \beta\)</span>, which
+means that with probability <span class="math notranslate nohighlight">\(1 - \beta\)</span>, our plants run out of water. In
+this case, we will need to get new plants and we will water them , of
+course, such that
+<span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm fail} | \rm {l}, {\rm on}) = 1-\beta\)</span>. As with high
+water levels, turning the lamps off reduces our rewards, but increases
+our chance of not losing the plants, <span class="math notranslate nohighlight">\(\beta' &gt; \beta\)</span>. Finally, if the
+agent should choose to send us a text, we will refill the water, such
+that <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm text} | {\rm l}, {\rm text}) = 1\)</span>. The whole
+Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 24</span></a>.</p>
+<p>From the probability for the next reward and state, we can also
+calculate the expected reward starting from state <span class="math notranslate nohighlight">\(s\)</span> and choosing
+action <span class="math notranslate nohighlight">\(a\)</span>, namely</p>
+<div class="math notranslate nohighlight">
+\[r(s, a) = \sum_{r\in\mathcal{R}} r \sum_{s'\in\mathcal{S}} p(s', r | s, a).\]</div>
+<p>Obviously, the value of an action now depends on the state the agent is
+in, such that we write <span class="math notranslate nohighlight">\(q_* (s, a)\)</span>. Alternatively, we can also assign
+to each state a value <span class="math notranslate nohighlight">\(v_*(s)\)</span>, which quantizes the optimal reward from
+this state.</p>
+<div class="figure align-default" id="fig-mdp-example">
+<img alt="../../_images/mdp_example.png" src="../../_images/mdp_example.png" />
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
+states ‘high’ and ‘low’ are denoted with large circles, the actions with
+small black circles, and the arrows correspond to the probabilities and
+rewards.</span><a class="headerlink" href="#fig-mdp-example" title="Permalink to this image">¶</a></p>
+</div>
+<p>Finally, we can define what we want to accomplish by learning: knowing
+our current state <span class="math notranslate nohighlight">\(s\)</span>, we want to know what action to choose such that
+our future total reward is maximized. Importantly, we want to accomplish
+this without any prior knowledge of how to optimize rewards directly.
+This poses yet another question: what is the total reward? We usually
+distinguish tasks with a well-defined end point <span class="math notranslate nohighlight">\(t=T\)</span>, so-called
+<em>episodic tasks</em>, from <em>continuous tasks</em> that go on for ever. The total
+reward for the former is simply the total <em>return</em></p>
+<div class="math notranslate nohighlight">
+\[G_t = R_{t+1} + R_{t+2} + R_{t+3} + \cdots + R_T.\]</div>
+<p>As such a sum is not guaranteed to converge for a continuous task, the total reward is the <em>discounted return</em></p>
+<div class="math notranslate nohighlight" id="equation-eqn-disc-return">
+<span class="eqno">(46)<a class="headerlink" href="#equation-eqn-disc-return" title="Permalink to this equation">¶</a></span>\[G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^\infty \gamma^k R_{t+k+1},\]</div>
+<p>with <span class="math notranslate nohighlight">\(0 \leq \gamma &lt;  1\)</span> the discount rate.
+Equation <a class="reference internal" href="#equation-eqn-disc-return">(46)</a> is more general and can be used for an
+episodic task by setting <span class="math notranslate nohighlight">\(\gamma = 1\)</span> and <span class="math notranslate nohighlight">\(R_t = 0\)</span> for <span class="math notranslate nohighlight">\(t&gt;T\)</span>. Note that
+for rewards which are bound, this sum is guaranteed to converge to a
+finite value.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/reinforcement_learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_reinforcement-learning-1.html" title="previous page">Exploration versus Exploitation</a>
+    <a class='right-next' id="next-link" href="ml_reinforcement-learning-3.html" title="next page">Policies and Value Functions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

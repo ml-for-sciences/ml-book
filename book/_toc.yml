@@ -2,26 +2,53 @@
 - file: docs/index
 - part: Lecture
   chapters:
-    - file: docs/introduction
-    - file: docs/ml_without_neural_network-1
-    - file: docs/ml_supervised_wo_NNs
-    - file: docs/ml_unsupervised
-    - file: docs/ml_interpretability
-    - file: docs/ml_reinforcement-learning
-    - file: docs/ml_conclusion
-- part: Exercises
-  chapters:
-  - file: docs/pca
-  - file: docs/Dimensionality_reduction
-  - file: docs/Linear-regression
-  - file: docs/Classification
-  - file: docs/NN-opt-reg
-  - file: docs/CNNs
-  - file: docs/exoplanets_RNN_CNN
-  - file: docs/Denoising
-  - file: docs/Molecule_gen_RNN
-  - file: docs/Anomaly_Detection_RNN_AE_VAE
-  - file: docs/Transfer-learning-attacks
+    - file: docs/introduction/introduction
+    - file: docs/structuring_data/ml_without_neural_network
+      sections:
+        - file: docs/structuring_data/ml_without_neural_network-1
+        - file: docs/structuring_data/ml_without_neural_network-2
+        - file: docs/structuring_data/ml_without_neural_network-3
+        - file: docs/structuring_data/ml_without_neural_network-4
+        - file: docs/structuring_data/pca
+        - file: docs/structuring_data/Dimensionality_reduction
+    - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs
+      sections:
+        - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-1
+        - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-2
+        - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-3
+        - file: docs/supervised_learning_wo_NNs/Linear-regression 
+        - file: docs/supervised_learning_wo_NNs/Classification
+    - file: docs/supervised_learning_w_NNs/ml_supervised_w_NNs
+      sections:
+        - file: docs/supervised_learning_w_NNs/Classification-2
+        - file: docs/supervised_learning_w_NNs/NN-opt-reg
+        - file: docs/supervised_learning_w_NNs/CNNs
+        - file: docs/supervised_learning_w_NNs/exoplanets_RNN_CNN
+    - file: docs/unsupervised_learning/ml_unsupervised
+      sections:
+        - file: docs/unsupervised_learning/ml_unsupervised-1
+        - file: docs/unsupervised_learning/ml_unsupervised-2
+        - file: docs/unsupervised_learning/ml_unsupervised-3
+        - file: docs/unsupervised_learning/ml_unsupervised-4
+        - file: docs/unsupervised_learning/Denoising
+        - file: docs/unsupervised_learning/Molecule_gen_RNN
+        - file: docs/unsupervised_learning/Anomaly_Detection_RNN_AE_VAE
+    - file: docs/interpretability/ml_interpretability
+      sections:
+        - file: docs/interpretability/ml_interpretability-1
+        - file: docs/interpretability/ml_interpretability-2
+        - file: docs/interpretability/ml_interpretability-3
+        - file: docs/interpretability/Transfer-learning-attacks
+    - file: docs/reinforcement_learning/ml_reinforcement-learning
+      sections:
+        - file: docs/reinforcement_learning/ml_reinforcement-learning-1
+        - file: docs/reinforcement_learning/ml_reinforcement-learning-2
+        - file: docs/reinforcement_learning/ml_reinforcement-learning-3
+        - file: docs/reinforcement_learning/ml_reinforcement-learning-4
+        - file: docs/reinforcement_learning/ml_reinforcement-learning-5
+    - file: docs/conclusion/ml_conclusion
+
+
 
 - part: About us
   chapters:

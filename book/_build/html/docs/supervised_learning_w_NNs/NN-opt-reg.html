@@ -1,0 +1,1007 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise: Machine Learning Optimizers &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise: Convolutional Neural Networks" href="CNNs.html" />
+    <link rel="prev" title="Exercise: Dense Neural Networks" href="Classification-2.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: logistic regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/supervised_learning_w_NNs/NN-opt-reg.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Exercise: Machine Learning Optimizers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-learning-rate-scheduling">
+   Exercise: Learning Rate Scheduling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-based-decay">
+     Time based decay
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-decay">
+     Step decay
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential-decay">
+     Exponential decay
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-regularizing-neural-networks">
+   Exercise: Regularizing Neural Networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l2-regularization">
+     L2 Regularization
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#early-stopping">
+     Early stopping
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dropout">
+     Dropout
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>Some useful libraries…</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Import the MNIST dataset we already go to know in the last exercise:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span> 
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+</pre></div>
+</div>
+<div class="section" id="exercise-machine-learning-optimizers">
+<h1>Exercise: Machine Learning Optimizers<a class="headerlink" href="#exercise-machine-learning-optimizers" title="Permalink to this headline">¶</a></h1>
+<p>Gradient descent is one of the most popular algorithms to perform optimization and is also one of the most common ways to optimize neural networks. Nevertheless there exist even more refined variants, which we will investigate in this exercise. Six common optimizers are:</p>
+<ul class="simple">
+<li><p><strong>SGD</strong> Stochastic gradient descent optimizes the parameters of the network by randomly choosing a mini-batch from the entire dataset and calculating the gradient of the loss function <span class="math notranslate nohighlight">\(J(\theta)\)</span> with respect to these data points. The learning rate <span class="math notranslate nohighlight">\(\eta\)</span> specifies how large of a step we take in the direction of the gradient.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta - \eta \nabla_{\theta} J(\theta).\]</div>
+<ul class="simple">
+<li><p><strong>Momentum</strong> The momentum optimizer refines the optimization by incorporating previous gradients and adding them to a momentum vector <span class="math notranslate nohighlight">\(\mathbf{m}\)</span>. In order to prevent the momentum from growing infinitely, one adds a friction parameter <span class="math notranslate nohighlight">\(\beta\)</span> which has to be chosen appropriately.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}\leftarrow \beta \mathbf{m} + \eta \nabla_{\theta} J(\theta),\]</div>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta - \mathbf{m}.\]</div>
+<ul class="simple">
+<li><p><strong>NAG</strong> A small modification to momentum optimization is Nesterov accelerated gradient (NAG), which evaluates the gradient not at the current set of parameters <span class="math notranslate nohighlight">\(\theta\)</span>, but slightly ahead, pointing more in the direction of the optimum.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}\leftarrow \beta \mathbf{m} + \eta \nabla_{\theta} J(\theta + \beta \mathbf{m}),\]</div>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta - \mathbf{m}.\]</div>
+<ul class="simple">
+<li><p><strong>AdaGrad</strong> The AdaGrad algorithm focuses the gradient more towards to the optimum by scaling the weight vector along the steepest dimensions. The first step is to accumulate the square of the gradients and then to use this to scale the gradient vector. In order to prevent division by zero we add a small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{s}\leftarrow \mathbf{s} + \nabla_{\theta} J(\theta) \otimes \nabla_{\theta} J(\theta),\]</div>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta -  \eta \nabla_{\theta} J(\theta) \oslash\sqrt{\mathbf{s} + \epsilon}.\]</div>
+<ul class="simple">
+<li><p><strong>RMSprop</strong> RMSProp is a slight modification of AdaGrad to prevent the training from slowing down too fast. This is done by accumulating only the gradients from the most recent iterations.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{s}\leftarrow \beta \mathbf{s} + \left(1-\beta\right)\nabla_{\theta} J(\theta) \otimes \nabla_{\theta} J(\theta),\]</div>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta -  \eta \nabla_{\theta} J(\theta) \oslash \sqrt{\mathbf{s} + \epsilon}.\]</div>
+<ul class="simple">
+<li><p><strong>Adam</strong> The adaptive moment estimation (Adam) combines the ideas of momentum and RMSProp optimization and is one of the most common choices today. <span class="math notranslate nohighlight">\(T\)</span> represents the epoch iteration number.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}\leftarrow \beta_1 \mathbf{m} + \left(1-\beta_1\right) \nabla_{\theta} J(\theta),\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{s}\leftarrow \beta_2 \mathbf{s} + \left(1-\beta_2\right)\nabla_{\theta} J(\theta) \otimes \nabla_{\theta} J(\theta),\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{m} \leftarrow \frac{\mathbf{m}}{1-\beta_1^T},\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{s} \leftarrow \frac{\mathbf{s}}{1-\beta_2^T},\]</div>
+<div class="math notranslate nohighlight">
+\[\theta \leftarrow \theta -  \eta \mathbf{m}\oslash \sqrt{\mathbf{s} + \epsilon}.\]</div>
+<p>In order to use the optimizers already implemented in the keras framework of tensorflow, we use a function which generates and compiles a model for a given optimizer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_compile</span><span class="p">(</span><span class="n">optimizer_name</span><span class="o">=</span><span class="s1">&#39;SGD&#39;</span><span class="p">):</span>
+    
+    <span class="c1"># Use the same network topology as last week</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span> 
+                          <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+                          <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)])</span>
+
+    <span class="c1"># compile the model with a cross-entropy loss and specify the given optimizer</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer_name</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(),</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+<p>Now we generate an array of the different optimizers to iterate over in a for loop</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SGD&#39;</span><span class="p">,</span><span class="s1">&#39;Momentum&#39;</span><span class="p">,</span><span class="s1">&#39;Nesterov&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSprop&#39;</span><span class="p">,</span><span class="s1">&#39;Adagrad&#39;</span><span class="p">,</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span><span class="s1">&#39;NAdam&#39;</span><span class="p">]</span>
+<span class="n">optimizer_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SGD&#39;</span><span class="p">,</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="s1">&#39;RMSprop&#39;</span><span class="p">,</span><span class="s1">&#39;Adagrad&#39;</span><span class="p">,</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span><span class="s1">&#39;NAdam&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Two arrays for training and validation performance</span>
+<span class="n">hist_acc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hist_val_acc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate over optimizers and train the network, using x_test and y_test as a validation set in each epoch</span>
+<span class="k">for</span> <span class="n">item</span><span class="p">,</span><span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">optimizer_list</span><span class="p">,</span> <span class="n">optimizer_names</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing </span><span class="si">%s</span><span class="s2"> optimizer&quot;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Get the model from our function above</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">build_compile</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="c1"># Train the model</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+    
+    <span class="c1"># Store the performance</span>
+    <span class="n">hist_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">])</span>
+    <span class="n">hist_val_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-----------------------------
+Doing SGD optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 32us/sample - loss: 0.6429 - acc: 0.8389 - val_loss: 0.3526 - val_acc: 0.9054
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 26us/sample - loss: 0.0472 - acc: 0.9881 - val_loss: 0.0780 - val_acc: 0.9768
+-----------------------------
+-----------------------------
+Doing Momentum optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 30us/sample - loss: 0.5009 - acc: 0.8676 - val_loss: 0.2948 - val_acc: 0.9187
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 31us/sample - loss: 0.0220 - acc: 0.9960 - val_loss: 0.0685 - val_acc: 0.9787
+-----------------------------
+-----------------------------
+Doing Nesterov optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 30us/sample - loss: 0.5109 - acc: 0.8639 - val_loss: 0.3035 - val_acc: 0.9158
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 27us/sample - loss: 0.0213 - acc: 0.9963 - val_loss: 0.0685 - val_acc: 0.9779
+-----------------------------
+-----------------------------
+Doing RMSprop optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 37us/sample - loss: 0.2563 - acc: 0.9273 - val_loss: 0.1384 - val_acc: 0.9587
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 34us/sample - loss: 4.0403e-04 - acc: 0.9998 - val_loss: 0.2369 - val_acc: 0.9764
+-----------------------------
+-----------------------------
+Doing Adagrad optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+
+Epoch 1/50
+60000/60000 [==============================] - 2s 34us/sample - loss: 0.6485 - acc: 0.8455 - val_loss: 0.4352 - val_acc: 0.8932
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 32us/sample - loss: 0.2028 - acc: 0.9443 - val_loss: 0.2022 - val_acc: 0.9420
+-----------------------------
+-----------------------------
+Doing Adam optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 30us/sample - loss: 0.2568 - acc: 0.9266 - val_loss: 0.1312 - val_acc: 0.9590
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 30us/sample - loss: 0.0027 - acc: 0.9990 - val_loss: 0.1513 - val_acc: 0.9800
+-----------------------------
+-----------------------------
+Doing NAdam optimizer
+-----------------------------
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 3s 45us/sample - loss: 0.2584 - acc: 0.9272 - val_loss: 0.1445 - val_acc: 0.9564
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 40us/sample - loss: 0.0027 - acc: 0.9992 - val_loss: 0.1757 - val_acc: 0.9786
+-----------------------------
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy on training set</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">optimizer_list</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_acc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">optimizer_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy on train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_11_1.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy on test set</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">optimizer_list</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_val_acc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">optimizer_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy on test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_12_1.png" /></p>
+<p>As already discussed in class, the Adam optimizer shows the best performance as it combines a momentum gradient approach with an adaptive learning rate. NAdam is further improvement, using the Nesterov update instead of vanilla momentum optimization.</p>
+</div>
+<div class="section" id="exercise-learning-rate-scheduling">
+<h1>Exercise: Learning Rate Scheduling<a class="headerlink" href="#exercise-learning-rate-scheduling" title="Permalink to this headline">¶</a></h1>
+<p>When training a neural network, we can tune the performance by optimizing a large set of hyperparameters. The most important parameter among them is the learning rate. A learning rate that is set too small will slow down the training, as we update the weights of the network in tiny steps. On the other hand, if the learning rate is set too high, the training can diverge.
+Usually we want to start with a large learning rate to make fast progress and then slow down the training close to the optimum. This can be achieved by using learning rate schedules, which we will investigate in this exercise.</p>
+<ul class="simple">
+<li><p><strong>Time-based decay:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\eta(t) =  \frac{\eta_0}{\left(1+t \cdot \frac{\eta_0}{n_{\text{epochs}}}\right)},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_0\)</span> is the initial learning rate, <span class="math notranslate nohighlight">\(t\)</span> the iteration number (epoch) and <span class="math notranslate nohighlight">\(n_{\text{epochs}}\)</span> the total number of epochs. Specifying the ratio <span class="math notranslate nohighlight">\(\eta_0/n_{\text{epochs}}\)</span> decreases the learning rate from the previous epoch by the set amount.</p>
+<ul class="simple">
+<li><p><strong>Step decay:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\eta(t) =  \eta_0 \cdot \alpha^{\left \lfloor{\frac{t}{n_{\text{drop}}}}\right \rfloor},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_0\)</span> is the initial learning rate, <span class="math notranslate nohighlight">\(t\)</span> the iteration number (epoch) and <span class="math notranslate nohighlight">\(\alpha\)</span> the drop rate specifying the amount that the learning rate is changed every <span class="math notranslate nohighlight">\(n_{\text{drop}}\)</span> epochs.</p>
+<ul class="simple">
+<li><p><strong>Exponential decay:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\eta(t) =  \eta_0 \cdot e^{-k \cdot t},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_0\)</span> is the initial learning rate, <span class="math notranslate nohighlight">\(t\)</span> the epoch number and <span class="math notranslate nohighlight">\(k\)</span> a hyperparameter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nepochs</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+<div class="section" id="time-based-decay">
+<h2>Time based decay<a class="headerlink" href="#time-based-decay" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement formula (15)</span>
+<span class="n">initial_learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="n">nepochs</span>
+<span class="n">decay</span> <span class="o">=</span> <span class="n">initial_learning_rate</span> <span class="o">/</span> <span class="n">epochs</span>
+
+<span class="k">def</span> <span class="nf">lr_time_based_decay</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">initial_learning_rate</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">decay</span> <span class="o">*</span> <span class="n">epoch</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the learning rate as a function of the number of epochs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr_time_based_decay</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nepochs</span><span class="p">),</span><span class="mf">0.01</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;learning rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_19_0.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the network with the learning rate schedule</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_compile</span><span class="p">()</span>
+<span class="n">history_time_based_decay</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> 
+    <span class="n">y_train</span><span class="p">,</span> 
+    <span class="n">epochs</span><span class="o">=</span><span class="n">nepochs</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_time_based_decay</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+
+Epoch 00001: LearningRateScheduler reducing learning rate to 0.01.
+Epoch 1/50
+60000/60000 [==============================] - 2s 34us/sample - loss: 0.6335 - acc: 0.8417 - val_loss: 0.3565 - val_acc: 0.9020
+
+
+
+Epoch 00050: LearningRateScheduler reducing learning rate to 0.009902951079421667.
+Epoch 50/50
+60000/60000 [==============================] - 2s 28us/sample - loss: 0.0487 - acc: 0.9876 - val_loss: 0.0785 - val_acc: 0.9768
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-decay">
+<h2>Step decay<a class="headerlink" href="#step-decay" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement formula (16)</span>
+<span class="n">initial_learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="k">def</span> <span class="nf">lr_step_decay</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
+    <span class="n">drop_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">epochs_drop</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="k">return</span> <span class="n">initial_learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">drop_rate</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">epoch</span><span class="o">/</span><span class="n">epochs_drop</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the learning rate as a function of the number of epochs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr_step_decay</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nepochs</span><span class="p">),</span><span class="mf">0.01</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;learning rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_23_0.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the network with the learning rate schedule</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_compile</span><span class="p">()</span>
+<span class="n">history_step_decay</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> 
+    <span class="n">y_train</span><span class="p">,</span> 
+    <span class="n">epochs</span><span class="o">=</span><span class="n">nepochs</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_step_decay</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+
+Epoch 00001: LearningRateScheduler reducing learning rate to 0.01.
+Epoch 1/50
+60000/60000 [==============================] - 2s 31us/sample - loss: 0.6441 - acc: 0.8373 - val_loss: 0.3594 - val_acc: 0.9019
+
+
+
+Epoch 00050: LearningRateScheduler reducing learning rate to 0.000625.
+Epoch 50/50
+60000/60000 [==============================] - 2s 26us/sample - loss: 0.1040 - acc: 0.9718 - val_loss: 0.1165 - val_acc: 0.9659
+</pre></div>
+</div>
+</div>
+<div class="section" id="exponential-decay">
+<h2>Exponential decay<a class="headerlink" href="#exponential-decay" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement formula (17)</span>
+<span class="n">initial_learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="k">def</span> <span class="nf">lr_exp_decay</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">return</span> <span class="n">initial_learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">epoch</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the learning rate as a function of the number of epochs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr_exp_decay</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nepochs</span><span class="p">),</span><span class="mf">0.01</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;learning rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_27_0.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the network with the learning rate schedule</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_compile</span><span class="p">()</span>
+<span class="n">history_exp_decay</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> 
+    <span class="n">y_train</span><span class="p">,</span> 
+    <span class="n">epochs</span><span class="o">=</span><span class="n">nepochs</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_exp_decay</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+
+Epoch 00001: LearningRateScheduler reducing learning rate to 0.01.
+Epoch 1/50
+60000/60000 [==============================] - 2s 29us/sample - loss: 0.6502 - acc: 0.8359 - val_loss: 0.3612 - val_acc: 0.8996
+
+
+
+Epoch 00050: LearningRateScheduler reducing learning rate to 7.446583070924338e-05.
+Epoch 50/50
+60000/60000 [==============================] - 2s 28us/sample - loss: 0.1607 - acc: 0.9554 - val_loss: 0.1678 - val_acc: 0.9520
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_acc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Constant&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_exp_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exp. Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_step_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Step Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_time_based_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Time Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy on train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_29_0.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_val_acc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Constant&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_exp_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exp. Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_step_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Step Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_time_based_decay</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Time Decay&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy on test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_30_0.png" /></p>
+</div>
+</div>
+<div class="section" id="exercise-regularizing-neural-networks">
+<h1>Exercise: Regularizing Neural Networks<a class="headerlink" href="#exercise-regularizing-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>We discussed the bias-variance trade-off, which describes the problem of creating models which generalize well to unseen data. Neural networks are extremely susceptible to overfitting, as the vast number of parameters allows to perfectly represent the training data. Two common ways to address overfitting are either creating more data or using a regularization of the model. You already got to know regularization with regards to linear regression, which we will now extend to neural networks. We start with a norm regularization of the weights.</p>
+<div class="section" id="l2-regularization">
+<h2>L2 Regularization<a class="headerlink" href="#l2-regularization" title="Permalink to this headline">¶</a></h2>
+<p>This means adding the squared norm of all weights to the loss function</p>
+<div class="math notranslate nohighlight">
+\[J(\theta) \leftarrow J(\theta) + \frac{b}{2m} \sum_{l = 1}^{L} \vert \vert \mathbf{w^{[L]}}\vert \vert^2,\]</div>
+<p>where <span class="math notranslate nohighlight">\(b\)</span> is the regularization parameter and <span class="math notranslate nohighlight">\(L\)</span> the number of layers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the model with an L2 regularization added to all weights</span>
+
+<span class="n">model_l2</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span> 
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span><span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)),</span>
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span><span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))])</span>
+
+<span class="c1"># Compile the model and optimize with adam</span>
+<span class="n">model_l2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(),</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model to the data while providing a validation set for each epoch</span>
+<span class="n">history_l2</span> <span class="o">=</span> <span class="n">model_l2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 37us/sample - loss: 0.4237 - acc: 0.9193 - val_loss: 0.3000 - val_acc: 0.9487
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 32us/sample - loss: 0.2427 - acc: 0.9697 - val_loss: 0.2448 - val_acc: 0.9672
+</pre></div>
+</div>
+</div>
+<div class="section" id="early-stopping">
+<h2>Early stopping<a class="headerlink" href="#early-stopping" title="Permalink to this headline">¶</a></h2>
+<p>Another possibility is to monitor the performance on the validation set and interrupt the training once it starts to drop. This procedure is called early stopping.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the model with early stopping</span>
+<span class="n">model_es</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span> 
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)])</span>
+
+<span class="c1"># Compile the model and optimize with adam</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model_es</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(),</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model to the data while providing a validation set for each epoch</span>
+<span class="n">history_es</span> <span class="o">=</span> <span class="n">model_es</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">es</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+Epoch 1/50
+60000/60000 [==============================] - 2s 34us/sample - loss: 0.2561 - acc: 0.9272 - val_loss: 0.1408 - val_acc: 0.9577
+Epoch 2/50
+60000/60000 [==============================] - 2s 31us/sample - loss: 0.1152 - acc: 0.9661 - val_loss: 0.0975 - val_acc: 0.9712
+Epoch 3/50
+60000/60000 [==============================] - 2s 29us/sample - loss: 0.0772 - acc: 0.9774 - val_loss: 0.0863 - val_acc: 0.9730
+Epoch 4/50
+60000/60000 [==============================] - 2s 30us/sample - loss: 0.0588 - acc: 0.9814 - val_loss: 0.0733 - val_acc: 0.9765
+Epoch 5/50
+60000/60000 [==============================] - 2s 29us/sample - loss: 0.0454 - acc: 0.9863 - val_loss: 0.0876 - val_acc: 0.9732
+Epoch 00005: early stopping
+</pre></div>
+</div>
+</div>
+<div class="section" id="dropout">
+<h2>Dropout<a class="headerlink" href="#dropout" title="Permalink to this headline">¶</a></h2>
+<p>An additional very common technique to regularize the network is <em>dropout</em>. Using dropout means to randomly remove neurons with a probability <span class="math notranslate nohighlight">\(p\)</span> during each training step.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the model with dropout</span>
+<span class="n">model_dropout</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span> 
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">),</span>
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">),</span>
+                      <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)])</span>
+
+<span class="c1"># Compile the model and optimize with adam</span>
+<span class="n">model_dropout</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(),</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model to the data while providing a validation set for each epoch</span>
+<span class="n">history_dropout</span> <span class="o">=</span> <span class="n">model_dropout</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on 60000 samples, validate on 10000 samples
+
+Epoch 1/50
+60000/60000 [==============================] - 2s 38us/sample - loss: 1.8167 - acc: 0.7189 - val_loss: 0.4290 - val_acc: 0.9338
+
+Epoch 50/50
+60000/60000 [==============================] - 2s 37us/sample - loss: 0.5712 - acc: 0.7990 - val_loss: 0.2042 - val_acc: 0.9805
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_val_acc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Standard&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_l2</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_es</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Early Stopping&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_dropout</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_acc&#39;</span><span class="p">],</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dropout&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy on test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_45_0.png" /></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/supervised_learning_w_NNs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Classification-2.html" title="previous page">Exercise: Dense Neural Networks</a>
+    <a class='right-next' id="next-link" href="CNNs.html" title="next page">Exercise: Convolutional Neural Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Eliska<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
