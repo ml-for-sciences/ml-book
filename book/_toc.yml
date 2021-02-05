@@ -16,10 +16,12 @@
         - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-1
         - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-2
         - file: docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-3
-        - file: docs/supervised_learning_wo_NNs/Linear-regression 
+        - file: docs/supervised_learning_wo_NNs/Linear-regression
         - file: docs/supervised_learning_wo_NNs/Classification
     - file: docs/supervised_learning_w_NNs/ml_supervised_w_NNs
       sections:
+        - file: docs/supervised_learning_w_NNs/ml_intro_neural
+        - file: docs/supervised_learning_w_NNs/ml_training_regularization
         - file: docs/supervised_learning_w_NNs/Classification-2
         - file: docs/supervised_learning_w_NNs/NN-opt-reg
         - file: docs/supervised_learning_w_NNs/CNNs
@@ -53,5 +55,3 @@
 - part: About us
   chapters:
   - file: docs/about_us
-
-    

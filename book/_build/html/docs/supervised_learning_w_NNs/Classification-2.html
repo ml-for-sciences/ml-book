@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Exercise: Machine Learning Optimizers" href="NN-opt-reg.html" />
-    <link rel="prev" title="Supervised Learning with Neural Networks" href="ml_supervised_w_NNs.html" />
+    <link rel="prev" title="Training" href="ml_training_regularization.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -180,6 +180,16 @@
    Supervised Learning with Neural Networks
   </a>
   <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_intro_neural.html">
+     Supervised Learning with Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_training_regularization.html">
+     Training
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Exercise: Dense Neural Networks
@@ -443,8 +453,8 @@
 <span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">LinearDiscriminantAnalysis</span>
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">softmax</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
@@ -489,7 +499,7 @@
 \end{split}\end{split}\]</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets look at the model&#39;s prediction before training it</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Classification&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
@@ -539,7 +549,7 @@ Epoch 10/10
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The model&#39;s predicition after training now makes sense!</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Classification&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
@@ -591,7 +601,7 @@ Epoch 10/10
 <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sX</span><span class="p">,</span> <span class="n">sY</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sX</span><span class="p">)</span>
 <span class="n">acc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sY</span> <span class="o">==</span> <span class="n">predictions</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">10000</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LR Accuracy =&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;LR Accuracy =&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;PC1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PC2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
@@ -824,7 +834,7 @@ Epoch 50/50
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ml_supervised_w_NNs.html" title="previous page">Supervised Learning with Neural Networks</a>
+    <a class='left-prev' id="prev-link" href="ml_training_regularization.html" title="previous page">Training</a>
     <a class='right-next' id="next-link" href="NN-opt-reg.html" title="next page">Exercise: Machine Learning Optimizers</a>
 
     </div>
@@ -832,7 +842,7 @@ Epoch 50/50
     <div class="container">
       <p>
         
-          By Eliska<br/>
+          By ml-for-science team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

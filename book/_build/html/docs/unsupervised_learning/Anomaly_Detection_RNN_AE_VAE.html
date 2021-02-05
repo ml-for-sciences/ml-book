@@ -181,6 +181,16 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
+     Supervised Learning with Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_training_regularization.html">
+     Training
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
      Exercise: Dense Neural Networks
     </a>
@@ -451,9 +461,9 @@
         
               <div>
                 
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -645,13 +655,13 @@ Epoch 20/20
 
 <span class="c1"># Compute the metrics</span>
 <span class="n">accuracy_test_rnn</span><span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = &#39;</span><span class="p">,</span><span class="n">accuracy_test_rnn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = &#39;</span><span class="p">,</span><span class="n">accuracy_test_rnn</span><span class="p">)</span>
 
 <span class="n">precision_test_rnn</span><span class="o">=</span><span class="n">precision_score</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision = &#39;</span><span class="p">,</span><span class="n">precision_test_rnn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Precision = &#39;</span><span class="p">,</span><span class="n">precision_test_rnn</span><span class="p">)</span>
 
 <span class="n">recall_test_rnn</span><span class="o">=</span><span class="n">recall_score</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall = &#39;</span><span class="p">,</span><span class="n">recall_test_rnn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Recall = &#39;</span><span class="p">,</span><span class="n">recall_test_rnn</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Accuracy =  0.976
@@ -697,7 +707,7 @@ Recall =  0.9785714285714285
           <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
           <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
           <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">normal_test_data</span><span class="p">,</span> <span class="n">normal_test_data</span><span class="p">),</span>
-          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
@@ -789,7 +799,7 @@ Epoch 20/20
 <p><img alt="png" src="../../_images/ad_output_36_0.png" /></p>
 <p>Choose a threshold value that is one standard deviation above the mean.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">threshold_ae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold: &quot;</span><span class="p">,</span> <span class="n">threshold_ae</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Threshold: &quot;</span><span class="p">,</span> <span class="n">threshold_ae</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Threshold:  0.031951994
@@ -815,9 +825,9 @@ Epoch 20/20
   <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">print_stats</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precision = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recall = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Accuracy = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Precision = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Recall = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">preds</span><span class="p">)))</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">autoencoder</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">threshold_ae</span><span class="p">)</span>
@@ -921,7 +931,7 @@ Recall = 0.9035714285714286
 <span class="n">history</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">normal_train_data</span><span class="p">,</span> <span class="n">normal_train_data</span><span class="p">,</span> 
           <span class="n">epochs</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> 
           <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Epoch 1/80
@@ -1115,7 +1125,7 @@ Epoch 80/80
 </div>
 <p><img alt="png" src="../../_images/ad_output_57_0.png" /></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">threshold_vae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold: &quot;</span><span class="p">,</span> <span class="n">threshold_vae</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Threshold: &quot;</span><span class="p">,</span> <span class="n">threshold_vae</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Threshold:  0.11696462
@@ -1134,7 +1144,7 @@ Epoch 80/80
 <p><img alt="png" src="../../_images/ad_output_59_0.png" /></p>
 <p>Classify an ECG as an anomaly if the reconstruction error is greater than the threshold.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">vae</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">threshold_vae</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variational Autoencoder&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Variational Autoencoder&quot;</span><span class="p">)</span>
 <span class="n">print_stats</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1145,7 +1155,7 @@ Recall = 0.9017857142857143
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">autoencoder</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">threshold_ae</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Autoencoder&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Autoencoder&quot;</span><span class="p">)</span>
 <span class="n">print_stats</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1155,10 +1165,10 @@ Precision = 0.9921568627450981
 Recall = 0.9035714285714286
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RNN as classifier&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = &#39;</span><span class="p">,</span><span class="n">accuracy_test_rnn</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision = &#39;</span><span class="p">,</span><span class="n">precision_test_rnn</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall = &#39;</span><span class="p">,</span><span class="n">recall_test_rnn</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;RNN as classifier&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Accuracy = &#39;</span><span class="p">,</span><span class="n">accuracy_test_rnn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Precision = &#39;</span><span class="p">,</span><span class="n">precision_test_rnn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Recall = &#39;</span><span class="p">,</span><span class="n">recall_test_rnn</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>RNN as classifier
@@ -1206,7 +1216,7 @@ Recall =  0.9926873857404022
     <div class="container">
       <p>
         
-          By Eliska<br/>
+          By ml-for-science team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

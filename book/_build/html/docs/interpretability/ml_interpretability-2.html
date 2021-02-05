@@ -181,6 +181,16 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
+     Supervised Learning with Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_training_regularization.html">
+     Training
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
      Exercise: Dense Neural Networks
     </a>
@@ -469,7 +479,7 @@ white box methods. We shall illustrate these concepts in the example
 below.</p>
 <div class="figure align-default" id="fig-white-box-attack">
 <img alt="../../_images/white_box_example.png" src="../../_images/white_box_example.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Adversarial examples.</strong> Generated using the fast gradient sign
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Adversarial examples.</strong> Generated using the fast gradient sign
 method with <span class="math notranslate nohighlight">\(T=1\)</span> iteration and <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>. The target model is
 Google’s <em>InceptionV3</em> deep convolutional network with a test accuracy
 of <span class="math notranslate nohighlight">\(\sim 95\%\)</span> on the binary (“Healthy” vs “Unhealthy”) plants
@@ -477,10 +487,10 @@ dataset.</span><a class="headerlink" href="#fig-white-box-attack" title="Permali
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>We shall use the same plant leaves classification example as above. The target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> which we want to ‘attack’ is a <em>pretrained</em> model using Google’s well known <em>InceptionV3</em> deep convolutional neural network containing over <span class="math notranslate nohighlight">\(20\)</span> million parameters<a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The model achieved a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>. Assuming we have access to the gradients of the model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we can then consider a white box attack. Starting from an image in the dataset which the target model correctly classifies and applying the fast gradient sign method with <span class="math notranslate nohighlight">\(\epsilon=0.01\)</span> and <span class="math notranslate nohighlight">\(T=1\)</span>, we obtain an adversarial image which differs from the original image by almost imperceptible amount of noise as depicted on the left of <a class="reference internal" href="#fig-white-box-attack"><span class="std std-numref">Fig. 20</span></a>. Any human would still correctly identify the image but yet the network, which has around <span class="math notranslate nohighlight">\(95\%\)</span> accuracy has completely failed.</p>
+<p>We shall use the same plant leaves classification example as above. The target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> which we want to ‘attack’ is a <em>pretrained</em> model using Google’s well known <em>InceptionV3</em> deep convolutional neural network containing over <span class="math notranslate nohighlight">\(20\)</span> million parameters<a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The model achieved a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>. Assuming we have access to the gradients of the model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we can then consider a white box attack. Starting from an image in the dataset which the target model correctly classifies and applying the fast gradient sign method with <span class="math notranslate nohighlight">\(\epsilon=0.01\)</span> and <span class="math notranslate nohighlight">\(T=1\)</span>, we obtain an adversarial image which differs from the original image by almost imperceptible amount of noise as depicted on the left of <a class="reference internal" href="#fig-white-box-attack"><span class="std std-numref">Fig. 23</span></a>. Any human would still correctly identify the image but yet the network, which has around <span class="math notranslate nohighlight">\(95\%\)</span> accuracy has completely failed.</p>
 <div class="figure align-default" id="fig-black-box-attack">
 <img alt="../../_images/black_box_attack.png" src="../../_images/black_box_attack.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Black Box Adversarial Attack.</strong></span><a class="headerlink" href="#fig-black-box-attack" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Black Box Adversarial Attack.</strong></span><a class="headerlink" href="#fig-black-box-attack" title="Permalink to this image">¶</a></p>
 </div>
 <p>If, however, the gradients and outputs of the target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> are
 hidden, the above white box attack strategy becomes unfeasible. In this
@@ -490,7 +500,7 @@ secondary model <span class="math notranslate nohighlight">\(\mathbf{g}\)</span>
 not necessary for <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> to have the same network architecture as the
 target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. In fact, it is possible that we do not even know
 the architecture of our target model.</p>
-<p>Let us consider another pretrained network based on <em>MobileNet</em> containing about <span class="math notranslate nohighlight">\(2\)</span> million parameters. After retraining the top classification layer of this model to a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>, we apply the FGSM algorithm to generate some adversarial examples. If we now test these examples on our target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we notice a significant drop in the accuracy as shown on the graph on the right of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 21</span></a>. The fact that the drop in accuracy is greater for the black box generated adversarial images as compared to images with random noise (of the same scale) added to it, shows that adversarial images have some degree of transferability between models. As a side note, on the left of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 21</span></a> we observe that black box attacks are more effective when only <span class="math notranslate nohighlight">\(T=1\)</span> iteration of the FGSM algorithm is used, contrary to the situation for the white box attack. This is because, with more iterations, the method has a tendency towards overfitting the secondary model, resulting in adversarial images which are less transferable.</p>
+<p>Let us consider another pretrained network based on <em>MobileNet</em> containing about <span class="math notranslate nohighlight">\(2\)</span> million parameters. After retraining the top classification layer of this model to a test accuracy of <span class="math notranslate nohighlight">\(\sim 95\%\)</span>, we apply the FGSM algorithm to generate some adversarial examples. If we now test these examples on our target model <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we notice a significant drop in the accuracy as shown on the graph on the right of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 24</span></a>. The fact that the drop in accuracy is greater for the black box generated adversarial images as compared to images with random noise (of the same scale) added to it, shows that adversarial images have some degree of transferability between models. As a side note, on the left of <a class="reference internal" href="#fig-black-box-attack"><span class="std std-numref">Fig. 24</span></a> we observe that black box attacks are more effective when only <span class="math notranslate nohighlight">\(T=1\)</span> iteration of the FGSM algorithm is used, contrary to the situation for the white box attack. This is because, with more iterations, the method has a tendency towards overfitting the secondary model, resulting in adversarial images which are less transferable.</p>
 <p>These forms of attacks highlight a serious vulnerability of such data
 driven machine learning techniques. Defending against such attack is an
 active area of research but it is largely a cat and mouse game between
@@ -545,7 +555,7 @@ base model fixed and only train the top layer.</p>
     <div class="container">
       <p>
         
-          By Eliska<br/>
+          By ml-for-science team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
