@@ -1,7 +1,7 @@
 # Machine Learning for Scientists
 
 This is an introductory machine learning course specifically developed with STEM students in mind,
-written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/en/groups/neupert.html) group at the University of Zurich and the [Quantum Matter and AI](https://twitter.com/QMAI_TUDelft) group at the Delft University of Technology. If you use the content of this webpage, please cite this arXiv:XX paper to acknowledge the work put into the development of this lecture. In case of questions or comments, feel free to contact us at mail@sth.com.
+written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/en/groups/neupert.html) group at the University of Zurich and the [Quantum Matter and AI](https://twitter.com/QMAI_TUDelft) group at the Delft University of Technology. If you use the content of this webpage, please cite this arXiv:XX paper to acknowledge the work put into the development of this lecture. In case of questions or comments, feel free to contact us at [comments@ml-lectures.org](mailto:comments@ml-lectures.org).
 
 
 
@@ -10,53 +10,45 @@ written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/e
 :card: border-2 mb-4
 :footer: text-center
 
-:img-top: ../cluster.png 
-+++
-
-[**Introduction**](sec:introduction)
----
-:img-top: ../_static/lecture_specific/structuring_data/circles_pca_kpca.png
+:img-top: ../_static/overview_page/SD.png
 +++
 [**Structuring Data without Neural Networks**](sec:structuring_data)
 
 
 
 ---
-:img-top: ../_static/lecture_specific/supervised-ml_wo_NN/Bias-Variance-Tradeoff.png
+:img-top: ../_static/overview_page/SLwoNN.png
 +++
 [**Supervised Learning without Neural Networks**](sec:linear-methods-for-supervised-learning)
 
 
 ---
-:img-top: ../_static/lecture_specific/unsupervised-ml/vae.png
+:img-top: ../_static/overview_page/SLwNN.png
 +++
 [**Supervised Learning with Neural Networks**](sec:supervised)
 
 
 
 ---
-:img-top: ../_static/lecture_specific/unsupervised-ml/GenerativeTaxonomy.png
+:img-top: ../_static/overview_page/US.png
 +++
 [**Unsupervised** <br/>
 **Learning**](sec:unsupervised)
 
 
 ---
-:img-top: ../_static/lecture_specific/interpretability/white_box_example.png
+:img-top: ../_static/overview_page/IoNN.png
 +++
 [**Interpretability of Neural Networks**](sec:interpretability)
 
 
 ---
-:img-top: ../_static/lecture_specific/reinforcement/mdp.png
+:img-top: ../_static/overview_page/RL.png
 +++
-[**Reinforcement Learning**](sec:RL)
+[**Reinforcement**  <br/>
+**Learning**](sec:RL)
 
 
----
-:img-top: ../_static/lecture_specific/conclusion/overview_ml.png
-+++
-[**Concluding Remarks**](sec:conclusion)
 
 
 
