@@ -1,6 +1,6 @@
 (sec:introduction)=
 # Introduction
-============
+
 
 Why machine learning for the sciences?
 --------------------------------------
@@ -81,7 +81,7 @@ MNIST dataset.
 Handwritten digit recognition has become one of the standard benchmark
 problems in the field. Why so? The reason is simple: there exists a very
 good and freely available data set for it, the MNIST database [^1], see
-Fig. \[fig:MNIST\]. This curious fact highlights an important aspect of
+{numref}`fig:MNIST`. This curious fact highlights an important aspect of
 machine learning: it is all about data. The most efficient way to
 improve machine learning results is to provide more and better data.
 Thus, one should keep in mind that despite the widespread applications,
@@ -98,7 +98,7 @@ that, machine learning presents itself as a universal new tool for the
 exact sciences, standing side-by-side with methods such as calculus,
 traditional statistics, and numerical simulations. This poses the
 question, where in the scientific workflow, summerized in
-Fig. \[fig:scientific\_workflow\], these novel methods are best
+{numref}`fig:scientific_workflow`, these novel methods are best
 employed.
 
 Once a specific task has been identified, applying machine learning to
@@ -125,7 +125,7 @@ abstraction to building and testing hypothesis or laws, to finally
 making predictions.
 ```
 
-[**A note on the concept of a model**]{}\
+**A note on the concept of a model**\
 In both machine learning and the sciences, models play a crucial role.
 However, it is important to recognize the difference in meaning: In the
 natural sciences, a model is a conceptual representation of a
@@ -178,11 +178,11 @@ complex and extremely high dimensional, it is often crucial to first
 understand the data better and reduce their dimensionality. Simple
 algorithms that can be used before turning to the often heavy machinery
 of neural networks will be discussed in the next section,
-Sec. \[sec:structuring\_data\].
+{ref}`sec:structuring_data`.
 
 The machine learning algorithms we will focus on most can generally be
 divided into two classes of algorithms, namely *discriminative* and
-*generative* algorithms as illustrated in Fig. \[fig:overview\].
+*generative* algorithms as illustrated in {numref}`fig:overview`.
 Examples of discriminative tasks include classification problems, such
 as the aforementioned digit classification or the classification into
 solid, liquid and gas phases given some experimental observables.
@@ -193,12 +193,18 @@ variable $y$ (the label) given some input data $x$. As data is provided
 in the form of input and target data for most of these tasks, these
 algorithms usually employ supervised learning. Discriminative algorithms
 are most straight-forwardly applicable in the sciences and we will
-discuss them in Secs. \[sec: linear methods for supervised learning\]
-and \[sec:supervised\].
+discuss them in Secs. {ref}`sec:linear-methods-for-supervised-learning`
+and {ref}`sec:supervised`.
 
-![Overview over the plan of the lecture from the perspective of learning
+
+```{figure} ../../_static/lecture_specific/introduction/overview.png
+:name: fig:overview
+
+**Overview over the plan of the lecture from the perspective of learning
 probability
-distributions.[]{data-label="fig:overview"}](figures/overview)
+distributions.**
+```
+
 
 Generative algorithms, on the other hand, model a probability
 distribution $P(x)$. These approaches are—once trained—in principle more
@@ -210,19 +216,19 @@ generative algorithms are useful in the natural sciences, as we can
 sample from a known probability distribution, for example for image
 denoising, or when trying to find new compounds/molecules resembling
 known ones with given properties. These algorithms are discussed in
-Sec. \[sec:unsupervised\]. The promise of artificial *intelligence* may
+Sec. {ref}`sec:unsupervised`. The promise of artificial *intelligence* may
 trigger unreasonable expectations in the sciences. After all, scientific
 knowledge generation is one of the most complex intellectual processes.
 Computer algorithms are certainly far from achieving anything on that
 level of complexity and will in the near future not formulate new laws
 of nature independently. Nevertheless, researchers study how machine
 learning can help with individual segments of the scientific workflow
-(Fig. \[fig:scientific\_workflow\]). While the type of abstraction
+({numref}`fig:scientific_workflow`). While the type of abstraction
 needed to formulate Newton’s laws of classical mechanics seems
 incredibly complex, neural networks are very good at *implicit knowledge
 representation*. To understand precisely how they achieve certain tasks,
 however, is not an easy undertaking. We will discuss this question of
-*interpretability* in Sec. \[sec:interpretability\].
+*interpretability* in Sec. {ref}`sec:interpretability`.
 
 A third class of algorithms, which does not neatly fit the framework of
 approximating a statistical model and thus the distinction into
@@ -231,11 +237,11 @@ learning. Instead of approximating a statistical model, reinforcement
 learning tries to optimize strategies (actions) for achieving a given
 task. Reinforcement learning has gained a lot of attention with Google’s
 AlphaGo Zero, a computer program that beat the best Go players in the
-world. As an example for an application in the sciences, reinfocrment
+world. As an example for an application in the sciences, reinforcement
 learning can be used to decide on what experimental configuration to
 perform next. While the whole topic is beyond the scope of this lecture,
 we will give an introduction to the basic concepts of reinforcement
-learning in Sec. \[sec:RL\].
+learning in Sec. {ref}`sec:RL`.
 
 A final note on the practice of learning. While the machine learning
 machinery is extremely powerful, using an appropriate architecture and
@@ -299,16 +305,16 @@ References
 
 For further reading, we recommend the following books:
 
--   [**ML without neural networks**]{}: *The Elements of Statistical
+-   **ML without neural networks**: *The Elements of Statistical
     Learning*, T. Hastie, R. Tisbshirani, and J. Friedman (Springer)
 
--   [**ML with neural networks**]{}: *Neural Networks and Deep
+-   **ML with neural networks**: *Neural Networks and Deep
     Learning*, M. Nielson (<http://neuralnetworksanddeeplearning.com>)
 
--   [**Deep Learning Theory**]{}: *Deep Learning*, I. Goodfellow, Y.
+-   **Deep Learning Theory**: *Deep Learning*, I. Goodfellow, Y.
     Bengio and A. Courville (<http://www.deeplearningbook.org>)
 
--   [**Reinforcement Learning**]{}: *Reinforcement Learning*, R. S.
+-   **Reinforcement Learning**: *Reinforcement Learning*, R. S.
     Sutton and A. G. Barto (MIT Press)
 
 [^1]: http://yann.lecun.com/exdb/mnist

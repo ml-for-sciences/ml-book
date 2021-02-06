@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,6 +193,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
      Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -446,12 +451,12 @@ same observation angles Copernicus did and deduces the same conclusion
 from them?</p>
 <div class="figure align-default" id="fig-copernicus">
 <img alt="../../_images/copernicus.png" src="../../_images/copernicus.png" />
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text"><strong>The Copernicus problem.</strong> Relation between angles in heliocentric
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text"><strong>The Copernicus problem.</strong> Relation between angles in heliocentric
 and geocentric coordinate
 system.</span><a class="headerlink" href="#fig-copernicus" title="Permalink to this image">¶</a></p>
 </div>
 <p>Renner group inputted into the autoencoder the angles of Mars and Sun as
-observed from Earth (<span class="math notranslate nohighlight">\(\alpha_{ES}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{EM}\)</span> in <a class="reference internal" href="#fig-copernicus"><span class="std std-numref">Fig. 30</span></a>) in certain times and asked the autoencoder
+observed from Earth (<span class="math notranslate nohighlight">\(\alpha_{ES}\)</span> and <span class="math notranslate nohighlight">\(\alpha_{EM}\)</span> in <a class="reference internal" href="#fig-copernicus"><span class="std std-numref">Fig. 33</span></a>) in certain times and asked the autoencoder
 to predict the angles at other times. When analyzing the trained model
 they realized that the two latent neurons included in their model are
 storing information in the <strong>heliocentric coordinates</strong>! In particular,
@@ -507,7 +512,7 @@ increasingly challenging.</p>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

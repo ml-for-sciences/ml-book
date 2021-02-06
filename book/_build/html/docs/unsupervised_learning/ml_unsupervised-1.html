@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,6 +193,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
      Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -447,10 +452,10 @@
   <div class="section" id="restricted-boltzmann-machine">
 <h1>Restricted Boltzmann Machine<a class="headerlink" href="#restricted-boltzmann-machine" title="Permalink to this headline">¶</a></h1>
 <p><em>Restricted Boltzmann Machines</em> (RBM) are a class of generative stochastic neural networks. More specifically, given some (binary) input data <span class="math notranslate nohighlight">\(\mathbf{x}\in\{0,1\}^{n_v}\)</span>, an RBM can be trained to approximate the probability distribution of this input. Moreover, once the neural network is trained to approximate the distribution of the input, we can sample from the network, in other words we generate new instances from the learned probability distribution.</p>
-<p>The RBM consists of two layers (see <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 19</span></a>) of <em>binary units</em>. Each binary unit is a variable which can take the values <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. We call the first (input) layer visible and the second layer hidden. The visible layer with input variables <span class="math notranslate nohighlight">\(\lbrace v_{1}, v_{2}, \dots v_{n_{\mathrm{v}}}\rbrace\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>, is connected to the hidden layer with variables <span class="math notranslate nohighlight">\(\{ h_{1}, h_{2}, \dots h_{n_{\mathrm{h}}}\}\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. The role of the hidden layer is to mediate correlations between the units of the visible layer. In contrast to the neural networks we have seen in the previous chapter, the hidden layer is not followed by an output layer. Instead, the RBM represents a probability distribution <span class="math notranslate nohighlight">\(P_{\text{rbm}}(\mathbf{v})\)</span>, which depends on variational parameters represented by the weights and biases of a neural network. The RBM, as illustrated by the graph in <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 19</span></a>, is a special case of a network structure known as a Boltzmann machine with the restriction that a unit in the visible layer is only connected to hidden units and vice versa, hence the name <em>restricted</em> Boltzmann machine.</p>
+<p>The RBM consists of two layers (see <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 22</span></a>) of <em>binary units</em>. Each binary unit is a variable which can take the values <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. We call the first (input) layer visible and the second layer hidden. The visible layer with input variables <span class="math notranslate nohighlight">\(\lbrace v_{1}, v_{2}, \dots v_{n_{\mathrm{v}}}\rbrace\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>, is connected to the hidden layer with variables <span class="math notranslate nohighlight">\(\{ h_{1}, h_{2}, \dots h_{n_{\mathrm{h}}}\}\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. The role of the hidden layer is to mediate correlations between the units of the visible layer. In contrast to the neural networks we have seen in the previous chapter, the hidden layer is not followed by an output layer. Instead, the RBM represents a probability distribution <span class="math notranslate nohighlight">\(P_{\text{rbm}}(\mathbf{v})\)</span>, which depends on variational parameters represented by the weights and biases of a neural network. The RBM, as illustrated by the graph in <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 22</span></a>, is a special case of a network structure known as a Boltzmann machine with the restriction that a unit in the visible layer is only connected to hidden units and vice versa, hence the name <em>restricted</em> Boltzmann machine.</p>
 <div class="figure align-default" id="fig-rbm">
 <img alt="../../_images/rbm.png" src="../../_images/rbm.png" />
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Restricted Boltzmann machine.</strong> Each of the three visible units and
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Restricted Boltzmann machine.</strong> Each of the three visible units and
 five hidden units represents a variable that can take the values <span class="math notranslate nohighlight">\(\pm1\)</span>
 and the connections between them represent the entries <span class="math notranslate nohighlight">\(W_{ij}\)</span> of the
 weight matrix that enters the energy function <a class="reference internal" href="#equation-eqn-rbm-energy">(38)</a>.</span><a class="headerlink" href="#fig-rbm" title="Permalink to this image">¶</a></p>
@@ -492,7 +497,7 @@ weight matrix that enters the energy function <a class="reference internal" href
         %&amp;= \sum_{h_{j}}x_{i}h_{j} P_{\textrm{rbm}}(h_{j}|\mathbf{x}) - \sum_{\mathbf{v},\mathbf{h}} v_{i} h_{j} P_{\textrm{rbm}}(\mathbf{v},\mathbf{h}) \\
         &amp;= x_{i}P_{\textrm{rbm}}(h_{j}=1|\mathbf{x}) - \sum_{\mathbf{v}} v_{i} P_{\textrm{rbm}}(h_{j}=1|\mathbf{v}) P_{\textrm{rbm}}(\mathbf{v})
 \end{split}\end{split}\]</div>
-<p>and similarly simple forms are found for the derivatives with respect to the components of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. We can then iteratively update the parameters just as we have done in Chapter <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html#sec-supervised"><span class="std std-ref">Supervised Learning with Neural Networks</span></a>,</p>
+<p>and similarly simple forms are found for the derivatives with respect to the components of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. We can then iteratively update the parameters just as we have done in Chapter <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html#sec-supervised"><span class="std std-ref">Computational neurons</span></a>,</p>
 <div class="math notranslate nohighlight">
 \[W_{ij} \rightarrow W_{ij} - \eta \frac{\partial L(a,b,W)}{\partial W_{ij}}\]</div>
 <p>with a sufficiently small learning rate <span class="math notranslate nohighlight">\(\eta\)</span>. As we have seen in the previous chapter in the context of backpropagation, we can reduce the computational cost by replacing the summation over the whole data set in Eq. <a class="reference internal" href="#equation-eqn-log-likelihood-derivative">(43)</a> with a summation over a small randomly chosen batch of samples. This reduction in the computational cost comes at the expense of noise, but at the same time it can help to improve generalization.</p>
@@ -545,11 +550,11 @@ example, where an RBM is used to reconstruct a noisy signal.</p></li>
 <div class="section" id="example-signal-or-image-reconstruction-denoising">
 <h2>Example: signal or image reconstruction/denoising<a class="headerlink" href="#example-signal-or-image-reconstruction-denoising" title="Permalink to this headline">¶</a></h2>
 <p>A major drawback of the simple RBMs for their application is the fact that they only take binary data as input. As an example, we thus look at simple periodic waveforms with 60 sample points. In particular, we use sawtooth, sine, and square waveforms. In order to have quasi-continuous data, we use eight bits for each point, such that our signal can take values from 0 to 255. Finally, we generate samples to train with a small variation in the maximum value, the periodicity, as well as the center point of each waveform.</p>
-<p>After training the RBM using the contrastive divergence algorithm, we now have a model which represents the data distribution of the binarized waveforms. Consider now a signal which has been corrupted, meaning some parts of the waveform have not been received, in other words they are set to 0. By feeding this corrupted data into the RBM and performing a few iterations of Gibbs sampling, we can obtain a reconstruction of the signal, where the missing part has been repaired, as can been seen at the bottom of <a class="reference internal" href="#fig-rbm-reconstruction"><span class="std std-numref">Fig. 20</span></a>.</p>
+<p>After training the RBM using the contrastive divergence algorithm, we now have a model which represents the data distribution of the binarized waveforms. Consider now a signal which has been corrupted, meaning some parts of the waveform have not been received, in other words they are set to 0. By feeding this corrupted data into the RBM and performing a few iterations of Gibbs sampling, we can obtain a reconstruction of the signal, where the missing part has been repaired, as can been seen at the bottom of <a class="reference internal" href="#fig-rbm-reconstruction"><span class="std std-numref">Fig. 23</span></a>.</p>
 <p>Note that the same procedure can be used to reconstruct or denoise images. Due to the limitation to binary data, however, the picture has to either be binarized, or the input size to the RBM becomes fairly large for high-resolution pictures. It is thus not surprising that while RBMs have been popular in the mid-2000s, they have largely been superseded by more modern and architectures such as <em>generative adversarial networks</em> which we shall explore later in the chapter. However, they still serve a pedagogical purpose and could also provide inspiration for future innovations, in particular in science. A recent example is the idea of using an RBM to represent a quantum mechanical state.</p>
 <div class="figure align-default" id="fig-rbm-reconstruction">
 <img alt="../../_images/rbm_reconstr.png" src="../../_images/rbm_reconstr.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Signal reconstruction.</strong> Using an RBM to repair a corrupted signal,
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Signal reconstruction.</strong> Using an RBM to repair a corrupted signal,
 here a sine and a sawtooth
 waveform.</span><a class="headerlink" href="#fig-rbm-reconstruction" title="Permalink to this image">¶</a></p>
 </div>
@@ -592,7 +597,7 @@ waveform.</span><a class="headerlink" href="#fig-rbm-reconstruction" title="Perm
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

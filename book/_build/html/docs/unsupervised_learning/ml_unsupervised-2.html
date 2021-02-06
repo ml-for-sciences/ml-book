@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,6 +193,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
      Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -441,18 +446,18 @@
                 
   <div class="section" id="training-an-rnn-without-supervision">
 <h1>Training an RNN without Supervision<a class="headerlink" href="#training-an-rnn-without-supervision" title="Permalink to this headline">¶</a></h1>
-<p>In Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html#sec-supervised"><span class="std std-ref">Supervised Learning with Neural Networks</span></a>, the RNN was introduced as a classification model. Instead of classifying sequences of data, such as time series, the RNN can also be trained to generate valid sequences itself. Given the RNN introduced in Sec. <span class="xref myst"></span>, the implementation of such a generator is straight-forward and does not require a new architecture. The main difference is that the output <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> of the network given the data point <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> is a guess of the subsequent data point <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> instead of the class to which the whole sequence belongs to. This means in particular that the input and output size are now the same. For training this network, we can once again use the cross-entropy or (negative) log-likelihood as a loss function,</p>
+<p>In Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html#sec-supervised"><span class="std std-ref">Computational neurons</span></a>, the RNN was introduced as a classification model. Instead of classifying sequences of data, such as time series, the RNN can also be trained to generate valid sequences itself. Given the RNN introduced in Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html#sec-rnn"><span class="std std-ref">Recurrent neural networks</span></a>, the implementation of such a generator is straight-forward and does not require a new architecture. The main difference is that the output <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> of the network given the data point <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> is a guess of the subsequent data point <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> instead of the class to which the whole sequence belongs to. This means in particular that the input and output size are now the same. For training this network, we can once again use the cross-entropy or (negative) log-likelihood as a loss function,</p>
 <div class="math notranslate nohighlight" id="eqn-unsup-rnn">
 <span id="equation-eqn-unsup-rnn"></span><span class="eqno">(45)<a class="headerlink" href="#eqn-unsup-rnn" title="Permalink to this equation">¶</a></span>\[L_{\mathrm{ent}}
     =-\sum_{t=1}^{m-1} \mathbf{x}_{t+1}\cdot
     \ln \left(
     \mathbf{y}_{t}
     \right),\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> is now the ‘label’ for the input <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}_{t}\)</span> is the output of the network and <span class="math notranslate nohighlight">\(t\)</span> runs over the input sequence with length <span class="math notranslate nohighlight">\(m\)</span>. This training is schematically shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 21</span></a>.</p>
-<p>For generating a new sequence, it is enough to have one single input point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> to start the sequence. Note that since we now can start with a single data point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> and generate a whole sequence of data points <span class="math notranslate nohighlight">\(\{\mathbf{y}_t\}\)</span>, this mode of using an RNN is referred to as <em>one-to-many</em>. This sequence generation is shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 21</span></a>, left.</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> is now the ‘label’ for the input <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}_{t}\)</span> is the output of the network and <span class="math notranslate nohighlight">\(t\)</span> runs over the input sequence with length <span class="math notranslate nohighlight">\(m\)</span>. This training is schematically shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 24</span></a>.</p>
+<p>For generating a new sequence, it is enough to have one single input point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> to start the sequence. Note that since we now can start with a single data point <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> and generate a whole sequence of data points <span class="math notranslate nohighlight">\(\{\mathbf{y}_t\}\)</span>, this mode of using an RNN is referred to as <em>one-to-many</em>. This sequence generation is shown in <a class="reference internal" href="#fig-rnn-gen"><span class="std std-numref">Fig. 24</span></a>, left.</p>
 <div class="figure align-default" id="fig-rnn-gen">
 <img alt="../../_images/generative_RNN2.png" src="../../_images/generative_RNN2.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>RNN used as a generator.</strong> For training, left, the input data
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>RNN used as a generator.</strong> For training, left, the input data
 shifted by one, <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span>, are used as the label. For the
 generation of new sequences, right, we input a single data point
 <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> and the RNN uses the recurrent steps to generate a new
@@ -460,12 +465,12 @@ sequence.</span><a class="headerlink" href="#fig-rnn-gen" title="Permalink to th
 </div>
 <div class="section" id="example-generating-molecules-with-an-rnn">
 <span id="sec-rnn-gen"></span><h2>Example: generating molecules with an RNN<a class="headerlink" href="#example-generating-molecules-with-an-rnn" title="Permalink to this headline">¶</a></h2>
-<p>To illustrate the concept of sequence generation using recurrent neural networks, we use an RNN to generate new molecules. The first question we need to address is how to encode a chemical structure into input data—of sequential form no less—that a machine learning model can read. A common representation of molecular graphs used in chemistry is the <em>simplified molecular-input line-entry system</em>, or SMILES. <a class="reference internal" href="#fig-smiles"><span class="std std-numref">Fig. 22</span></a> shows examples of such SMILES strings for the caffeine, ethanol, and aspirin molecules. We can use the dataset <em>Molecular Sets</em> <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, which contains <span class="math notranslate nohighlight">\(\sim 1.9\)</span>M molecules written in the SMILES format.</p>
+<p>To illustrate the concept of sequence generation using recurrent neural networks, we use an RNN to generate new molecules. The first question we need to address is how to encode a chemical structure into input data—of sequential form no less—that a machine learning model can read. A common representation of molecular graphs used in chemistry is the <em>simplified molecular-input line-entry system</em>, or SMILES. <a class="reference internal" href="#fig-smiles"><span class="std std-numref">Fig. 25</span></a> shows examples of such SMILES strings for the caffeine, ethanol, and aspirin molecules. We can use the dataset <em>Molecular Sets</em> <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, which contains <span class="math notranslate nohighlight">\(\sim 1.9\)</span>M molecules written in the SMILES format.</p>
 <p>Using the SMILES dataset, we create a dictionary to translate each character that appears in the dataset into an integer. We further use one-hot-encoding to feed each character separately to the RNN. This creates a map from characters in SMILES strings onto an array of numbers. Finally, in order to account for the variable size of the molecules and hence, the variable length of the strings, we can introduce a ‘stop’ character such that the network learns and later generates sequences of arbitrary length.</p>
 <p>We are now ready to use the SMILES strings for training our network as described above, where the input is a one-hot-encoded vector and the output is again a vector of the same size. Note, however, that similar to a classification task, the output vector is a probability distribution over the characters the network believes could come next. Unlike a classification task, where we consider the largest output the best guess of the network, here we sample in each step from the probability distribution <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> to again have a one-hot-encoded vector for the input of the next step.</p>
 <div class="figure align-default" id="fig-smiles">
 <img alt="../../_images/SMILES_examples.png" src="../../_images/SMILES_examples.png" />
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>SMILES.</strong> Examples of molecules and their representation in
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>SMILES.</strong> Examples of molecules and their representation in
 SMILES.</span><a class="headerlink" href="#fig-smiles" title="Permalink to this image">¶</a></p>
 </div>
 <hr class="docutils" />
@@ -513,7 +518,7 @@ SMILES.</span><a class="headerlink" href="#fig-smiles" title="Permalink to this 
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

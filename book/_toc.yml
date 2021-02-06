@@ -23,6 +23,7 @@
         - file: docs/supervised_learning_w_NNs/ml_intro_neural
         - file: docs/supervised_learning_w_NNs/ml_training_regularization
         - file: docs/supervised_learning_w_NNs/ml_convolutional
+        - file: docs/supervised_learning_w_NNs/ml_rnn
         - file: docs/supervised_learning_w_NNs/Classification-2
         - file: docs/supervised_learning_w_NNs/NN-opt-reg
         - file: docs/supervised_learning_w_NNs/CNNs

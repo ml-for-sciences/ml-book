@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -192,7 +192,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
-     Convolutional neural networks
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -668,7 +673,7 @@ actually still reduce the error by sacrificing some bias in our
 estimate.</p>
 <div class="figure align-default" id="fig-bias-variance-tradeoff">
 <img alt="../../_images/Bias-Variance-Tradeoff.png" src="../../_images/Bias-Variance-Tradeoff.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>Schematic depiction of the bias-variance tradeoff.</strong></span><a class="headerlink" href="#fig-bias-variance-tradeoff" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>Schematic depiction of the bias-variance tradeoff.</strong></span><a class="headerlink" href="#fig-bias-variance-tradeoff" title="Permalink to this image">¶</a></p>
 </div>
 <p>A possible way to reduce generalisation error is actually to drop some
 data features. From the <span class="math notranslate nohighlight">\(n\)</span> data features
@@ -719,20 +724,20 @@ complexity of our model. In the former, some parameters are set to zero,
 while in the latter, there is a constraint which effectively reduces the
 magnitude of all parameters. A less complex model has a smaller variance
 but larger bias. By balancing these competing effects, generalisation
-can be improved, as illustrated schematically in <a class="reference internal" href="#fig-bias-variance-tradeoff"><span class="std std-numref">Fig. 6</span></a>.</p>
+can be improved, as illustrated schematically in <a class="reference internal" href="#fig-bias-variance-tradeoff"><span class="std std-numref">Fig. 7</span></a>.</p>
 <p>In the next chapter, we will see that these techniques are useful beyond
 applications to linear methods. We illustrate the different concepts in
 the following example.</p>
 <div class="figure align-default" id="fig-ml-workflow">
 <img alt="../../_images/ML_Workflow.png" src="../../_images/ML_Workflow.png" />
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>Machine Learning Workflow.</strong></span><a class="headerlink" href="#fig-ml-workflow" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>Machine Learning Workflow.</strong></span><a class="headerlink" href="#fig-ml-workflow" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the concepts of linear regression using a medical dataset.
 In the process, we will also familiarize ourselves with the standard
-machine learning workflow [see <a class="reference internal" href="#fig-ml-workflow"><span class="std std-numref">Fig. 7</span></a>]. For this example, we are given <span class="math notranslate nohighlight">\(10\)</span>
+machine learning workflow [see <a class="reference internal" href="#fig-ml-workflow"><span class="std std-numref">Fig. 8</span></a>]. For this example, we are given <span class="math notranslate nohighlight">\(10\)</span>
 data features, namely age, sex, body mass index, average blood pressure,
 and six blood serum measurements from <span class="math notranslate nohighlight">\(442\)</span> diabetes patients, and our
 task is train a model <span class="math notranslate nohighlight">\(f(\mathbf{x}|\boldsymbol \beta)\)</span>
@@ -773,12 +778,12 @@ and <span class="math notranslate nohighlight">\(4\)</span>, until validation er
 in optimizing either parameters <span class="math notranslate nohighlight">\(\boldsymbol \beta\)</span> or the hyperparameters such
 as <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <p>Applying this procedure to the diabetes dataset <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, we obtain the
-results in <a class="reference internal" href="#fig-regression-on-diabetes-dataset"><span class="std std-numref">Fig. 8</span></a>. We compare RSS linear
+results in <a class="reference internal" href="#fig-regression-on-diabetes-dataset"><span class="std std-numref">Fig. 9</span></a>. We compare RSS linear
 regression with the ridge regression, and indeed we see that by
 appropriately choosing the regularisation hyperparameter <span class="math notranslate nohighlight">\(\lambda\)</span>, the
 generalisation error can be minimized.</p>
 <p>As side remark regarding the ridge regression, we can see on the left of
-<a class="reference internal" href="#fig-ridge-parameters"><span class="std std-numref">Fig. 9</span></a>, that as <span class="math notranslate nohighlight">\(\lambda\)</span> increases, the
+<a class="reference internal" href="#fig-ridge-parameters"><span class="std std-numref">Fig. 10</span></a>, that as <span class="math notranslate nohighlight">\(\lambda\)</span> increases, the
 magnitude of the parameters, Eq. <a class="reference internal" href="#equation-eqn-ridge-solution">(20)</a>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol \beta}_{\textrm{ridge}}\)</span>
 decreases. Consider on the other hand, a different form of
 regularisation, which goes by the name <em>lasso regression</em>, where the
@@ -787,21 +792,21 @@ loss function is given by</p>
 <span class="eqno">(22)<a class="headerlink" href="#equation-eqn-lasso" title="Permalink to this equation">¶</a></span>\[    %L_{\textrm{lasso}}(\boldsymbol \beta) = \sum_{i=1}^{m} \left(y_{i} -  \beta_0 +\sum_{j=1}^{n} \beta_{j}x_{ij}\right)^{2} + \alpha \sum_{j=0}^{n} |\beta_{j}|.
     L_{\textrm{lasso}}(\boldsymbol \beta) = \sum_{i=1}^{m} \left[y_{i} -  f(\boldsymbol{x}_i|\boldsymbol \beta)\right]^{2} + \alpha \sum_{j=0}^{n} |\beta_{j}|.\]</div>
 <p>Despite the similarities, lasso regression has a very different
-behaviour as depicted on the right of <a class="reference internal" href="#fig-ridge-parameters"><span class="std std-numref">Fig. 9</span></a>. Notice that as <span class="math notranslate nohighlight">\(\alpha\)</span> increases
+behaviour as depicted on the right of <a class="reference internal" href="#fig-ridge-parameters"><span class="std std-numref">Fig. 10</span></a>. Notice that as <span class="math notranslate nohighlight">\(\alpha\)</span> increases
 some parameters actually vanish and can be ignored completely. This
 actually corresponds to dropping certain data features completely and
 can be useful if we are interested in selecting the most important
 features in a dataset.</p>
 <div class="figure align-default" id="fig-regression-on-diabetes-dataset">
 <img alt="../../_images/diabetes_ridge_regression.png" src="../../_images/diabetes_ridge_regression.png" />
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>Ridge Regression on Diabetes patients dataset.</strong> Left: Validation
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Ridge Regression on Diabetes patients dataset.</strong> Left: Validation
 error versus <span class="math notranslate nohighlight">\(\lambda\)</span>. Right: Test data versus the prediction from the
 trained model. If the prediction were free of any error, all the points
 would fall on the blue line.</span><a class="headerlink" href="#fig-regression-on-diabetes-dataset" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="fig-ridge-parameters">
 <img alt="../../_images/ridge_variables.png" src="../../_images/ridge_variables.png" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>Evolution of the model parameters.</strong> Increasing the hyperparameter
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Evolution of the model parameters.</strong> Increasing the hyperparameter
 <span class="math notranslate nohighlight">\(\lambda\)</span> or <span class="math notranslate nohighlight">\(\alpha\)</span> leads to a reduction of the absolute value of the
 model parameters, here shown for the ridge (left) and Lasso (right)
 regression for the Diabetes dataset.</span><a class="headerlink" href="#fig-ridge-parameters" title="Permalink to this image">¶</a></p>
@@ -851,7 +856,7 @@ regression for the Diabetes dataset.</span><a class="headerlink" href="#fig-ridg
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

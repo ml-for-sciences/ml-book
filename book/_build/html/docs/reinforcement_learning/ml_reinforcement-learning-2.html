@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,6 +193,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
      Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -429,7 +434,7 @@
 <h1>Finite Markov Decision Process<a class="headerlink" href="#finite-markov-decision-process" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-default" id="fig-mdp">
 <img alt="../../_images/mdp.png" src="../../_images/mdp.png" />
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text"><strong>Markov decision process.</strong> Schematic of the agent-environment
 interaction.</span><a class="headerlink" href="#fig-mdp" title="Permalink to this image">¶</a></p>
 </div>
 <p>After this introductory example, we introduce the idealized form of
@@ -438,7 +443,7 @@ time step <span class="math notranslate nohighlight">\(t\)</span>, the agent sta
 performs an action <span class="math notranslate nohighlight">\(A_t\in\mathcal{A}\)</span>, which, through interaction with
 the environment, leads to a reward <span class="math notranslate nohighlight">\(R_{t+1}\in \mathcal{R}\)</span> and moves
 the agent to a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. This agent-environment interaction
-is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 31</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
+is schematically shown in <a class="reference internal" href="#fig-mdp"><span class="std std-numref">Fig. 34</span></a>. Note that we assume the space of all actions, states, and rewards to be finite, such that we talk about a <em>finite</em> MDP.</p>
 <p>For our toy example, the sensor we have only shows whether the water
 level is high (h) or low (l), so that the state space of our agent is
 <span class="math notranslate nohighlight">\(\mathcal{S} = \{ {\rm h}, {\rm l} \}\)</span>. In both cases, our agent can
@@ -472,7 +477,7 @@ water levels, turning the lamps off reduces our rewards, but increases
 our chance of not losing the plants, <span class="math notranslate nohighlight">\(\beta' &gt; \beta\)</span>. Finally, if the
 agent should choose to send us a text, we will refill the water, such
 that <span class="math notranslate nohighlight">\(p({\rm h}, r_{\rm text} | {\rm l}, {\rm text}) = 1\)</span>. The whole
-Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 32</span></a>.</p>
+Markov process is summarized in the <em>transition graph</em> in <a class="reference internal" href="#fig-mdp-example"><span class="std std-numref">Fig. 35</span></a>.</p>
 <p>From the probability for the next reward and state, we can also
 calculate the expected reward starting from state <span class="math notranslate nohighlight">\(s\)</span> and choosing
 action <span class="math notranslate nohighlight">\(a\)</span>, namely</p>
@@ -484,7 +489,7 @@ to each state a value <span class="math notranslate nohighlight">\(v_*(s)\)</spa
 this state.</p>
 <div class="figure align-default" id="fig-mdp-example">
 <img alt="../../_images/mdp_example.png" src="../../_images/mdp_example.png" />
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
+<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text"><strong>Transition graph of the MDP for the plant-watering agent.</strong> The
 states ‘high’ and ‘low’ are denoted with large circles, the actions with
 small black circles, and the arrows correspond to the probabilities and
 rewards.</span><a class="headerlink" href="#fig-mdp-example" title="Permalink to this image">¶</a></p>
@@ -545,7 +550,7 @@ finite value.</p>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

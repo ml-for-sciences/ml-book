@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supervised Learning with Neural Networks &#8212; Machine Learning for Scientists</title>
+    <title>Computational neurons &#8212; Machine Learning for Scientists</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -182,7 +182,7 @@
   <ul class="current collapse-ul">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -192,7 +192,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="ml_convolutional.html">
-     Convolutional neural networks
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -424,11 +429,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computational-neurons">
-   Computational neurons
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-simple-network-structure">
    A simple network structure
   </a>
@@ -444,53 +444,11 @@
         
               <div>
                 
-  <div class="section" id="supervised-learning-with-neural-networks">
-<span id="sec-supervised"></span><h1>Supervised Learning with Neural Networks<a class="headerlink" href="#supervised-learning-with-neural-networks" title="Permalink to this headline">¶</a></h1>
-<p>In the previous chapter, we covered the basics of machine learning using
-conventional methods such as linear regression and principle component
-analysis. In the present chapter, we move towards a more complex class
-of machine learning models: <em>neural networks</em>. Neural networks have been
-central to the recent vast success of machine learning in many practical
-applications.</p>
-<p>The idea for the design of a neural network model is an analogy to how
-biological organisms process information. Biological brains contain
-neurons, electrically activated nerve cells, connected by synapses that
-facilitate information transfer between neurons. The machine learning
-equivalent of this structure, the so-called artificial neural networks
-or neural networks in short, is a mathematical function developed with
-the same principles in mind. It is composed from elementary functions,
-the <em>neurons</em>, which are organized in <em>layers</em> that are connected to
-each other. To simplify the notation, a graphical representation of the
-neurons and network is used, see <a class="reference internal" href="#fig-nn-carrot"><span class="std std-numref">Fig. 11</span></a>. The
-connections in the graphical representation means that the output from
-one set of neurons (forming one layer) serves as the input for the next
-set of neurons (the next layer). This defines a sense of direction in
-which information is handed over from layer to layer, and thus the
-architecture is referred to as a feed-forward neural network.</p>
-<p>In general, an artificial neural network is simply an example of a
-variational non-linear function that maps some (potentially
-high-dimensional) input data to a desired output. Neural networks are
-remarkably powerful and it has been proven that under some mild
-structure assumptions they can approximate any smooth function
-arbitrarily well as the number of neurons tends to infinity. A drawback
-is that neural networks typically depend on a large amount of
-parameters. In the following, we will learn how to construct these
-neural networks and find optimal values for the variational parameters.</p>
-<p>In this chapter, we are going to discuss one option for optimizing
-neural networks: the so-called <em>supervised learning</em>. A machine learning
-process is called supervised whenever we use training data comprising
-input-output pairs, in other words input with known correct answer (the
-label), to teach the network-required task.</p>
-<div class="figure align-default" id="fig-nn-carrot">
-<img alt="../../_images/NN_carrot.png" src="../../_images/NN_carrot.png" />
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text"><strong>Graphical representation of the basic neural network
-architecture.</strong></span><a class="headerlink" href="#fig-nn-carrot" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="computational-neurons">
-<h2>Computational neurons<a class="headerlink" href="#computational-neurons" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="computational-neurons">
+<span id="sec-supervised"></span><h1>Computational neurons<a class="headerlink" href="#computational-neurons" title="Permalink to this headline">¶</a></h1>
 <p>The basic building block of a neural network is the neuron. Let us
 consider a single neuron which we assume to be connected to <span class="math notranslate nohighlight">\(k\)</span> neurons
-in the preceding layer, see <a class="reference internal" href="#fig-nn-act"><span class="std std-numref">Fig. 12</span></a> left side. The neuron
+in the preceding layer, see <a class="reference internal" href="#fig-nn-act"><span class="std std-numref">Fig. 13</span></a> left side. The neuron
 corresponds to a function <span class="math notranslate nohighlight">\(f:\mathbb{R}^k\to \mathbb{R}\)</span> which is a
 composition of a linear function <span class="math notranslate nohighlight">\(q:\mathbb{R}^k\to \mathbb{R}\)</span> and a
 non-linear (so-called <em>activation function</em>) <span class="math notranslate nohighlight">\(g:\mathbb{R}\to \mathbb{R}\)</span>. Specifically,</p>
@@ -517,11 +475,11 @@ linear transformation. For this reason, <span class="math notranslate nohighligh
 analogy to biological neurons, <span class="math notranslate nohighlight">\(g\)</span> represents the property of the neuron
 that it “spikes”, i.e., it produces a noticeable output only when the
 input potential grows beyond a certain threshold value. The most common
-choices for activation functions, shown in <a class="reference internal" href="#fig-nn-act"><span class="std std-numref">Fig. 12</span></a>,
+choices for activation functions, shown in <a class="reference internal" href="#fig-nn-act"><span class="std std-numref">Fig. 13</span></a>,
 include:</p>
 <div class="figure align-default" id="fig-nn-act">
 <img alt="../../_images/act_functions.png" src="../../_images/act_functions.png" />
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text"><strong>Left: schematic of a single neuron and
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Left: schematic of a single neuron and
 its functional form. Right: examples of the commonly used activation
 functions: ReLU, sigmoid function and hyperbolic
 tangent.</strong></span><a class="headerlink" href="#fig-nn-act" title="Permalink to this image">¶</a></p>
@@ -557,21 +515,20 @@ linear transformation. Then, the <em>softmax</em> is defined as</p>
 interpreted as a probability distribution. The softmax function is thus
 a continuous generalization of the argmax function introduced in the
 previous chapter.</p>
-</div>
 <div class="section" id="a-simple-network-structure">
 <h2>A simple network structure<a class="headerlink" href="#a-simple-network-structure" title="Permalink to this headline">¶</a></h2>
 <p>Now that we understand how a single neuron works, we can connect many of
 them together and create an artificial neural network. The general
 structure of a simple (feed-forward) neural network is shown in
-<a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 13</span></a>. The first and last layers are the input
+<a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 14</span></a>. The first and last layers are the input
 and output layers (blue and violet, respectively, in
-<a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 13</span></a>) and are called <em>visible layers</em> as they
+<a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 14</span></a>) and are called <em>visible layers</em> as they
 are directly accessed. All the other layers in between them are neither
 accessible for input nor providing any direct output, and thus are
-called <em>hidden layers</em> (green layer in <a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 13</span></a>.</p>
+called <em>hidden layers</em> (green layer in <a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 14</span></a>.</p>
 <div class="figure align-default" id="fig-simple-network">
 <img alt="../../_images/simple_network.png" src="../../_images/simple_network.png" />
-<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Architecture and variational
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text"><strong>Architecture and variational
 parameters.</strong></span><a class="headerlink" href="#fig-simple-network" title="Permalink to this image">¶</a></p>
 </div>
 <p>Assuming we can feed the input to the network as a vector, we denote the
@@ -579,7 +536,7 @@ input data with <span class="math notranslate nohighlight">\({\boldsymbol{x}}\)<
 input into the output <span class="math notranslate nohighlight">\({\boldsymbol{F}}({\boldsymbol{x}})\)</span>, which in
 general is also a vector. As a simple and concrete example, we write the
 complete functional form of a neural network with one hidden layer as
-shown in <a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 13</span></a>,</p>
+shown in <a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 14</span></a>,</p>
 <div class="math notranslate nohighlight" id="equation-eq-2-layer-nn">
 <span class="eqno">(34)<a class="headerlink" href="#equation-eq-2-layer-nn" title="Permalink to this equation">¶</a></span>\[{\boldsymbol{F}}({\boldsymbol{x}})
     =
@@ -651,7 +608,7 @@ regression.</p>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

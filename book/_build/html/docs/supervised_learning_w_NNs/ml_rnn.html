@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recurrent neural networks &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise: Dense Neural Networks" href="Classification-2.html" />
+    <link rel="prev" title="Regularization" href="ml_convolutional.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_intro_neural.html">
+     Computational neurons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_training_regularization.html">
+     Training
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_convolutional.html">
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Recurrent neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/supervised_learning_w_NNs/ml_rnn.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#long-short-term-memory">
+   Long short-term memory
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="recurrent-neural-networks">
+<span id="sec-rnn"></span><h1>Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>We have seen in the previous section how the convolutional neural
+network allows to retain local information through the use of filters.
+While this context-sensitivity of the CNN is applicable in many
+situations, where geometric information is important, there are
+situations we have more than neighborhood relations, namely sequential
+order. An element is before or after an other, not simply next to it. A
+common situation, where the order of the input is important, is with
+time-series data. Examples are measurements of a distant star collected
+over years or the events recorded in a detector after a collision in a
+particle collider. The classification task in these examples could be
+the determination whether the star has an exoplanet, or whether a Higgs
+boson was observed, respectively. Another example without any temporal
+structure in the data is the prediction of a protein’s functions from
+its primary amino-acid sequence.</p>
+<div class="figure align-default" id="fig-rnn">
+<img alt="../../_images/rnn.png" src="../../_images/rnn.png" />
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Recurrent neural network architecture: The input <span class="math notranslate nohighlight">\(x_t\)</span> is fed
+into the recurrent cell together with the (hidden) memory <span class="math notranslate nohighlight">\(h_{t-1}\)</span> of
+the previous step to produce the new memory <span class="math notranslate nohighlight">\(h_t\)</span> and the output <span class="math notranslate nohighlight">\(y_t\)</span>.
+One can understand the recurrent structure via the “unwrapped” depiction
+of the structure on the right hand side of the figure. The red arrows
+indicate how gradients are propagated back in time for updating the
+network parameters.</strong></span><a class="headerlink" href="#fig-rnn" title="Permalink to this image">¶</a></p>
+</div>
+<p>A property that the above examples have in common is that the length of
+the input data is not necessarily always fixed for all samples. This
+emphasizes again another weakness of both the dense network and the CNN:
+The networks only work with fixed-size input and there is no good
+procedure to decrease or increase the input size. While we can in
+principle always cut our input to a desired size, of course, this finite
+window is not guaranteed to contain the relevant information.</p>
+<p>In this final section on supervised learning, we introduce one more
+neural network architecture that solves both problems discussed above:
+<em>recurrent neural networks</em> (RNNs). The key idea behind a recurrent
+neural network is that input is passed to the network one element after
+another—unlike for other neural networks, where an input ’vector’ is
+given the network all at once—and to recognize context, the network
+keeps an internal state, or memory, that is fed back to the network
+together with the next input. Recurrent neural networks were developed
+in the context of <em>natural language processing</em> (NLP), the field of
+processing, translating and transforming spoken or written language
+input, where clearly, both context and order are crucial pieces of
+information. However, over the last couple of years, RNNs have found
+applications in many fields in the sciences.</p>
+<p>The special structure of a RNN is depicted in <a class="reference internal" href="#fig-rnn"><span class="std std-numref">Fig. 20</span></a>. At step
+<span class="math notranslate nohighlight">\(t\)</span>, the input <span class="math notranslate nohighlight">\({\boldsymbol{x}}_t\)</span> and the (hidden) internal state of
+the last step <span class="math notranslate nohighlight">\({\boldsymbol{h}}_{t-1}\)</span> are fed to the network to
+calculate <span class="math notranslate nohighlight">\({\boldsymbol{h}}_t\)</span>. The new hidden memory of the RNN is
+finally connected to the output layer <span class="math notranslate nohighlight">\({\boldsymbol{y}}_t\)</span>. As shown in
+<a class="reference internal" href="#fig-rnn"><span class="std std-numref">Fig. 20</span></a>, this is equivalent to having many copies of the
+input-output architecture, where the hidden layers of the copies are
+connected to each other. The RNN cell itself can have a very simple
+structure with a single activation function. Concretely, in each step of
+a simple RNN we update the hidden state as</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{h}}_{t} = \tanh(W_{hh} {\boldsymbol{h}}_{t-1} + W_{xh} {\boldsymbol{x}}_{t-1} + {\boldsymbol{b}}_h),
+  \label{eq:rnn first step}\]</div>
+<p>where we used for the nonlinearity the
+hyperbolic tangent, a common choice, which is applied element-wise.
+Further, if the input data <span class="math notranslate nohighlight">\({\boldsymbol{x}}_t\)</span> has dimension <span class="math notranslate nohighlight">\(n\)</span> and
+the hidden state <span class="math notranslate nohighlight">\({\boldsymbol{h}}_t\)</span> dimension <span class="math notranslate nohighlight">\(m\)</span>, the weight matrices
+<span class="math notranslate nohighlight">\(W_{hh}\)</span> and <span class="math notranslate nohighlight">\(W_{ih}\)</span> have dimensions <span class="math notranslate nohighlight">\(m\times m\)</span> and <span class="math notranslate nohighlight">\(m\times n\)</span>,
+respectively. Finally, the output at step <span class="math notranslate nohighlight">\(t\)</span> can be calculated using
+the hidden state <span class="math notranslate nohighlight">\({\boldsymbol{h}}_t\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{y}}_{t} = W_{ho} {\boldsymbol{h}}_t.
+  \label{eq:rnn output}\]</div>
+<p>A schematic of this implementation is depicted
+in <a class="reference internal" href="#fig-lstm"><span class="std std-numref">Fig. 21</span></a>(a). Note that in this simplest implementation, the
+output is only a linear operation on the hidden state. A straight
+forward extension—necessary in the case of a classification problem—is
+to add a non-linear element to the output as well, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{y}}_{t} = {\boldsymbol{g}}(W_{ho}{\boldsymbol{h}}_t + {\boldsymbol{b}}_y)\]</div>
+<p>with <span class="math notranslate nohighlight">\({\boldsymbol{g}}({\boldsymbol{q}})\)</span> some activation function, such
+as a softmax. Note that while in principle an output can be calculated
+at every step, this is only done after the last input element in a
+classification task. An interesting property of RNNs is that the weight
+matrices and biases, the parameters we learn during training, are the
+same for each input element. This property is called <em>parameter sharing</em>
+and is in stark contrast to dense networks. In the latter architecture,
+each input element is connected through its own weight matrix. While it
+might seem that this property could be detrimental in terms of
+representability of the network, it can greatly help extracting
+sequential information: Similar to a filter in a CNN, the network does
+not need to learn the exact location of some specific sequence that
+carries the important information, it only learns to recognize this
+sequence somewhere in the data. Note that the way each input element is
+processed differently is instead implemented through the hidden memory.</p>
+<p>Parameter sharing is, however, also the root of a major problem when
+training a simple RNN. To see this, remember that during training, we
+update the network parameters using gradient descent. As in the previous
+sections, we can use backpropagation to achieve this optimization. Even
+though the unwrapped representation of the RNN in <a class="reference internal" href="#fig-rnn"><span class="std std-numref">Fig. 20</span></a>
+suggests a single hidden layer, the gradients for the backpropagation
+have to also propagate back through time. This is depicted in
+<a class="reference internal" href="#fig-rnn"><span class="std std-numref">Fig. 20</span></a> with the red arrows <a class="footnote-reference brackets" href="#id3" id="id1">3</a>. Looking at the
+backpropagation algorithm in Sec. <a class="reference internal" href="ml_training_regularization.html#sec-training"><span class="std std-ref">Training</span></a>, we see that to use
+data points from <span class="math notranslate nohighlight">\(N\)</span> steps back, we need to multiply <span class="math notranslate nohighlight">\(N-1\)</span> Jacobi
+matrices <span class="math notranslate nohighlight">\(D{\boldsymbol{f}}^{[t']}\)</span> with <span class="math notranslate nohighlight">\(t-N &lt; t' \leq t\)</span>. Using Eq. ,
+we can write each Jacobi matrix as a product of the derivative of the
+activation function, <span class="math notranslate nohighlight">\(\partial_q \tanh(q)\)</span>, with the weight matrix. If
+either of these factors <a class="footnote-reference brackets" href="#id4" id="id2">4</a> is much smaller (much larger) than <span class="math notranslate nohighlight">\(1\)</span>, the
+gradients decrease (grow) exponentially. This is known as the problem of
+<em>vanishing gradients</em> (<em>exploding gradients</em>) and makes learning
+long-term dependencies with simple RNNs practically impossible.</p>
+<p>Note that the problem of exploding gradients can be mitigated by
+clipping the gradients, in other words scaling them to a fixed size.
+Furthermore, we can use the ReLU activation function instead of a
+hyperbolic tangent, as the derivative of the ReLU for <span class="math notranslate nohighlight">\(q&gt;0\)</span> is always 1.
+However, the problem of the shared weight matrices can not so easily be
+resolved. In order to learn long-time dependencies, we have to introduce
+a different architecture. In the following, we will discuss the long
+short-term memory (LSTM) network. This architecture and its variants are
+used in most applications of RNNs nowadays.</p>
+<div class="section" id="long-short-term-memory">
+<h2>Long short-term memory<a class="headerlink" href="#long-short-term-memory" title="Permalink to this headline">¶</a></h2>
+<p>The key idea behind the LSTM is to introduce another state to the RNN,
+the so-called <em>cell state</em>, which is passed from cell to cell, similar
+to the hidden state. However, unlike the hidden state, no matrix
+multiplication takes place, but information is added or removed to the
+cell state through <em>gates</em>. The LSTM then commonly comprises four gates
+which correspond to three steps: the forget step, the input and update
+step, and finally the output step. We will in the following go through
+all of these steps individually.</p>
+<div class="figure align-default" id="fig-lstm">
+<img alt="../../_images/lstm.png" src="../../_images/lstm.png" />
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Comparison of (a) a simple RNN and (b) a LSTM: The boxes
+denote neural networks with the respective activation function, while
+the circles denote element-wise operations. The dark green box indicates
+that the four individual neural networks can be implemented as one
+larger one.</strong></span><a class="headerlink" href="#fig-lstm" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Forget step</strong><br />
+In this step, specific information of the cell state is forgotten.
+Specifically, we update the cell state as</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{c}}'_t = \sigma(W_{hf} {\boldsymbol{h}}_{t-1} + W_{xf} {\boldsymbol{x}}_t + {\boldsymbol{b}}_f)\odot {\boldsymbol{c}}_{t-1}.
+  \label{eq:forget}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the sigmoid function (applied
+element-wise) and <span class="math notranslate nohighlight">\(\odot\)</span> denotes element-wise multiplication. Note that
+this step multiplies each element of the gate state with a number
+<span class="math notranslate nohighlight">\(\in(0,1)\)</span>, in other words elements multiplied with a number close to
+<span class="math notranslate nohighlight">\(0\)</span> forget their previous memory.</p>
+<p><strong>Input and update step</strong><br />
+In the next step, we decide what and how much to add to the cell state.
+For this purpose, we first decide what to add to the state. We first
+define what we would like to add to the cell,</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{g}}_t = \tanh(W_{hu}{\boldsymbol{h}}_{t-1} + W_{xu} {\boldsymbol{x}}_t + {\boldsymbol{b}}_u),
+  \label{eq:gate gate}\]</div>
+<p>which due to the hyperbolic tangent,
+<span class="math notranslate nohighlight">\(-1 &lt; g^\alpha_t &lt; 1\)</span> for each element. However, we do not necessarily
+update each element of the cell state, but rather we introduce another
+gate, which determines whether to actually write to the cell,</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{i}}_t = \sigma(W_{hi} {\boldsymbol{h}}_{t-1} + W_{xi} {\boldsymbol{x}}_t + {\boldsymbol{b}}_i),
+  \label{eq:input}\]</div>
+<p>again with <span class="math notranslate nohighlight">\(0&lt;i^\alpha_t &lt; 1\)</span>. Finally, we update
+the cell state</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{c}}_t = {\boldsymbol{c}}'_t +  {\boldsymbol{i}}_t \odot {\boldsymbol{g}}_t.
+  \label{eq:update}\]</div>
+<p><strong>Output step</strong><br />
+In the final step, we decide how much of the information stored in the
+cell state should be written to the new hidden state,
+$<span class="math notranslate nohighlight">\({\boldsymbol{h}}_t = \sigma(W_{ho} {\boldsymbol{h}}_{t-1} + W_{xo} {\boldsymbol{x}}_t + {\boldsymbol{b}}_o) \odot \tanh ({\boldsymbol{c}}_t).
+  \label{eq:output step}\)</span>$</p>
+<p>The full structure of the LSTM with the four gates and the element-wise
+operations is schematically shown in <a class="reference internal" href="#fig-lstm"><span class="std std-numref">Fig. 21</span></a>(b). Note that we
+can concatenate the input <span class="math notranslate nohighlight">\({\boldsymbol{x}}_t\)</span> and hidden memory
+<span class="math notranslate nohighlight">\({\boldsymbol{h}}_{t-1}\)</span> into a vector of size <span class="math notranslate nohighlight">\(n+m\)</span> and write one large
+weight matrix <span class="math notranslate nohighlight">\(W\)</span> of size <span class="math notranslate nohighlight">\(4m \times (m+n)\)</span>.</p>
+<p>So far, we have only used the RNN in a supervised setting for
+classification purposes, where the input is a sequence and the output a
+single class at the end of the full sequence. A network that performs
+such a task is thus called a many-to-one RNN. We will see in the next
+section, that unlike the other network architectures encountered in this
+section, RNNs can straight-forwardly be used for unsupervised learning,
+usually as one-to-many RNNs.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>In the context of RNNs, backpropagation is thus referred to as
+<em>backpropagation through time</em> (BPTT).</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p>For the weight matrix this means the singular values.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/supervised_learning_w_NNs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_convolutional.html" title="previous page">Regularization</a>
+    <a class='right-next' id="next-link" href="Classification-2.html" title="next page">Exercise: Dense Neural Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Machine Learning for Science Team<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

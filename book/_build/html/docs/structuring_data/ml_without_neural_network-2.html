@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -192,7 +192,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
-     Convolutional neural networks
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -430,7 +435,7 @@
 <p>PCA performs a linear transformation on the data. However, there are
 cases where such a transformation is unable to produce any meaningful
 result. Consider for instance the fictitious dataset with <span class="math notranslate nohighlight">\(2\)</span> classes
-and <span class="math notranslate nohighlight">\(2\)</span> data features as shown on the left of <a class="reference internal" href="#fig-kernel-pca"><span class="std std-numref">Fig. 4</span></a>. We see by naked eye that it should be
+and <span class="math notranslate nohighlight">\(2\)</span> data features as shown on the left of <a class="reference internal" href="#fig-kernel-pca"><span class="std std-numref">Fig. 5</span></a>. We see by naked eye that it should be
 possible to separate this data well, for instance by the distance of the
 datapoint from the origin, but it is also clear that a linear function
 cannot be used to compute it. In this case, it can be helpful to
@@ -450,7 +455,7 @@ centered, i.e.,</p>
 <p>to have simpler formulas.</p>
 <div class="figure align-default" id="fig-kernel-pca">
 <img alt="../../_images/circles_pca_kpca.png" src="../../_images/circles_pca_kpca.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong>Kernel PCA versus PCA.</strong></span><a class="headerlink" href="#fig-kernel-pca" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>Kernel PCA versus PCA.</strong></span><a class="headerlink" href="#fig-kernel-pca" title="Permalink to this image">¶</a></p>
 </div>
 <p>In practice, when <span class="math notranslate nohighlight">\(N\)</span> is large, it is not efficient or even possible to
 explicitly perform the transformation <span class="math notranslate nohighlight">\(\mathbf{\Phi}\)</span>. Instead we can make
@@ -499,7 +504,7 @@ kernel (RBF) defined by</p>
 \[K_{\textrm{RBF}}(\mathbf{x},\mathbf{y}) = \exp\left( -\gamma \| \mathbf{x} - \mathbf{y}\|^{2} \right),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is a tunable parameter. Using the RBF kernel, we compare
 the result of kernel PCA with that of standard PCA, as shown on the
-right of <a class="reference internal" href="#fig-kernel-pca"><span class="std std-numref">Fig. 4</span></a>. It is clear that kernel PCA leads to a
+right of <a class="reference internal" href="#fig-kernel-pca"><span class="std std-numref">Fig. 5</span></a>. It is clear that kernel PCA leads to a
 meaningful separation of the data while standard PCA completely fails.</p>
 </div>
 
@@ -539,7 +544,7 @@ meaningful separation of the data while standard PCA completely fails.</p>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

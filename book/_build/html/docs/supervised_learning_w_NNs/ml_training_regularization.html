@@ -56,8 +56,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Convolutional neural networks" href="ml_convolutional.html" />
-    <link rel="prev" title="Supervised Learning with Neural Networks" href="ml_intro_neural.html" />
+    <link rel="next" title="Regularization" href="ml_convolutional.html" />
+    <link rel="prev" title="Computational neurons" href="ml_intro_neural.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -182,7 +182,7 @@
   <ul class="current collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -192,7 +192,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="ml_convolutional.html">
-     Convolutional neural networks
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -723,7 +728,7 @@ styles are incredibly personal and different people will write the digit
 the criteria to recognize “4” and not confuse it with, say, a “9”.</p>
 <p>We can use a simple neural network as introduced earlier in the chapter
 to tackle this complex task. We will use a network as shown in
-<a class="reference internal" href="ml_intro_neural.html#fig-simple-network"><span class="std std-numref">Fig. 13</span></a> and given in Eq. <a class="reference internal" href="ml_intro_neural.html#equation-eq-2-layer-nn">(34)</a> to do just that. The
+<a class="reference internal" href="ml_intro_neural.html#fig-simple-network"><span class="std std-numref">Fig. 14</span></a> and given in Eq. <a class="reference internal" href="ml_intro_neural.html#equation-eq-2-layer-nn">(34)</a> to do just that. The
 input is the image of the handwritten digit, transformed into a <span class="math notranslate nohighlight">\(k=28^2\)</span>
 long vector, the hidden layer contains <span class="math notranslate nohighlight">\(l\)</span> neurons and the output layer
 has <span class="math notranslate nohighlight">\(p=10\)</span> neurons, each corresponding to one digit in the one-hot
@@ -843,15 +848,15 @@ that is needed here is to call the ’train’ function</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ml_intro_neural.html" title="previous page">Supervised Learning with Neural Networks</a>
-    <a class='right-next' id="next-link" href="ml_convolutional.html" title="next page">Convolutional neural networks</a>
+    <a class='left-prev' id="prev-link" href="ml_intro_neural.html" title="previous page">Computational neurons</a>
+    <a class='right-next' id="next-link" href="ml_convolutional.html" title="next page">Regularization</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

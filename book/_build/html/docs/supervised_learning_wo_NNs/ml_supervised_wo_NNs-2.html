@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -192,7 +192,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
-     Convolutional neural networks
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -488,7 +493,7 @@ regularizer. As we have seen in the example of the previous section,
 such a regularizer tries to set as many <span class="math notranslate nohighlight">\(\xi_i\)</span> to zero as possible.</p>
 <div class="figure align-default" id="fig-svm">
 <img alt="../../_images/SVM_overlap.png" src="../../_images/SVM_overlap.png" />
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Binary classification.</strong> Hyperplane separating the two classes and
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text"><strong>Binary classification.</strong> Hyperplane separating the two classes and
 margin <span class="math notranslate nohighlight">\(M\)</span> of the linear binary classifier. The support vectors are
 denoted by a circle around them.</span><a class="headerlink" href="#fig-svm" title="Permalink to this image">¶</a></p>
 </div>
@@ -509,7 +514,7 @@ Lagrange multipliers <span class="math notranslate nohighlight">\(\alpha_i\)</sp
 <p>subject to <span class="math notranslate nohighlight">\(\sum_i \alpha_i y_i =0\)</span> and <span class="math notranslate nohighlight">\(0\leq \alpha_i \leq C\)</span> <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. Using Eq. <a class="reference internal" href="#equation-eqn-svm-derivatives">(29)</a>, we can reexpress <span class="math notranslate nohighlight">\(\beta_j\)</span> to find</p>
 <div class="math notranslate nohighlight" id="equation-eqn-svm-f">
 <span class="eqno">(31)<a class="headerlink" href="#equation-eqn-svm-f" title="Permalink to this equation">¶</a></span>\[f(\mathbf{x}|\{\alpha_i\}) = \sum_i{}' \alpha_i y_i \mathbf{x}^T \mathbf{x}_i + \beta_0,\]</div>
-<p>where the sum only runs over the points <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, which lie within the margin, as all other points have <span class="math notranslate nohighlight">\(\alpha_i\equiv0\)</span> [see Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a>]. These points are thus called the <em>support vectors</em> and are denoted in <a class="reference internal" href="#fig-svm"><span class="std std-numref">Fig. 10</span></a> with a circle around them. Finally, note that we can use Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a> again to find <span class="math notranslate nohighlight">\(\beta_0\)</span>.</p>
+<p>where the sum only runs over the points <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, which lie within the margin, as all other points have <span class="math notranslate nohighlight">\(\alpha_i\equiv0\)</span> [see Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a>]. These points are thus called the <em>support vectors</em> and are denoted in <a class="reference internal" href="#fig-svm"><span class="std std-numref">Fig. 11</span></a> with a circle around them. Finally, note that we can use Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a> again to find <span class="math notranslate nohighlight">\(\beta_0\)</span>.</p>
 <div class="section" id="the-kernel-trick-and-support-vector-machines">
 <h2>The Kernel trick and support vector machines<a class="headerlink" href="#the-kernel-trick-and-support-vector-machines" title="Permalink to this headline">¶</a></h2>
 <p>We have seen in our discussion of PCA that most data is not separable
@@ -577,7 +582,7 @@ additional Karush-Kuhn-Tucker constraints</p>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

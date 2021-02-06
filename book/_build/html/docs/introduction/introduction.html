@@ -182,7 +182,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
-     Supervised Learning with Neural Networks
+     Computational neurons
     </a>
    </li>
    <li class="toctree-l2">
@@ -193,6 +193,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
      Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
     </a>
    </li>
    <li class="toctree-l2">
@@ -461,7 +466,6 @@
                 
   <div class="section" id="introduction">
 <span id="sec-introduction"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>============</p>
 <div class="section" id="why-machine-learning-for-the-sciences">
 <h2>Why machine learning for the sciences?<a class="headerlink" href="#why-machine-learning-for-the-sciences" title="Permalink to this headline">¶</a></h2>
 <p>Machine learning and artificial neural networks are everywhere and
@@ -530,7 +534,7 @@ MNIST dataset.</span><a class="headerlink" href="#fig-mnist" title="Permalink to
 <p>Handwritten digit recognition has become one of the standard benchmark
 problems in the field. Why so? The reason is simple: there exists a very
 good and freely available data set for it, the MNIST database <a class="footnote-reference brackets" href="#id2" id="id1">2</a>, see
-Fig. [fig:MNIST]. This curious fact highlights an important aspect of
+<a class="reference internal" href="#fig-mnist"><span class="std std-numref">Fig. 1</span></a>. This curious fact highlights an important aspect of
 machine learning: it is all about data. The most efficient way to
 improve machine learning results is to provide more and better data.
 Thus, one should keep in mind that despite the widespread applications,
@@ -546,7 +550,7 @@ that, machine learning presents itself as a universal new tool for the
 exact sciences, standing side-by-side with methods such as calculus,
 traditional statistics, and numerical simulations. This poses the
 question, where in the scientific workflow, summerized in
-Fig. [fig:scientific_workflow], these novel methods are best
+<a class="reference internal" href="#fig-scientific-workflow"><span class="std std-numref">Fig. 2</span></a>, these novel methods are best
 employed.</p>
 <p>Once a specific task has been identified, applying machine learning to
 the sciences does, furthermore, hold its very specific challenges: (i)
@@ -567,7 +571,7 @@ methods.</p>
 abstraction to building and testing hypothesis or laws, to finally
 making predictions.</span><a class="headerlink" href="#fig-scientific-workflow" title="Permalink to this image">¶</a></p>
 </div>
-<p>[<strong>A note on the concept of a model</strong>]{}<br />
+<p><strong>A note on the concept of a model</strong><br />
 In both machine learning and the sciences, models play a crucial role.
 However, it is important to recognize the difference in meaning: In the
 natural sciences, a model is a conceptual representation of a
@@ -613,10 +617,10 @@ complex and extremely high dimensional, it is often crucial to first
 understand the data better and reduce their dimensionality. Simple
 algorithms that can be used before turning to the often heavy machinery
 of neural networks will be discussed in the next section,
-Sec. [sec:structuring_data].</p>
+<a class="reference internal" href="../structuring_data/ml_without_neural_network.html#sec-structuring-data"><span class="std std-ref">Structuring Data without Neural Networks</span></a>.</p>
 <p>The machine learning algorithms we will focus on most can generally be
 divided into two classes of algorithms, namely <em>discriminative</em> and
-<em>generative</em> algorithms as illustrated in Fig. [fig:overview].
+<em>generative</em> algorithms as illustrated in <a class="reference internal" href="#fig-overview"><span class="std std-numref">Fig. 3</span></a>.
 Examples of discriminative tasks include classification problems, such
 as the aforementioned digit classification or the classification into
 solid, liquid and gas phases given some experimental observables.
@@ -627,9 +631,14 @@ variable <span class="math notranslate nohighlight">\(y\)</span> (the label) giv
 in the form of input and target data for most of these tasks, these
 algorithms usually employ supervised learning. Discriminative algorithms
 are most straight-forwardly applicable in the sciences and we will
-discuss them in Secs. [sec: linear methods for supervised learning]
-and [sec:supervised].</p>
-<p><img alt="Overview over the plan of the lecture from the perspective of learningprobabilitydistributions.[]{data-label=&quot;fig:overview&quot;}" src="docs/introduction/figures/overview" /></p>
+discuss them in Secs. <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html#sec-linear-methods-for-supervised-learning"><span class="std std-ref">Supervised Learning without Neural Networks</span></a>
+and <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html#sec-supervised"><span class="std std-ref">Computational neurons</span></a>.</p>
+<div class="figure align-default" id="fig-overview">
+<img alt="../../_images/overview.png" src="../../_images/overview.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Overview over the plan of the lecture from the perspective of learning
+probability
+distributions.</strong></span><a class="headerlink" href="#fig-overview" title="Permalink to this image">¶</a></p>
+</div>
 <p>Generative algorithms, on the other hand, model a probability
 distribution <span class="math notranslate nohighlight">\(P(x)\)</span>. These approaches are—once trained—in principle more
 powerful, since we can also learn the joint probability distribution
@@ -640,19 +649,19 @@ generative algorithms are useful in the natural sciences, as we can
 sample from a known probability distribution, for example for image
 denoising, or when trying to find new compounds/molecules resembling
 known ones with given properties. These algorithms are discussed in
-Sec. [sec:unsupervised]. The promise of artificial <em>intelligence</em> may
+Sec. <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html#sec-unsupervised"><span class="std std-ref">Unsupervised Learning</span></a>. The promise of artificial <em>intelligence</em> may
 trigger unreasonable expectations in the sciences. After all, scientific
 knowledge generation is one of the most complex intellectual processes.
 Computer algorithms are certainly far from achieving anything on that
 level of complexity and will in the near future not formulate new laws
 of nature independently. Nevertheless, researchers study how machine
 learning can help with individual segments of the scientific workflow
-(Fig. [fig:scientific_workflow]). While the type of abstraction
+(<a class="reference internal" href="#fig-scientific-workflow"><span class="std std-numref">Fig. 2</span></a>). While the type of abstraction
 needed to formulate Newton’s laws of classical mechanics seems
 incredibly complex, neural networks are very good at <em>implicit knowledge
 representation</em>. To understand precisely how they achieve certain tasks,
 however, is not an easy undertaking. We will discuss this question of
-<em>interpretability</em> in Sec. [sec:interpretability].</p>
+<em>interpretability</em> in Sec. <a class="reference internal" href="../interpretability/ml_interpretability.html#sec-interpretability"><span class="std std-ref">Interpretability of Neural Networks</span></a>.</p>
 <p>A third class of algorithms, which does not neatly fit the framework of
 approximating a statistical model and thus the distinction into
 discriminative and generative algorithms is known as reinforcement
@@ -660,11 +669,11 @@ learning. Instead of approximating a statistical model, reinforcement
 learning tries to optimize strategies (actions) for achieving a given
 task. Reinforcement learning has gained a lot of attention with Google’s
 AlphaGo Zero, a computer program that beat the best Go players in the
-world. As an example for an application in the sciences, reinfocrment
+world. As an example for an application in the sciences, reinforcement
 learning can be used to decide on what experimental configuration to
 perform next. While the whole topic is beyond the scope of this lecture,
 we will give an introduction to the basic concepts of reinforcement
-learning in Sec. [sec:RL].</p>
+learning in Sec. <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html#sec-rl"><span class="std std-ref">Reinforcement Learning</span></a>.</p>
 <p>A final note on the practice of learning. While the machine learning
 machinery is extremely powerful, using an appropriate architecture and
 the right training details, captured in what are called
@@ -720,13 +729,13 @@ Jupyter notebooks.</p></li>
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>For further reading, we recommend the following books:</p>
 <ul class="simple">
-<li><p>[<strong>ML without neural networks</strong>]{}: <em>The Elements of Statistical
+<li><p><strong>ML without neural networks</strong>: <em>The Elements of Statistical
 Learning</em>, T. Hastie, R. Tisbshirani, and J. Friedman (Springer)</p></li>
-<li><p>[<strong>ML with neural networks</strong>]{}: <em>Neural Networks and Deep
+<li><p><strong>ML with neural networks</strong>: <em>Neural Networks and Deep
 Learning</em>, M. Nielson (<a class="reference external" href="http://neuralnetworksanddeeplearning.com">http://neuralnetworksanddeeplearning.com</a>)</p></li>
-<li><p>[<strong>Deep Learning Theory</strong>]{}: <em>Deep Learning</em>, I. Goodfellow, Y.
+<li><p><strong>Deep Learning Theory</strong>: <em>Deep Learning</em>, I. Goodfellow, Y.
 Bengio and A. Courville (<a class="reference external" href="http://www.deeplearningbook.org">http://www.deeplearningbook.org</a>)</p></li>
-<li><p>[<strong>Reinforcement Learning</strong>]{}: <em>Reinforcement Learning</em>, R. S.
+<li><p><strong>Reinforcement Learning</strong>: <em>Reinforcement Learning</em>, R. S.
 Sutton and A. G. Barto (MIT Press)</p></li>
 </ul>
 <hr class="docutils" />
@@ -774,7 +783,7 @@ Sutton and A. G. Barto (MIT Press)</p></li>
     <div class="container">
       <p>
         
-          By ml-for-science team<br/>
+          By Machine Learning for Science Team<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

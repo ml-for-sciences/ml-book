@@ -25,7 +25,7 @@ written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/e
 ---
 :img-top: ../_static/overview_page/SLwNN.png
 +++
-[**Supervised Learning with Neural Networks**](sec:supervised)
+[**Supervised Learning with Neural Networks**](chap:supervised)
 
 
 
