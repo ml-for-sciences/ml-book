@@ -191,6 +191,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="ml_convolutional.html">
+     Convolutional neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Classification-2.html">
      Exercise: Dense Neural Networks
     </a>
@@ -575,14 +580,13 @@ input into the output <span class="math notranslate nohighlight">\({\boldsymbol{
 general is also a vector. As a simple and concrete example, we write the
 complete functional form of a neural network with one hidden layer as
 shown in <a class="reference internal" href="#fig-simple-network"><span class="std std-numref">Fig. 13</span></a>,</p>
-<div class="math notranslate nohighlight">
-\[{\boldsymbol{F}}({\boldsymbol{x}})
+<div class="math notranslate nohighlight" id="equation-eq-2-layer-nn">
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-2-layer-nn" title="Permalink to this equation">¶</a></span>\[{\boldsymbol{F}}({\boldsymbol{x}})
     =
     {\boldsymbol{g}}^{[2]}\left(
     W^{[2]}{\boldsymbol{g}}^{[1]}
     \left(W^{[1]}{\boldsymbol{x}}+{\boldsymbol{b}}^{[1]}\right)+{\boldsymbol{b}}^{[2]}
-    \right).
-    \label{eq: 2-layer NN}\]</div>
+    \right).\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(W^{[n]}\)</span> and
 <span class="math notranslate nohighlight">\({\boldsymbol{b}}^{[n]}\)</span> are the weight matrix and bias vectors of the
 <span class="math notranslate nohighlight">\(n\)</span>-th layer. Specifically, <span class="math notranslate nohighlight">\(W^{[1]}\)</span> is the <span class="math notranslate nohighlight">\(k\times l\)</span> weight matrix

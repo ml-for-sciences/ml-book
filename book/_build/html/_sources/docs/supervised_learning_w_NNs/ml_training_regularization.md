@@ -47,6 +47,7 @@ output. For discrete classification problems, a great choice is the
 *cross-entropy* between true label, ${\boldsymbol{y}}_i$ and the network
 output, ${\boldsymbol{F}}({\boldsymbol{x}}_i)$ defined as
 ```{math}
+:label: eq:cross-entropy
 L_{\mathrm{ent}}{}(\theta)
     =-\sum_{i=1}^m
     \left[
@@ -61,7 +62,6 @@ L_{\mathrm{ent}}{}(\theta)
     \right)
     \right]
     ,
-    \label{eq:cross-entropy}
 ```
 where the logarithm is taken element-wise. This loss function is also called *negative log
 likelihood*. It is here written for outputs that lie between 0 and 1, as
@@ -95,17 +95,16 @@ function with respect to the weights for a single term in the sum and a
 network that is composed of a single sigmoid and a general input-output
 pair $\{x,y\}$
 ```{math}
+:label: eqn:cost derivative w
 \begin{split}
-:label: eq: cost derivative w
-\frac{\partial L_{\mathrm{ent}}}{\partial w}
-&=-\left(
-\frac{y}{\sigma(wx+b)}-\frac{1-y}{1-\sigma(wx+b)}\right)\sigma'(wx+b)x
-\\
-&=\frac{\sigma'(wx+b) x}{\sigma(wx+b)[1-\sigma(wx+b)]}[\sigma(wx+b)-y]
-\\
-&=x[\sigma(wx+b)-y],
+  \frac{\partial L_{\mathrm{ent}}}{\partial w}
+  &=-\left(
+    \frac{y}{\sigma(wx+b)}-\frac{1-y}{1-\sigma(wx+b)}\right)\sigma'(wx+b)x
+    \\
+    &=\frac{\sigma'(wx+b) x}{\sigma(wx+b)[1-\sigma(wx+b)]}[\sigma(wx+b)-y]
+    \\
+    &=x[\sigma(wx+b)-y],
 \end{split}
-\label{eq: cost derivative w}
 ```
 where in the last step we used that
 $\sigma'(z)=\sigma(z)[1-\sigma(z)]$. This is a much better result than
@@ -114,22 +113,23 @@ proportional to the error between data point and prediction
 $[\sigma(wx+b)-y]$. The mathematical reason for this change is that
 $\sigma'(z)$ cancels out due to this specific form of the cross entropy.
 A similar expression holds true for the derivative with respect to $b$,
+
 ```{math}
-:label: eq: cost derivative b
-\frac{\partial L_{\mathrm{ent}}}{\partial b}
-=[\sigma(wx+b)-y].
+:label: eq:cost derivative b
+  \frac{\partial L_{\mathrm{ent}}}{\partial b}=[\sigma(wx+b)-y].
 ```
+
 In fact, if we insisted that we want the
-very intuitive form of Eqs[](eq: cost derivative b) and [](eq: cost derivative w) for the gradients, we can derive the
+very intuitive form of Eqs {eq}`eq:cost derivative b` and {eq}`eqn:cost derivative w` for the gradients, we can derive the
 cost function for the sigmoid activation function to be the
 cross-entropy. This follows simply because
 ```{math}
 \frac{\partial L}{\partial b}=\frac{\partial L}{\partial F}F'
 ```
-and $F'=F(1-F)$ for the sigmoid activation, which, in comparison to Eq.[](eq: cost derivative w) ,
+and $F'=F(1-F)$ for the sigmoid activation, which, in comparison to {eq}`eqn:cost derivative w` ,
 yields $\frac{\partial L}{\partial F}=\frac{F-y}{F(1-F)},$ which, when
 integrated with respect to $F$, gives exactly the cross-entropy (up to a
-constant). We can thus, starting from Eqs.[](eq: cost derivative w) and [](eq: cost derivative b), think of the choice of
+constant). We can thus, starting from Eqs. {eq}`eqn:cost derivative w` and {eq}`eq:cost derivative b`, think of the choice of
 cost functions as a backward engineering. Following this logic, we can
 think of other pairs of final layer activations and cost functions that
 may work well together.
@@ -167,7 +167,7 @@ $ F_{n_i}({\boldsymbol{x}}_i)$ is always $\leq 1$, so that loss function
 is minimized, if it approaches 1, the value of the label. For the
 gradients, we obtain
 ```{math}
- $$\begin{split}
+ \begin{split}
 \frac{\partial L}{\partial b_{j}}=&
 -\sum_{i=1}^m\frac{1}{F_{n_i}({\boldsymbol{x}}_i)}\frac{\partial F_{n_i}({\boldsymbol{x}}_i)}{\partial b_j}
 \\
@@ -285,9 +285,9 @@ $,
 $\quad\partial L / \partial b^{[n]}_{i} = ({\boldsymbol{\nabla}} L)^T \frac{\partial {\boldsymbol{g}}^{[n]}}{\partial q_i^{[n]}}$
 
 for $k = 1, ..., n$ do
-Calculate the Jacobi matrices for layer $k$: $D\bm{g}^{[k]}=(\partial \bm{g}^{[k]}/\partial \bm{q}^{[k]})$ and $D\bm{f}^{[k]}=(\partial \bm{f}^{[k]}/\partial \bm{z}^{[k-1]})$\;
+Calculate the Jacobi matrices for layer $k$: $D{g}^{[k]}=(\partial {g}^{[k]}/\partial {q}^{[k]})$ and $D{f}^{[k]}=(\partial {f}^{[k]}/\partial {z}^{[k-1]})$\;
  Multiply all following Jacobi matrices to obtain the derivatives of layer $k$:
-  $\partial L / \partial \theta^{[k]}_{\alpha} = (\nabla L)^T D\bm{f}^{[n]}\cdots D\bm{f}^{[k+1]}D\bm{g}^{[k]} (\partial \bm{q}^{[k]}/\partial \theta^{[k]}_\alpha)$
+  $\partial L / \partial \theta^{[k]}_{\alpha} = (\nabla L)^T D{f}^{[n]}\cdots D{f}^{[k+1]}D{g}^{[k]} (\partial {q}^{[k]}/\partial \theta^{[k]}_\alpha)$
 ```
 
 A remaining question is when to actually perform updates to the network
@@ -325,7 +325,7 @@ the criteria to recognize “4” and not confuse it with, say, a “9”.
 
 We can use a simple neural network as introduced earlier in the chapter
 to tackle this complex task. We will use a network as shown in
-{numref}`fig:simple_network` and given in Eq. [](eq: 2-layer NN) to do just that. The
+{numref}`fig:simple_network` and given in Eq. {eq}`eq:2-layer NN` to do just that. The
 input is the image of the handwritten digit, transformed into a $k=28^2$
 long vector, the hidden layer contains $l$ neurons and the output layer
 has $p=10$ neurons, each corresponding to one digit in the one-hot
@@ -358,7 +358,7 @@ choice , but the generic structure will be the following:
         discussed, a softmax function.
 
 3.  *Choose the loss function*: Since we are dealing with a
-    classification task, we use the cross-entropy, Eq. [](eq:cross-entropy) .
+    classification task, we use the cross-entropy, Eq. {eq}`eq:cross-entropy`.
 
 4.  *Train and evaluate the model*: Follow the standard machine-learning
     workflow to train[^2] and evaluate the model. However, unlike in the

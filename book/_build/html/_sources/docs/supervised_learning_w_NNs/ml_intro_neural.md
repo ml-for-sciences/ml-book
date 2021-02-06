@@ -165,13 +165,13 @@ general is also a vector. As a simple and concrete example, we write the
 complete functional form of a neural network with one hidden layer as
 shown in {numref}`fig:simple_network`,
 ```{math}
+:label: eq:2-layer NN
 {\boldsymbol{F}}({\boldsymbol{x}})
     =
     {\boldsymbol{g}}^{[2]}\left(
     W^{[2]}{\boldsymbol{g}}^{[1]}
     \left(W^{[1]}{\boldsymbol{x}}+{\boldsymbol{b}}^{[1]}\right)+{\boldsymbol{b}}^{[2]}
     \right).
-    \label{eq: 2-layer NN}
 ```
 Here, $W^{[n]}$ and
 ${\boldsymbol{b}}^{[n]}$ are the weight matrix and bias vectors of the

@@ -191,6 +191,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
+     Convolutional neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
      Exercise: Dense Neural Networks
     </a>
@@ -430,7 +435,7 @@ can define the value function of a state <span class="math notranslate nohighlig
 starting in that state and using the policy function <span class="math notranslate nohighlight">\(\pi\)</span> for choosing
 all our future actions. We can write this as</p>
 <div class="math notranslate nohighlight" id="equation-eqn-value-function">
-<span class="eqno">(47)<a class="headerlink" href="#equation-eqn-value-function" title="Permalink to this equation">¶</a></span>\[v_\pi(s) \equiv E_\pi (G_t | S_t = s).\]</div>
+<span class="eqno">(51)<a class="headerlink" href="#equation-eqn-value-function" title="Permalink to this equation">¶</a></span>\[v_\pi(s) \equiv E_\pi (G_t | S_t = s).\]</div>
 <p>Alternatively, we can define the action-value function of <span class="math notranslate nohighlight">\(\pi\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[q_\pi (s, a) \equiv E_\pi(G_t | S_t = s, A_t = a).\]</div>
@@ -438,9 +443,9 @@ all our future actions. We can write this as</p>
 action <span class="math notranslate nohighlight">\(a\)</span>, but using the policy <span class="math notranslate nohighlight">\(\pi\)</span> for all future actions. Note that
 one of the key ideas of reinforcement learning is to use such value
 functions, instead of the policy, to organize our learning process.</p>
-<p>The value function of Eq. <a class="reference internal" href="#equation-eqn-value-function">(47)</a> satisfies a self-consistency equation,</p>
+<p>The value function of Eq. <a class="reference internal" href="#equation-eqn-value-function">(51)</a> satisfies a self-consistency equation,</p>
 <div class="math notranslate nohighlight" id="equation-eqn-be-expect">
-<span class="eqno">(48)<a class="headerlink" href="#equation-eqn-be-expect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(52)<a class="headerlink" href="#equation-eqn-be-expect" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     v_\pi(s) &amp;= E_\pi ( R_{t+1} + \gamma G_{t+1} | S_t = s)\\
     &amp;= \sum_a \pi(a | s) \sum_{s', r} p(s', r | s, a) [ r + \gamma v_\pi (s')].\end{aligned}\end{split}\]</div>
 <p>This equation, known as the <em>Bellman equation</em>, relates the value of
@@ -462,12 +467,12 @@ can directly try and find the optimal policy <span class="math notranslate nohig
 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>. For this policy, we find the <em>Bellman optimality
 equations</em></p>
 <div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-1">
-<span class="eqno">(49)<a class="headerlink" href="#equation-eqn-bellman-optimality-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(53)<a class="headerlink" href="#equation-eqn-bellman-optimality-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     v_*(s) &amp;= \max_a q_{\pi_*}(s, a)\nonumber\\
     &amp;= \max_a E(R_{t+1} + \gamma v_*(S_{t+1}) | S_t = s, A_t = a)\\
     &amp;=\max_a \sum_{s', r} p(s', r | s, a) [ r + \gamma v_* (s')].
 \end{aligned}\end{split}\]</div>
-<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
+<p>Importantly, the Bellman optimality equations do not depend on the actual policy anymore. As such, Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(53)</a> defines a non-linear system of equations, which for a sufficiently simple MDP can be solved explicitly.
 For our toy example, the two equations for the value functions are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}v_*({\rm h}) = \max \left\{\begin{array}{l} r_{\rm on} + \gamma [\alpha v_*({\rm h}) + (1-\alpha) v_*({\rm l})] \\ 
@@ -477,19 +482,19 @@ For our toy example, the two equations for the value functions are</p>
 \[\begin{split}v_*({\rm l}) = \max \left\{\begin{array}{l} \beta[r_{\rm on} + \gamma v_*({\rm l})] + (1-\beta) [r_{\rm fail} + \gamma v_*({\rm h})] \\ 
     \beta'[r_{\rm off} + \gamma v_*({\rm l})] + (1-\beta') [r_{\rm fail} + \gamma v_*({\rm h})]\\
     r_{\rm text} + \gamma v_*({\rm h})\end{array}\right. .\end{split}\]</div>
-<p>Note that equivalent equations to Eqs. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> hold for the state-action value function</p>
+<p>Note that equivalent equations to Eqs. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(53)</a> hold for the state-action value function</p>
 <div class="math notranslate nohighlight" id="equation-eqn-bellman-optimality-2">
-<span class="eqno">(50)<a class="headerlink" href="#equation-eqn-bellman-optimality-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(54)<a class="headerlink" href="#equation-eqn-bellman-optimality-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     q_*(s, a) &amp;= E(R_{t+1} + \gamma \max_{a'} q_*(S_{t+1},a'))\\
     &amp;= \sum_{s', r} p(s', r | s, a) [ r + \gamma \max_{a'} q_* (s', a')].
 \end{aligned}\end{split}\]</div>
 <p>Once we know <span class="math notranslate nohighlight">\(v_*\)</span>, the optimal policy <span class="math notranslate nohighlight">\(\pi_* (a| s)\)</span> is the greedy
 policy that chooses the action <span class="math notranslate nohighlight">\(a\)</span> that maximizes the right-hand side of
-Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
+Eq. <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(53)</a>. If, instead, we know <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 then we can directly choose the action which maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>,
 namely <span class="math notranslate nohighlight">\(\pi_*(a | s) = {\rm argmax}_{a'} q_*(s, a')\)</span>, without looking
 one step ahead.</p>
-<p>While Eqs <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(49)</a> or <a class="reference internal" href="#equation-eqn-bellman-optimality-2">(50)</a> can be solved explicitly for a sufficiently simple system, such an approach, which corresponds to an exhaustive search, is often not feasible. In the following, we distinguish two levels of complexity: First, if the explicit solution is too hard, but we can still keep track of all possible value functions—we can choose either the state or the state-action value function—we can use a <em>tabular</em> approach. A main difficulty in this case is the evaluation of a policy, or prediction, which is needed to improve on the policy. While various methods for <em>policy evaluation</em> and <em>policy improvement</em> exist, we will discuss in the following an approach called <em>temporal-difference learning</em>. Second, in many cases the space of possible states is much too large to allow for a complete knowledge of all value functions. In this case, we additionally need to approximate the value functions. For this purpose, we can use the methods encountered in the previous chapters, such as (deep) neural networks.</p>
+<p>While Eqs <a class="reference internal" href="#equation-eqn-bellman-optimality-1">(53)</a> or <a class="reference internal" href="#equation-eqn-bellman-optimality-2">(54)</a> can be solved explicitly for a sufficiently simple system, such an approach, which corresponds to an exhaustive search, is often not feasible. In the following, we distinguish two levels of complexity: First, if the explicit solution is too hard, but we can still keep track of all possible value functions—we can choose either the state or the state-action value function—we can use a <em>tabular</em> approach. A main difficulty in this case is the evaluation of a policy, or prediction, which is needed to improve on the policy. While various methods for <em>policy evaluation</em> and <em>policy improvement</em> exist, we will discuss in the following an approach called <em>temporal-difference learning</em>. Second, in many cases the space of possible states is much too large to allow for a complete knowledge of all value functions. In this case, we additionally need to approximate the value functions. For this purpose, we can use the methods encountered in the previous chapters, such as (deep) neural networks.</p>
 </div>
 
     <script type="text/x-thebe-config">
