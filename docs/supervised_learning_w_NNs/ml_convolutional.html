@@ -1,0 +1,834 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Layers &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Recurrent neural networks" href="ml_rnn.html" />
+    <link rel="prev" title="Training" href="ml_training_regularization.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-1.html">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.html">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/ml_supervised_wo_NNs-3.html">
+     More than two classes: Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_wo_NNs/Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_intro_neural.html">
+     Computational neurons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_training_regularization.html">
+     Training
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Advanced Layers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_rnn.html">
+     Recurrent neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/supervised_learning_w_NNs/ml_convolutional.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-neural-networks">
+   Convolutional neural networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-layers">
+     Convolutional layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pooling">
+     Pooling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-dna-sequencing">
+     Example: DNA sequencing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-advanced-mnist">
+     Example: advanced MNIST
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="advanced-layers">
+<span id="sec-convolutional"></span><h1>Advanced Layers<a class="headerlink" href="#advanced-layers" title="Permalink to this headline">¶</a></h1>
+<p>In the previous sections, we have illustrated an artificial neural
+network that is constructed analogous to neuronal networks in the brain.
+A model is only given a rough structure a priori, within which they have
+a huge number of parameters to adjust by learning from the training set.
+While we already understand that this is an extraordinarily powerful
+process, this method of learning comes with its own set of challenges.
+The most prominent of them is the generalization of the rules learned
+from training data to unseen data.</p>
+<p>We have already encountered in the previous chapter how the naive
+optimization of a linear model reduces the generalization. However, we
+have also seen how the generalization error can be improved using
+regularization. Training neural network comes with the same issue and
+the same solution: we are always showing the algorithm we built the
+training that is limited in one way or another and we need to make sure
+that the neural network does not learn particularities of that given
+training set, but actually extracts a general knowledge.</p>
+<p>The step zero to avoid over-fitting is to create sufficiently
+representative and diverse training set. Once this is taken care of, we
+can take several steps for the regularization of the network. The
+simplest, but at the same time most powerful option is introducing
+<em>dropout layers</em>. This regularization is very similar to dropping
+features that we discussed for linear regression. However, the dropout
+layer ignores a randomly selected subset of neuron outputs in the
+network only during training. Which neurons are dropped is chosen at
+random for each training step. This regularization procedure is
+illustrated in <a class="reference internal" href="#fig-dropout"><span class="std std-numref">Fig. 15</span></a>. By randomly discarding a certain
+fraction of neurons we ensure that the network does not get fixed at
+small particular features of the training set and is better equipped to
+recognize the more general features. Another way of looking at it is
+that this procedure corresponds to training a large number of neural
+networks with different neuron connections in parallel. The fraction of
+neurons that are ignored in a dropout layer is a hyperparameter that is
+fixed a priori. Maybe it is counter-intuitive but the best performance
+is often achieved when this number is sizable, between 20% and 50%. It
+shows the remarkable resilience of the network against fluctuations.</p>
+<div class="figure align-default" id="fig-dropout">
+<img alt="../../_images/dropout.png" src="../../_images/dropout.png" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text"><strong>Dropout layer.</strong></span><a class="headerlink" href="#fig-dropout" title="Permalink to this image">¶</a></p>
+</div>
+<p>As for the linear models, regularization can also be achieved by adding
+regularization terms <span class="math notranslate nohighlight">\(R\)</span> to the <span class="math notranslate nohighlight">\(L\)</span>, <span class="math notranslate nohighlight">\(L \rightarrow L + R\)</span>. Again, the
+two most common regularization terms are <span class="math notranslate nohighlight">\(L1\)</span>- or
+<em>Lasso</em>-regularisation, where</p>
+<div class="math notranslate nohighlight">
+\[R_{L1} = \frac{\lambda}{2} \sum_j |W_j|,\]</div>
+<p>and the sum runs over all weights <span class="math notranslate nohighlight">\(W_j\)</span> of the network, as well as the <span class="math notranslate nohighlight">\(L2\)</span>-regularization, or
+ridge regression, which we already discussed for linear regression with</p>
+<div class="math notranslate nohighlight">
+\[R_{L2} = \frac{\lambda}{2} \sum_j W_j^2,\]</div>
+<p>where the sum runs again
+over all weights <span class="math notranslate nohighlight">\(W_j\)</span> of the network. As for the linear models, <span class="math notranslate nohighlight">\(L2\)</span>
+regularization shrinks all parameters symmetrically, whereas
+<span class="math notranslate nohighlight">\(L1\)</span>-regularization usually causes a subset of parameters to vanish. For
+this reason, the method is also called <em>weight decay</em>. Either way, both
+<span class="math notranslate nohighlight">\(L1\)</span> and <span class="math notranslate nohighlight">\(L2\)</span> regularizations restrict the expressiveness of the neural
+network, thus encouraging it to learn generalizable features rather than
+overfitting specific features of the data set.</p>
+<p>The weights are commonly initialized with small values and increase
+during training. This naturally limits the capacity of the network,
+because for very small weights it effectively acts as a linear model
+(when one approximates the activation function by a linear function).
+Only once the weights become bigger, the network explores its
+nonlinearity.</p>
+<p>Another regularization technique consists in artificially enlarging the
+data set. Data is often costly, but we have extra knowledge about what
+further data might look like and feed this information in the machine
+learning workflow. For instance, going back to the MNIST example, we may
+shift or tilt the existing images or apply small transformations to
+them. By doing that, researchers were able to improve MNIST performance
+by almost 1 percent <a class="footnote-reference brackets" href="#id3" id="id1">3</a>. In particular if we know symmetries of the
+problem from which the data originates (such as time translation
+invariance, invariance under spatial translations or rotations),
+effective generation of augmented datasets is possible. Another option
+is the addition of various forms of noise to data in order to prevent
+overfitting to the existing noise or in general resilience of the neural
+network to noise. Finally, for classification problems in particular,
+data may not be distributed between categories equally. To avoid a bias,
+it is the desirable to enhance the data in the underrepresented
+categories.</p>
+<div class="section" id="convolutional-neural-networks">
+<h2>Convolutional neural networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">¶</a></h2>
+<p>The fully-connected simple single-layer architecture for a neural
+network is in principle universally applicable. However, this
+architecture is often inefficient and hard to train. In this section, we
+introduce more advanced neural-network layers and examples of the types
+of problems for which they are suitable.</p>
+<div class="section" id="convolutional-layers">
+<h3>Convolutional layers<a class="headerlink" href="#convolutional-layers" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="fig-conv-2d">
+<img alt="../../_images/convolution.png" src="../../_images/convolution.png" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>Convolutional layer in 2D: Here with filter size <span class="math notranslate nohighlight">\(k=3\)</span> and
+stride <span class="math notranslate nohighlight">\(s=2\)</span>. The filter is first applied to the <span class="math notranslate nohighlight">\(3\times 3\)</span> sub-image
+in the top left of the input, which yields the first pixel in the
+feature map. The filter then moves <span class="math notranslate nohighlight">\(s\)</span> neurons to the right, which
+yields the next pixel and so on. After moving all the way to the right,
+the filter moves <span class="math notranslate nohighlight">\(s\)</span> pixels down and starts from the left again until
+reaching the bottom right.</strong></span><a class="headerlink" href="#fig-conv-2d" title="Permalink to this image">¶</a></p>
+</div>
+<p>The achieved accuracy in the MNIST example above was not as high as one
+may have hoped, being much worse than the performance of a human. A main
+reason was that, using a dense network structure, we discarded all local
+information contained in the pictures. In other words, connecting every
+input neuron with every neuron in the next layer, the information
+whether two neurons are close to each other is lost. This information
+is, however, not only crucial for pictures, but quite often for input
+data with an underlying geometric structure or natural notion of
+‘distance’ in its correlations. To use this local information, so-called
+<em>convolutional layers</em> were introduced. The neural networks that contain
+such layers are called <em>convolutional neural networks</em> (CNNs).</p>
+<p>The key idea behind convolutional layers is to identify certain (local)
+patterns in the data. In the example of the MNIST images, such patterns
+could be straight and curved lines, or corners. A pattern is then
+encoded in a <em>kernel</em> or <em>filter</em> in the form of weights, which are
+again part of the training. The convolutional layer than compares these
+patterns with a local patch of the input data. Mathematically,
+identifying the features in the data corresponds to a convolution
+<span class="math notranslate nohighlight">\((f * x)(t)=\sum_{\tau}f(\tau)x(t-\tau)\)</span> of the kernel <span class="math notranslate nohighlight">\(f\)</span> with the
+original data <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>For two-dimensional data, such as shown in the example in
+<a class="reference internal" href="#fig-conv-2d"><span class="std std-numref">Fig. 16</span></a>, we write the discrete convolution explicitly as</p>
+<div class="math notranslate nohighlight">
+\[q_{i,j} = \sum_{m=1}^{k} \sum_{n=1}^{k} f_{n,m} x_{si-m,sj-n} + b_0,\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_{n,m}\)</span> are the weights of the kernel, which has linear size
+<span class="math notranslate nohighlight">\(k\)</span>, and <span class="math notranslate nohighlight">\(b_0\)</span> is a bias. Finally, <span class="math notranslate nohighlight">\(s\)</span> is called <em>stride</em> and refers to
+the number of pixels the filter moves per application. The output, <span class="math notranslate nohighlight">\(q\)</span>,
+is called <em>feature map</em>. Note that the dimension of the feature map is
+<span class="math notranslate nohighlight">\(n_q\times n_q\)</span> with <span class="math notranslate nohighlight">\(n_q = \lfloor (n_{in} - k)/s + 1 \rfloor \)</span> when
+the input image is of dimensions <span class="math notranslate nohighlight">\(n_{in} \times n_{in}\)</span>: application of
+a convolutional layer thus reduces the image size, an effect not always
+intended. To avoid this reduction, the original data can be <em>padded</em>,
+for example by adding zeros around the border of the data to ensure the
+feature map has the same dimension as the input data.</p>
+<p>For typical convolutional networks, one applies a number of filters for
+each layer in parallel, where each filter is trained to recognize
+different features. For instance, one filter could start to be sensitive
+to contours in an image, while another filter recognizes the brightness
+of a region. Further, while filters in the first layers may be sensitive
+to local patterns, the ones in the later layers recognize larger
+structures. This distribution of functionalities between filters happens
+automatically, it is not preconceived when building the neural network.</p>
+</div>
+<div class="section" id="pooling">
+<h3>Pooling<a class="headerlink" href="#pooling" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="fig-pooling">
+<img alt="../../_images/pooling.png" src="../../_images/pooling.png" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>Pooling layer: (a) an average pooling and (b) a max pooling
+layer (both <span class="math notranslate nohighlight">\(n=3\)</span>).</strong></span><a class="headerlink" href="#fig-pooling" title="Permalink to this image">¶</a></p>
+</div>
+<p>Another very useful layer, in particular in combination with
+convolutional layers, is the <em>pooling layer</em>. Each neuron in the pooling
+layer takes input from <span class="math notranslate nohighlight">\(n\)</span> (neighboring) neurons in the previous
+layer—in the case of a convolutional network for each feature map
+individually—and only retains the most significant information. Thus,
+the pooling layer helps to reduce the spatial dimension of the data.
+What is considered significant depends on the particular circumstances:
+Picking the neuron with the maximum input among the <span class="math notranslate nohighlight">\(n\)</span>, called <em>max
+pooling</em>, detects whether a given feature is present in the window.
+Furthermore, max pooling is useful to avoid <em>dead neurons</em>, in other
+words neurons that are stuck with a value near 0 irrespective of the
+input and such a small gradient for its weights and biases that this is
+unlikely to change with further training. This is a scenario that can
+often happen especially when using the ReLU activation function.
+<em>Average pooling</em>, in other words taking the average value of the <span class="math notranslate nohighlight">\(n\)</span>
+inputs is a straight forward compression. Note that unlike other layers,
+the pooling layer has just a small set of <span class="math notranslate nohighlight">\(n\)</span> connections with no
+adjustable weights. The functionality of the pooling layer is shown in
+<a class="reference internal" href="#fig-pooling"><span class="std std-numref">Fig. 17</span></a> (a) and (b).</p>
+<p>An extreme case of pooling is global pooling, where the full input is
+converted to a single output. Using a max pooling, this would then
+immediately tell us, whether a given feature is present in the data.</p>
+</div>
+<div class="section" id="example-dna-sequencing">
+<h3>Example: DNA sequencing<a class="headerlink" href="#example-dna-sequencing" title="Permalink to this headline">¶</a></h3>
+<p>With lowering costs and expanding applications, DNA sequencing has
+become a widespread tool in biological research. Especially the
+introduction of high-throughput sequencing methods and the related
+increase of data has required the introduction of data science methods
+into biology. Sequenced data is extremely complex and thus a great
+playground for machine learning applications. Here, we consider a simple
+classification as an example. The primary structure of DNA consists of a
+linear sequence of basic building blocks called nucleotides. The key
+component of nucleotides are nitrogen bases: Adenine (A), Guanine (G),
+Cytosine (C), and Thymine (T). The order of the bases in the linear
+chains defines the DNA sequence. Which sequences are meaningful is
+determined by a set of complex specific rules. In other words, there are
+series of letters A, G, C, and T that correspond to DNA and while many
+other sequences do not resemble DNA. Trying to distinguish between
+strings of nitrogen bases that correspond to human DNA and those that
+don not is a simple example of a classification task that is at the same
+time not so easy for an untrained human eye.</p>
+<div class="figure align-default" id="fig-dnacompare">
+<img alt="../../_images/DNA.png" src="../../_images/DNA.png" />
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text"><strong>Comparison of DNA and random
+sequences.</strong></span><a class="headerlink" href="#fig-dnacompare" title="Permalink to this image">¶</a></p>
+</div>
+<p>In <a class="reference internal" href="#fig-dnacompare"><span class="std std-numref">Fig. 18</span></a>, we show a comparison of five strings of
+human DNA and five strings of 36 randomly generated letters A, G, C, and
+T. Without deeper knowledge it is hard to distinguish the two classes
+and even harder to find the set of empirical rules that quantify their
+distinction. We can let a neural network have a go and see if it
+performs any better than us studying these sequences by visual analysis.</p>
+<div class="figure align-default" id="fig-dna">
+<img alt="../../_images/conv_network.png" src="../../_images/conv_network.png" />
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Neural network classification of DNA sequences: The upper panel shows the architecture and he two lower
+panels show loss function and accuracy on the training (evaluation) data
+in green (orange) as a function of the training step
+respectively.</strong></span><a class="headerlink" href="#fig-dna" title="Permalink to this image">¶</a></p>
+</div>
+<p>We have all ingredients to build a binary classifier that will be able
+to distinguish between DNA and non-DNA sequences. First, we download a
+freely available database of the human genome from
+<a class="reference external" href="https://genome.ucsc.edu">https://genome.ucsc.edu</a><a class="footnote-reference brackets" href="#id4" id="id2">4</a>. Here, we downloaded a database of
+encoding genomes that contains <span class="math notranslate nohighlight">\(100 000\)</span> sequences of human DNA (each is
+36 letters long). Additionally, we generate <span class="math notranslate nohighlight">\(100 000\)</span> random sequences
+of letters A, G, C, T. The learning task we are facing now is very
+similar to the MNIST classification, though in the present case, we only
+have two classes. Note, however, that we generated random sequences of
+bases and labeled them as random, even though we might have accidentally
+created sequences that do correspond to human DNA. This limits the
+quality of our data set and thus naturally also the final performance of
+the network.</p>
+<p>The model we choose here has a standard architecture and can serve as a
+guiding example for supervised learning with neural networks that will
+be useful in many other scenarios. In particular, we implement the
+following architecture:</p>
+<div class="admonition-dna-classification admonition">
+<p class="admonition-title">DNA Classification</p>
+<ol class="simple">
+<li><p><em>Import the data</em> from <a class="reference external" href="http://genome.uscs.edu">http://genome.uscs.edu</a></p></li>
+<li><p><em>Define the model</em>:</p>
+<ul class="simple">
+<li><p><em>Input layer</em>: The input layer has dimension <span class="math notranslate nohighlight">\(36\times 4\)</span> (<span class="math notranslate nohighlight">\(36\)</span>
+entries per DNA sequence, <span class="math notranslate nohighlight">\(4\)</span> to encode each of 4 different
+bases A, G, C, T)<br />
+<em>Example</em>: [[1,0,0,0], [0,0,1,0], [0,0,1,0],
+[0,0,0,1]] = ACCT</p></li>
+<li><p><em>Convolutional layer</em>: Kernel size <span class="math notranslate nohighlight">\(k= 4\)</span>, stride <span class="math notranslate nohighlight">\(s= 1\)</span> and
+number of filters <span class="math notranslate nohighlight">\(N=64\)</span>.</p></li>
+<li><p><em>Pooling layer</em>: max pooling over <span class="math notranslate nohighlight">\(n=2\)</span> neurons, which reduces
+the output of the previous layer by a factor of 2.</p></li>
+<li><p><em>Dense layer</em>: 256 neurons with a ReLU activation function.</p></li>
+<li><p><em>Output layer</em>: 2 neurons (DNA and non-DNA output) with softmax
+activation function.</p></li>
+</ul>
+</li>
+<li><p><em>Loss function</em>: Cross-entropy between DNA and non-DNA.</p></li>
+</ol>
+</div>
+<p>A schematic of the network structure as well as the evolution of the
+loss and the accuracy measured over the training and validation sets
+with the number of training steps are shown in <a class="reference internal" href="#fig-dna"><span class="std std-numref">Fig. 19</span></a>.
+Comparing the accuracies of the training and validation sets is a
+standard way to avoid overfitting: On the examples from the training set
+we can simply check the accuracy during training. When training and
+validation accuracy reach the same number, this indicates that we are
+not overfitting on the training set since the validation set is never
+used to adjust the weights and biases. A decreasing validation accuracy
+despite an increasing training accuracy, on the other hand, is a clear
+sign of overfitting.</p>
+<p>We see that this simple convolutional network is able to achieve around
+80% accuracy. By downloading a larger training set, ensuring that only
+truly random sequences are labeled as such, and by optimizing the
+hyper-parameters of the network, it is likely that an even higher
+accuracy can be achieved. We also encourage you to test other
+architectures: one can try to add more layers (both convolutional and
+dense), adjust the size of the convolution kernel or stride, add dropout
+layers, and finally, test whether it is possible to reach higher
+accuracies without over-fitting on the training set.</p>
+</div>
+<div class="section" id="example-advanced-mnist">
+<h3>Example: advanced MNIST<a class="headerlink" href="#example-advanced-mnist" title="Permalink to this headline">¶</a></h3>
+<p>We can now revisit the MNIST example and approach the classification
+with the more advanced neural network structures of the previous
+section. In particular, we use the following architecture</p>
+<div class="admonition-advanced-mnist admonition">
+<p class="admonition-title">Advanced MNIST</p>
+<ol class="simple">
+<li><p><em>Input layer</em>: <span class="math notranslate nohighlight">\(28^2 = 784\)</span> neurons.</p></li>
+<li><p><em>Convolutional layer 1</em>: Kernel size <span class="math notranslate nohighlight">\(k= 5\)</span>, stride <span class="math notranslate nohighlight">\(s= 1\)</span> and
+number of filters <span class="math notranslate nohighlight">\(N=32\)</span> with a ReLU activation function.</p></li>
+<li><p><em>Pooling layer</em>: max pooling over <span class="math notranslate nohighlight">\(n=2\times 2\)</span> neurons.</p></li>
+<li><p><em>Convolutional layer 2</em>: Kernel size <span class="math notranslate nohighlight">\(k= 5\)</span>, stride <span class="math notranslate nohighlight">\(s= 1\)</span> and
+number of filters <span class="math notranslate nohighlight">\(N=64\)</span> with a ReLU activation function.</p></li>
+<li><p><em>Pooling layer</em>: max pooling over <span class="math notranslate nohighlight">\(n=2\times 2\)</span> neurons.</p></li>
+<li><p><em>Dropout</em>: dropout layer for regularization with a 50% dropout
+probability.</p></li>
+<li><p><em>Dense layer</em>: 1000 neurons with a ReLU activation function.</p></li>
+<li><p><em>Output layer</em>: 10 neurons with softmax activation function.</p></li>
+</ol>
+</div>
+<p>For the loss function, we again use cross-entropy between the output and
+the labels. Notice here the repeated structure of convolutional layers
+and pooling layers. This is a very common structure for deep
+convolutional networks. With this model, we achieve an accuracy on the
+MNIST test set of 98.8%, a massive improvement over the simple dense
+network.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>See Simard et al., <a class="reference external" href="http://dx.doi.org/10.1109/ICDAR.2003.1227801">http://dx.doi.org/10.1109/ICDAR.2003.1227801</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p><a class="reference external" href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeUwRepliSeq/wgEncodeUwRepliSeqBg02esG1bAlnRep1.bam">http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeUwRepliSeq/wgEncodeUwRepliSeqBg02esG1bAlnRep1.bam</a></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/supervised_learning_w_NNs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_training_regularization.html" title="previous page">Training</a>
+    <a class='right-next' id="next-link" href="ml_rnn.html" title="next page">Recurrent neural networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Machine Learning for Science Team<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

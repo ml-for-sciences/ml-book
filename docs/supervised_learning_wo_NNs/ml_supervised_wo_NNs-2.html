@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary Classification and Support Vector Machines &#8212; Machine Learning for Scientists</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="More than two classes: Logistic Regression" href="ml_supervised_wo_NNs-3.html" />
+    <link rel="prev" title="Linear Regression" href="ml_supervised_wo_NNs-1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/cluster.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning for Scientists</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lecture
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../structuring_data/ml_without_neural_network.html">
+   Structuring Data without Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-1.html">
+     Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-2.html">
+     Kernel PCA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-3.html">
+     t-SNE as a Nonlinear Visualization Technique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/ml_without_neural_network-4.html">
+     Clustering Algorithms: the example of
+     <span class="math notranslate nohighlight">
+      \(k\)
+     </span>
+     -means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/pca.html">
+     Exercise: Principle Component Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structuring_data/Dimensionality_reduction.html">
+     Exercise: Dimensionality Reduction
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ml_supervised_wo_NNs.html">
+   Supervised Learning without Neural Networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_supervised_wo_NNs-1.html">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Binary Classification and Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml_supervised_wo_NNs-3.html">
+     More than two classes: Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Linear-regression.html">
+     Exercise: Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Classification.html">
+     Exercise: Classification without Neural Networks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../supervised_learning_w_NNs/ml_supervised_w_NNs.html">
+   Supervised Learning with Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html">
+     Computational neurons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_training_regularization.html">
+     Training
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_convolutional.html">
+     Regularization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html">
+     Recurrent neural networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/Classification-2.html">
+     Exercise: Dense Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html">
+     Exercise: Machine Learning Optimizers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-learning-rate-scheduling">
+     Exercise: Learning Rate Scheduling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/NN-opt-reg.html#exercise-regularizing-neural-networks">
+     Exercise: Regularizing Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/CNNs.html">
+     Exercise: Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../supervised_learning_w_NNs/exoplanets_RNN_CNN.html">
+     Exercise: Discovery of Exoplanets with RNNs and CNNs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../unsupervised_learning/ml_unsupervised.html">
+   Unsupervised Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-1.html">
+     Restricted Boltzmann Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-2.html">
+     Training an RNN without Supervision
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-3.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/ml_unsupervised-4.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Denoising.html">
+     Exercise: Denoising with Restricted Boltzmann Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Molecule_gen_RNN.html">
+     Exercise: Molecule Generation with an RNN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../unsupervised_learning/Anomaly_Detection_RNN_AE_VAE.html">
+     Exercise: Anomaly Detection
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../interpretability/ml_interpretability.html">
+   Interpretability of Neural Networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-1.html">
+     Dreaming and the Problem of Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-2.html">
+     Adversarial Attacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/ml_interpretability-3.html">
+     Interpreting Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interpretability/Transfer-learning-attacks.html">
+     Exercise: Transfer Learning and Adversarial Attacks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning.html">
+   Reinforcement Learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-1.html">
+     Exploration versus Exploitation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-2.html">
+     Finite Markov Decision Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-3.html">
+     Policies and Value Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-4.html">
+     Temporal-difference Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../reinforcement_learning/ml_reinforcement-learning-5.html">
+     Function Approximation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion/ml_conclusion.html">
+   Concluding Remarks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  About us
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about_us.html">
+   Who we are
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/supervised_learning_wo_NNs/ml_supervised_wo_NNs-2.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-kernel-trick-and-support-vector-machines">
+   The Kernel trick and support vector machines
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="binary-classification-and-support-vector-machines">
+<h1>Binary Classification and Support Vector Machines<a class="headerlink" href="#binary-classification-and-support-vector-machines" title="Permalink to this headline">¶</a></h1>
+<p>In a classification problem, the aim is to categorize the inputs into
+one of a finite set of classes. Formulated as a supervised learning
+task, the dataset again consists of input-output pairs, i.e.
+<span class="math notranslate nohighlight">\(\lbrace(\mathbf{x}_{1}, y_{1}), \dots, (\mathbf{x}_{m}, y_{m})\rbrace\)</span> with
+<span class="math notranslate nohighlight">\(\mathbf{x}\in \mathbb{R}^n\)</span>. However, unlike regression problems, the
+output <span class="math notranslate nohighlight">\(y\)</span> is a discrete integer number representing one of the classes.
+In a binary classification problem, in other words a problem with only
+two classes, it is natural to choose <span class="math notranslate nohighlight">\(y\in\{-1, 1\}\)</span>.</p>
+<p>We have introduced linear regression in the previous section as a method
+for supervised learning when the output is a real number. Here, we will
+see how we can use the same model for a binary classification task. If
+we look at the regression problem, we first note that geometrically</p>
+<div class="math notranslate nohighlight" id="equation-eqn-univariate-linear-model-b">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eqn-univariate-linear-model-b" title="Permalink to this equation">¶</a></span>\[     f(\boldsymbol{x}|\boldsymbol \beta) = \beta_0 + \sum_{j=1}^{n} \beta_{j}x_{j} = 0\]</div>
+<p>defines a hyperplane perpendicular to the vector with elements
+<span class="math notranslate nohighlight">\(\beta_{j\geq1}\)</span>. If we fix the length <span class="math notranslate nohighlight">\(\sum_{j=1}^n \beta_j^2=1\)</span>, then
+<span class="math notranslate nohighlight">\(f(\mathbf{x}|\boldsymbol \beta)\)</span> measures the (signed) distance of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the
+hyperplane with a sign depending on which side of the plane the point
+<span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> lies. To use this model as a classifier, we thus define</p>
+<div class="math notranslate nohighlight" id="equation-eqn-binaryclassifier">
+<span class="eqno">(24)<a class="headerlink" href="#equation-eqn-binaryclassifier" title="Permalink to this equation">¶</a></span>\[F(\mathbf{x}|\boldsymbol \beta) = \mathrm{sign} f(\mathbf{x}|\boldsymbol \beta),\]</div>
+<p>which yields <span class="math notranslate nohighlight">\(\{+1, -1\}\)</span>. If the two classes are (completely) linearly separable, then the goal of the
+classification is to find a hyperplane that separates the two classes in
+feature space. Specifically, we look for parameters <span class="math notranslate nohighlight">\(\boldsymbol \beta\)</span>, such
+that</p>
+<div class="math notranslate nohighlight" id="equation-eqn-separable">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eqn-separable" title="Permalink to this equation">¶</a></span>\[y_i \tilde{\mathbf{x}}_i^T\boldsymbol \beta &gt; M, \quad \forall i,\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is called the <em>margin</em>. The optimal solution <span class="math notranslate nohighlight">\(\hat{\boldsymbol \beta}\)</span> then maximizes this margin. Note that
+instead of fixing the norm of <span class="math notranslate nohighlight">\(\beta_{j\geq1}\)</span> and maximizing <span class="math notranslate nohighlight">\(M\)</span>, it is
+customary to minimize <span class="math notranslate nohighlight">\(\sum_{j=1}^n \beta_j^2\)</span> setting <span class="math notranslate nohighlight">\(M=1\)</span> in
+Eq. <a class="reference internal" href="#equation-eqn-separable">(25)</a>.</p>
+<p>In most cases, the two classes are not completely separable. In order to
+still find a good classifier, we allow some of the points <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> to
+lie within the margin or even on the wrong side of the hyperplane. For
+this purpose, we rewrite the optimization constraint
+Eq. <a class="reference internal" href="#equation-eqn-separable">(25)</a> to</p>
+<div class="math notranslate nohighlight" id="equation-eqn-notseparable">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eqn-notseparable" title="Permalink to this equation">¶</a></span>\[y_i \tilde{\mathbf{x}}_i^T\boldsymbol \beta &gt; (1-\xi_i), \textrm{with } \xi_i \geq 0, \quad \forall i.\]</div>
+<p>We can now define the optimization problem as finding</p>
+<div class="math notranslate nohighlight" id="equation-eqn-optimalclassifierbeta">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eqn-optimalclassifierbeta" title="Permalink to this equation">¶</a></span>\[\min_{\boldsymbol \beta,\{\xi_i\}} \frac12 \sum_{j=1}^{n} \beta_j^2 + C\sum_i \xi_i\]</div>
+<p>subject to the constraint Eq. <a class="reference internal" href="#equation-eqn-notseparable">(26)</a>. Note that the second term with
+hyperparameter <span class="math notranslate nohighlight">\(C\)</span> acts like a regularizer, in particular a lasso
+regularizer. As we have seen in the example of the previous section,
+such a regularizer tries to set as many <span class="math notranslate nohighlight">\(\xi_i\)</span> to zero as possible.</p>
+<div class="figure align-default" id="fig-svm">
+<img alt="../../_images/SVM_overlap.png" src="../../_images/SVM_overlap.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text"><strong>Binary classification.</strong> Hyperplane separating the two classes and
+margin <span class="math notranslate nohighlight">\(M\)</span> of the linear binary classifier. The support vectors are
+denoted by a circle around them.</span><a class="headerlink" href="#fig-svm" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can solve this constrained minimization problem by introducing
+Lagrange multipliers <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\mu_i\)</span> and solving</p>
+<div class="math notranslate nohighlight" id="equation-eqn-svm-lagrange">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eqn-svm-lagrange" title="Permalink to this equation">¶</a></span>\[\min_{\beta, \{\xi_i\}} \frac12 \sum_{j=1}^{n} \beta_j^2 + C\sum_i \xi_i - \sum_i \alpha_i [y_i \tilde{\mathbf{x}}_i^T\boldsymbol \beta - (1-\xi_i)] - \sum_i\mu_i\xi_i,\]</div>
+<p>which yields the conditions</p>
+<div class="math notranslate nohighlight" id="equation-eqn-svm-derivatives">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eqn-svm-derivatives" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  \beta_j &amp;=&amp; \sum_i \alpha_i y_i x_{ij},\\
+  0 &amp;=&amp; \sum_i \alpha_i y_i\\
+  \alpha_i &amp;=&amp; C-\mu_i, \quad \forall i.
+\end{aligned}\end{split}\]</div>
+<p>It is numerically simpler to solve the dual problem</p>
+<div class="math notranslate nohighlight" id="equation-eqn-svm-dual">
+<span class="eqno">(30)<a class="headerlink" href="#equation-eqn-svm-dual" title="Permalink to this equation">¶</a></span>\[\min_{\{\alpha_i\}} \frac12 \sum_{i,i'} \alpha_i \alpha_{i'} y_i y_{i'} \mathbf{x}_i^T \mathbf{x}_{i'} - \sum_i \alpha_i\]</div>
+<p>subject to <span class="math notranslate nohighlight">\(\sum_i \alpha_i y_i =0\)</span> and <span class="math notranslate nohighlight">\(0\leq \alpha_i \leq C\)</span> <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. Using Eq. <a class="reference internal" href="#equation-eqn-svm-derivatives">(29)</a>, we can reexpress <span class="math notranslate nohighlight">\(\beta_j\)</span> to find</p>
+<div class="math notranslate nohighlight" id="equation-eqn-svm-f">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eqn-svm-f" title="Permalink to this equation">¶</a></span>\[f(\mathbf{x}|\{\alpha_i\}) = \sum_i{}' \alpha_i y_i \mathbf{x}^T \mathbf{x}_i + \beta_0,\]</div>
+<p>where the sum only runs over the points <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, which lie within the margin, as all other points have <span class="math notranslate nohighlight">\(\alpha_i\equiv0\)</span> [see Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a>]. These points are thus called the <em>support vectors</em> and are denoted in <a class="reference internal" href="#fig-svm"><span class="std std-numref">Fig. 11</span></a> with a circle around them. Finally, note that we can use Eq. <a class="reference internal" href="#equation-eqn-firstkkt">(32)</a> again to find <span class="math notranslate nohighlight">\(\beta_0\)</span>.</p>
+<div class="section" id="the-kernel-trick-and-support-vector-machines">
+<h2>The Kernel trick and support vector machines<a class="headerlink" href="#the-kernel-trick-and-support-vector-machines" title="Permalink to this headline">¶</a></h2>
+<p>We have seen in our discussion of PCA that most data is not separable
+linearly. However, we have also seen how the kernel trick can help us in
+such situations. In particular, we have seen how a non-linear function
+<span class="math notranslate nohighlight">\(\boldsymbol \Phi(\mathbf{x})\)</span>, which we first apply to the data <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, can help
+us separate data that is not linearly separable. Importantly, we never
+actually use the non-linear function <span class="math notranslate nohighlight">\(\boldsymbol \Phi(\mathbf{x})\)</span>, but only the
+kernel. Looking at the dual optimization problem
+Eq. <a class="reference internal" href="#equation-eqn-svm-dual">(30)</a> and the resulting classifier
+Eq. <a class="reference internal" href="#equation-eqn-svm-f">(31)</a>, we see that, as in the case of Kernel PCA, only
+the kernel <span class="math notranslate nohighlight">\(K(\mathbf{x}, \mathbf{y}) = \boldsymbol \Phi(\mathbf{x})^T\boldsymbol \Phi(\mathbf{y})\)</span>
+enters, simplifying the problem. This non-linear extension of the binary
+classifier is called a <em>support vector machine</em>.</p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note that the constraints for the minimization are not equalities,
+but actually inequalities. A solution thus has to fulfil the
+additional Karush-Kuhn-Tucker constraints</p>
+<div class="math notranslate nohighlight" id="equation-eqn-firstkkt">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eqn-firstkkt" title="Permalink to this equation">¶</a></span>\[\begin{split} \begin{aligned}
+    \alpha_i [y_i \tilde{\mathbf{x}}_i^T\boldsymbol \beta - (1-\xi_i)]&amp;=&amp;0,\\
+    \mu_i\xi_i &amp;=&amp; 0,\\
+    y_i \tilde{\mathbf{x}}_i^T\boldsymbol \beta - (1-\xi_i)&amp;&gt;&amp; 0.
+  \end{aligned}\end{split}\]</div>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/supervised_learning_wo_NNs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml_supervised_wo_NNs-1.html" title="previous page">Linear Regression</a>
+    <a class='right-next' id="next-link" href="ml_supervised_wo_NNs-3.html" title="next page">More than two classes: Logistic Regression</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Machine Learning for Science Team<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
