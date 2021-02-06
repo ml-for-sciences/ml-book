@@ -191,8 +191,10 @@ the cell state
 **Output step**\
 In the final step, we decide how much of the information stored in the
 cell state should be written to the new hidden state,
-$${\boldsymbol{h}}_t = \sigma(W_{ho} {\boldsymbol{h}}_{t-1} + W_{xo} {\boldsymbol{x}}_t + {\boldsymbol{b}}_o) \odot \tanh ({\boldsymbol{c}}_t).
-  \label{eq:output step}$$
+```{math}
+{\boldsymbol{h}}_t = \sigma(W_{ho} {\boldsymbol{h}}_{t-1} + W_{xo} {\boldsymbol{x}}_t + {\boldsymbol{b}}_o) \odot \tanh ({\boldsymbol{c}}_t).
+  \label{eq:output step}
+```
 
 The full structure of the LSTM with the four gates and the element-wise
 operations is schematically shown in {numref}`fig:lstm`(b). Note that we

@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Exercise: Dense Neural Networks" href="Classification-2.html" />
-    <link rel="prev" title="Regularization" href="ml_convolutional.html" />
+    <link rel="prev" title="Advanced Layers" href="ml_convolutional.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -192,7 +192,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="ml_convolutional.html">
-     Regularization
+     Advanced Layers
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -611,9 +611,10 @@ the cell state</p>
   \label{eq:update}\]</div>
 <p><strong>Output step</strong><br />
 In the final step, we decide how much of the information stored in the
-cell state should be written to the new hidden state,
-$<span class="math notranslate nohighlight">\({\boldsymbol{h}}_t = \sigma(W_{ho} {\boldsymbol{h}}_{t-1} + W_{xo} {\boldsymbol{x}}_t + {\boldsymbol{b}}_o) \odot \tanh ({\boldsymbol{c}}_t).
-  \label{eq:output step}\)</span>$</p>
+cell state should be written to the new hidden state,</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{h}}_t = \sigma(W_{ho} {\boldsymbol{h}}_{t-1} + W_{xo} {\boldsymbol{x}}_t + {\boldsymbol{b}}_o) \odot \tanh ({\boldsymbol{c}}_t).
+  \label{eq:output step}\]</div>
 <p>The full structure of the LSTM with the four gates and the element-wise
 operations is schematically shown in <a class="reference internal" href="#fig-lstm"><span class="std std-numref">Fig. 21</span></a>(b). Note that we
 can concatenate the input <span class="math notranslate nohighlight">\({\boldsymbol{x}}_t\)</span> and hidden memory
@@ -667,7 +668,7 @@ usually as one-to-many RNNs.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ml_convolutional.html" title="previous page">Regularization</a>
+    <a class='left-prev' id="prev-link" href="ml_convolutional.html" title="previous page">Advanced Layers</a>
     <a class='right-next' id="next-link" href="Classification-2.html" title="next page">Exercise: Dense Neural Networks</a>
 
     </div>

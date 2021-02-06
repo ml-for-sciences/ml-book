@@ -1,6 +1,6 @@
 
 (sec:convolutional)=
-# Regularization
+# Advanced Layers
 
 
 In the previous sections, we have illustrated an artificial neural
