@@ -464,9 +464,9 @@
         
               <div>
                 
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">BernoulliRBM</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
@@ -502,7 +502,7 @@
   <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -515,10 +515,10 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
   <span class="c1"># If you have access to our pretrained model</span>
   <span class="n">rbm</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">&#39;rbm.joblib&#39;</span><span class="p">)</span>  
-  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;RBM Reloaded&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RBM Reloaded&quot;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
   <span class="n">rbm</span> <span class="o">=</span> <span class="n">BernoulliRBM</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
-                    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+                    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
   <span class="n">rbm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
   <span class="n">dump</span><span class="p">(</span><span class="n">rbm</span><span class="p">,</span> <span class="s1">&#39;rbm.joblib&#39;</span><span class="p">)</span>
@@ -528,8 +528,8 @@
 </pre></div>
 </div>
 <p>A good metric to track the training progress is the pseudo-likelihood. Let us evaluate this value on both the training and validation sets.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Training set Pseudo-Likelihood =&quot;</span><span class="p">,</span> <span class="n">rbm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Validation set Pseudo-Likelihood =&quot;</span><span class="p">,</span> <span class="n">rbm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training set Pseudo-Likelihood =&quot;</span><span class="p">,</span> <span class="n">rbm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation set Pseudo-Likelihood =&quot;</span><span class="p">,</span> <span class="n">rbm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Training set Pseudo-Likelihood = -81.6129329172141

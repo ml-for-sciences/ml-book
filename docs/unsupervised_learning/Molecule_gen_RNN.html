@@ -459,13 +459,13 @@
         
               <div>
                 
-  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
@@ -578,8 +578,8 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># how many unique characters do we have?</span>
 <span class="n">mapping_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_to_int</span><span class="p">)</span>
 <span class="n">reverse_mapping_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">int_to_char</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Size of the character to integer dictionary is: &quot;</span><span class="p">,</span> <span class="n">mapping_size</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Size of the integer to character dictionary is: &quot;</span><span class="p">,</span> <span class="n">reverse_mapping_size</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Size of the character to integer dictionary is: &quot;</span><span class="p">,</span> <span class="n">mapping_size</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Size of the integer to character dictionary is: &quot;</span><span class="p">,</span> <span class="n">reverse_mapping_size</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Size of the character to integer dictionary is:  26
@@ -617,12 +617,12 @@ Size of the integer to character dictionary is:  26
 
 <span class="c1"># Create the model (simple 2 layer LSTM)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="bp">True</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="bp">True</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
@@ -793,7 +793,7 @@ Epoch 50/50
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count correct and incorrect predictions</span>
 <span class="n">no_false</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">train_res</span><span class="p">)</span>
 <span class="n">no_true</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">*</span><span class="n">embed</span><span class="o">-</span><span class="n">no_false</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Average success rate on training set: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">no_true</span><span class="o">/</span><span class="p">(</span><span class="n">embed</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average success rate on training set: </span><span class="si">%s</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">no_true</span><span class="o">/</span><span class="p">(</span><span class="n">embed</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)),</span><span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Average success rate on training set: 87.76 %
@@ -811,7 +811,7 @@ Epoch 50/50
     <span class="n">idxs2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">true</span> <span class="o">=</span>  <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">int_to_char</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">idxs2</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
     <span class="k">if</span> <span class="n">true</span> <span class="o">!=</span> <span class="n">pred</span><span class="p">:</span>
-        <span class="k">print</span> <span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CCCNC(=O)CSc1nnc(CC)n1NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE C(((C(=O)CSc1nnc(-))n1NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
@@ -877,7 +877,7 @@ Oc1ccc(-c2csnn2)cc1S(=O)(=O)Nc1ccccc1EEEEEEEEEEEEEEEE Cc1ccc(Cc2nccc2)c(1C(=O)(=
     <span class="c1"># Continue as long as we do not add &#39;E&#39;</span>
     <span class="k">while</span> <span class="n">ch</span> <span class="o">!=</span><span class="s1">&#39;E&#39;</span><span class="p">:</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">,:],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">ch</span> <span class="o">=</span> <span class="n">int_to_char</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">char_to_int</span><span class="p">)),</span> <span class="n">size</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">pred</span><span class="p">)]</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">int_to_char</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">char_to_int</span><span class="p">)),</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">pred</span><span class="p">)]</span>
         <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
 
         <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">26</span><span class="p">))</span>
@@ -886,7 +886,7 @@ Oc1ccc(-c2csnn2)cc1S(=O)(=O)Nc1ccccc1EEEEEEEEEEEEEEEE Cc1ccc(Cc2nccc2)c(1C(=O)(=
         <span class="n">stringc</span> <span class="o">+=</span> <span class="n">ch</span>
         
 
-    <span class="k">print</span><span class="p">(</span><span class="n">stringc</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">stringc</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
 </pre></div>
 </div>
