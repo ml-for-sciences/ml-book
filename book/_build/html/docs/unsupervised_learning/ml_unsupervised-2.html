@@ -444,7 +444,16 @@
         
               <div>
                 
-  <div class="section" id="training-an-rnn-without-supervision">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
+<div class="section" id="training-an-rnn-without-supervision">
 <h1>Training an RNN without Supervision<a class="headerlink" href="#training-an-rnn-without-supervision" title="Permalink to this headline">¶</a></h1>
 <p>In Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html#sec-supervised"><span class="std std-ref">Computational neurons</span></a>, the RNN was introduced as a classification model. Instead of classifying sequences of data, such as time series, the RNN can also be trained to generate valid sequences itself. Given the RNN introduced in Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_rnn.html#sec-rnn"><span class="std std-ref">Recurrent neural networks</span></a>, the implementation of such a generator is straight-forward and does not require a new architecture. The main difference is that the output <span class="math notranslate nohighlight">\(\mathbf{y}_t\)</span> of the network given the data point <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> is a guess of the subsequent data point <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span> instead of the class to which the whole sequence belongs to. This means in particular that the input and output size are now the same. For training this network, we can once again use the cross-entropy or (negative) log-likelihood as a loss function,</p>
 <div class="math notranslate nohighlight" id="eqn-unsup-rnn">

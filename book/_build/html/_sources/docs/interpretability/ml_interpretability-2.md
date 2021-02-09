@@ -1,4 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
 # Adversarial Attacks
 
 As we have seen, it is possible to modify the input $\mathbf{x}$ so that the

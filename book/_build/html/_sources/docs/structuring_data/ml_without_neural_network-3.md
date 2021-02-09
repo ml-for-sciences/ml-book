@@ -1,3 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
 # t-SNE as a Nonlinear Visualization Technique
 
 We studied (kernel) PCA as an example for a method that reduces the

@@ -1,3 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
 # Exercise: Transfer Learning and Adversarial Attacks
 
 To run the script you can download the data from the [original source](https://data.mendeley.com/datasets/tywbtsjrjv/1). The models used in this notebook will take some time to run so it is best to run it on google colab with a GPU.

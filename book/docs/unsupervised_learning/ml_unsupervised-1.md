@@ -1,4 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
 # Restricted Boltzmann Machine
 
 *Restricted Boltzmann Machines* (RBM) are a class of generative stochastic neural networks. More specifically, given some (binary) input data $\mathbf{x}\in\{0,1\}^{n_v}$, an RBM can be trained to approximate the probability distribution of this input. Moreover, once the neural network is trained to approximate the distribution of the input, we can sample from the network, in other words we generate new instances from the learned probability distribution.

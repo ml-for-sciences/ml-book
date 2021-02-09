@@ -449,7 +449,16 @@
         
               <div>
                 
-  <div class="section" id="restricted-boltzmann-machine">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
+<div class="section" id="restricted-boltzmann-machine">
 <h1>Restricted Boltzmann Machine<a class="headerlink" href="#restricted-boltzmann-machine" title="Permalink to this headline">¶</a></h1>
 <p><em>Restricted Boltzmann Machines</em> (RBM) are a class of generative stochastic neural networks. More specifically, given some (binary) input data <span class="math notranslate nohighlight">\(\mathbf{x}\in\{0,1\}^{n_v}\)</span>, an RBM can be trained to approximate the probability distribution of this input. Moreover, once the neural network is trained to approximate the distribution of the input, we can sample from the network, in other words we generate new instances from the learned probability distribution.</p>
 <p>The RBM consists of two layers (see <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 22</span></a>) of <em>binary units</em>. Each binary unit is a variable which can take the values <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. We call the first (input) layer visible and the second layer hidden. The visible layer with input variables <span class="math notranslate nohighlight">\(\lbrace v_{1}, v_{2}, \dots v_{n_{\mathrm{v}}}\rbrace\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>, is connected to the hidden layer with variables <span class="math notranslate nohighlight">\(\{ h_{1}, h_{2}, \dots h_{n_{\mathrm{h}}}\}\)</span>, which we collect in the vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. The role of the hidden layer is to mediate correlations between the units of the visible layer. In contrast to the neural networks we have seen in the previous chapter, the hidden layer is not followed by an output layer. Instead, the RBM represents a probability distribution <span class="math notranslate nohighlight">\(P_{\text{rbm}}(\mathbf{v})\)</span>, which depends on variational parameters represented by the weights and biases of a neural network. The RBM, as illustrated by the graph in <a class="reference internal" href="#fig-rbm"><span class="std std-numref">Fig. 22</span></a>, is a special case of a network structure known as a Boltzmann machine with the restriction that a unit in the visible layer is only connected to hidden units and vice versa, hence the name <em>restricted</em> Boltzmann machine.</p>

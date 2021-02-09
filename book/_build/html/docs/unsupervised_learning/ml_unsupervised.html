@@ -430,7 +430,16 @@
         
               <div>
                 
-  <div class="section" id="unsupervised-learning">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
+<div class="section" id="unsupervised-learning">
 <span id="sec-unsupervised"></span><h1>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h1>
 <p>In Sec. <a class="reference internal" href="../supervised_learning_w_NNs/ml_intro_neural.html#sec-supervised"><span class="std std-ref">Computational neurons</span></a>, we discussed supervised learning tasks, for which datasets consist of input-output pairs, or data-label pairs. More often than not, however, we have data without labels and would like to extract information from such a dataset. Clustering problems fall in this category, for instance: We suspect that the data can be divided into different types, but we do not know which features distinguish these types.</p>
 <p>Mathematically, we can think of the data <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as samples that were drawn from a probability distribution <span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span>. The unsupervised learning task is to implicitly represent this distribution with a model, for example represented by a neural network. The model can then be used to study properties of the distribution or to generate new ‘artificial’ data. The models we encounter in this chapter are thus also referred to as <em>generative models</em>. In general, unsupervised learning is conceptually more challenging than supervised learning. At the same time, unsupervised algorithms are highly desirable, since unlabelled data is much more abundant than labelled data. Moreover, we can in principle use a generative model for a classification task by learning the joint probability distribution of the data-label pair.</p>

@@ -444,7 +444,16 @@
         
               <div>
                 
-  <div class="section" id="autoencoders">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
+<div class="section" id="autoencoders">
 <h1>Autoencoders<a class="headerlink" href="#autoencoders" title="Permalink to this headline">¶</a></h1>
 <p>Autoencoders are neuron-based generative models, initially introduced for dimensionality reduction. The original purpose, thus, is similar to that of PCA or t-SNE that we already encountered in Sec. <a class="reference internal" href="../structuring_data/ml_without_neural_network.html#sec-structuring-data"><span class="std std-ref">Structuring Data without Neural Networks</span></a>, namely the reduction of the number of features that describe our input data. Unlike for PCA, where we have a clear recipe how to reduce the number of features, an autoencoder learns the best way of achieving the dimensionality reduction. An obvious question, however, is how to measure the quality of the compression, which is essential for the definition of a loss function and thus, training. In the case of t-SNE, we introduced two probability distributions based on the distance of samples in the original and feature space, respectively, and minimized their difference, for example using the Kullback-Leibler divergence.</p>
 <p>The solution the autoencoder uses is to have a neural network do first, the dimensionality reduction, or encoding to the <em>latent space</em>, <span class="math notranslate nohighlight">\(\mathbf{x}\mapsto \mathbf{e}(\mathbf{x})=\mathbf{z}\)</span>, and then, the decoding back to the original dimension, <span class="math notranslate nohighlight">\(\mathbf{z} \mapsto \mathbf{d}(\mathbf{z})\)</span>, see <a class="reference internal" href="#fig-ae-scheme"><span class="std std-numref">Fig. 26</span></a>. This architecture allows us to directly compare the original input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with the reconstructed output <span class="math notranslate nohighlight">\(\mathbf{d}(\mathbf{e}(\mathbf{x}))\)</span>, such that the autoencoder trains itself unsupervised by minimizing the difference. A good example of a loss function that achieves successful training and that we have encountered already several times is the cross entropy,</p>
