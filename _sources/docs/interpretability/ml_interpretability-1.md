@@ -1,4 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLMLLKHZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZLMLLKHZE0');
+</script>
 # Dreaming and the Problem of Extrapolation
 
 Exploring the weights and intermediate activations of a neural network
