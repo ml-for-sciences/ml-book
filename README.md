@@ -37,5 +37,5 @@ After pushing to the main branch, go to ml-book/book and run:
 
 ```bash
 ghp-import -n -p -f _build/html
-``
+```
 This will push the build to the webpage branch and deploy it at [ml-lectures.org](https://ml-lectures.org/).
