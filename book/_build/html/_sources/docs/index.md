@@ -12,46 +12,17 @@ If you use the content of this webpage, please **cite arXiv:XX** to acknowledge 
 :card: border-2 mb-4
 :footer: text-center
 
-:img-top: ../_static/overview_page/SD.png
-+++
-[**Structuring Data without Neural Networks**](sec:structuring_data)
 
 
-
+[![png](../_static/overview_page/SD.png)](sec:structuring_data)
 ---
-:img-top: ../_static/overview_page/SLwoNN.png
-+++
-[**Supervised Learning without Neural Networks**](sec:linear-methods-for-supervised-learning)
-
-
+[![png](../_static/overview_page/SLwoNN.png)](sec:linear-methods-for-supervised-learning)
 ---
-:img-top: ../_static/overview_page/SLwNN.png
-+++
-[**Supervised Learning with Neural Networks**](chap:supervised)
-
-
-
+[![png](../_static/overview_page/SLwNN.png)](chap:supervised)
 ---
-:img-top: ../_static/overview_page/US.png
-+++
-[**Unsupervised** <br/>
-**Learning**](sec:unsupervised)
-
-
+[![png](../_static/overview_page/US.png)](sec:unsupervised)
 ---
-:img-top: ../_static/overview_page/IoNN.png
-+++
-[**Interpretability of Neural Networks**](sec:interpretability)
-
-
+[![png](../_static/overview_page/IoNN.png)](sec:interpretability)
 ---
-:img-top: ../_static/overview_page/RL.png
-+++
-[**Reinforcement**  <br/>
-**Learning**](sec:RL)
-
-
-
-
-
+[![png](../_static/overview_page/RL.png)](sec:RL)
 ````
