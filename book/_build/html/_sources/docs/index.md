@@ -13,7 +13,7 @@
 This is an introductory machine learning course specifically developed with STEM students in mind,
 written by the theoretical [Condensed Matter Theory](https://www.physik.uzh.ch/en/groups/neupert.html) group at the University of Zurich and the [Quantum Matter and AI](https://twitter.com/QMAI_TUDelft) group at the Delft University of Technology. 
 
-If you use the content of this webpage, please **cite arXiv:XX** to acknowledge the work put into the development of this lecture. A shorter German version of the lecture notes is published in the Springer Essential Series, [ISBN 978-3-658-32268-7](https://www.springer.com/de/book/9783658322670). In case of questions or comments, feel free to contact us at [comments@ml-lectures.org](mailto:comments@ml-lectures.org).
+If you use the content of this webpage, please **[cite arXiv:2102.04883](https://arxiv.org/abs/2102.04883)** to acknowledge the work put into the development of this lecture. A shorter German version of the lecture notes is published in the Springer Essential Series, [ISBN 978-3-658-32268-7](https://www.springer.com/de/book/9783658322670). In case of questions or comments, feel free to contact us at [comments@ml-lectures.org](mailto:comments@ml-lectures.org).
 
 
 
